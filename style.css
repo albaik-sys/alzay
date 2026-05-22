@@ -351,3 +351,28 @@ img { max-width: 100%; height: auto; display: block; }
     .gov-btn-royal { width: 100%; justify-content: center; }
     .contact-card-grid { grid-template-columns: 1fr; gap: 12px; }
 }
+
+/* ==========================================================================
+   تنسيقات عرض البيانات بالأرشيف وقسم التفاصيل الخيالي المطور
+   ========================================================================== */
+
+/* ستايل شريط البيانات الإضافية داخل بطاقات الأرشيف */
+.archive-gov-info-strip { display: flex; flex-direction: column; gap: 6px; background: var(--light); padding: 10px 12px; border-radius: 4px; margin-bottom: 12px; font-size: 12.5px; font-weight: 700; color: #555; border-right: 3px solid var(--gold); }
+.archive-gov-info-strip span { display: flex; align-items: center; gap: 6px; }
+.archive-gov-info-strip i { color: var(--primary); font-size: 13px; }
+.archive-phone-badge { color: var(--primary); font-family: sans-serif !important; }
+
+/* بلوك وقسم التفاصيل الساحر الخيالي أسفل المقالات */
+.magical-details-block { background: linear-gradient(135deg, #ffffff 0%, #f6faf8 100%); border: 1px solid rgba(17, 92, 56, 0.12); border-radius: 12px; padding: 30px; margin-top: 40px; box-shadow: 0 10px 30px rgba(17, 92, 56, 0.03); position: relative; overflow: hidden; }
+.magical-details-block::before { content: "\f51c"; font-family: "Font Awesome 5 Free"; font-weight: 900; position: absolute; left: -20px; bottom: -20px; font-size: 120px; color: rgba(17, 92, 56, 0.02); pointer-events: none; }
+.magical-details-header { font-size: 18px; font-weight: 900; color: var(--primary); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; border-bottom: 2px solid rgba(214, 175, 55, 0.3); padding-bottom: 12px; }
+.magical-details-header i { color: var(--gold); font-size: 20px; }
+.magical-text-desc { font-size: 16px; line-height: 1.8; color: #444; font-weight: 600; text-align: justify; margin-bottom: 20px; }
+.magical-footer-stamp { display: flex; gap: 20px; border-top: 1px dashed #e0e0e0; padding-top: 15px; }
+.stamp-item { font-size: 12.5px; font-weight: 800; color: var(--primary); background: rgba(17, 92, 56, 0.06); padding: 5px 14px; border-radius: 20px; display: inline-flex; align-items: center; gap: 6px; }
+.stamp-item i { color: var(--gold); }
+
+@media(max-width: 768px) {
+    .magical-details-block { padding: 20px; }
+    .magical-footer-stamp { flex-direction: column; gap: 10px; }
+}

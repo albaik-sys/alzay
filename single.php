@@ -32,6 +32,30 @@
                 <?php the_content(); ?>
             </div>
 
+            <?php if(in_array(get_post_type(), array('help', 'lost'))) : ?>
+                <div class="magical-details-block">
+                    <div class="magical-details-header">
+                        <i class="fas fa-clipboard-list"></i> التفاصيل والبيانات الإضافية للمعامـلة
+                    </div>
+                    <div class="magical-details-body">
+                        <p class="magical-text-desc">
+                            <?php 
+                            // جلب المقتطف أو نص الشرح الإضافي بطريقة منسقة
+                            if(has_excerpt()) {
+                                the_excerpt();
+                            } else {
+                                echo 'مرفق أعلاه كافة بيانات الاتصال المعتمدة لـ ' . get_post_type_object(get_post_type())->labels->singular_name . ' المنشورة رسمياً عبر ديوان شبكة حي الزيتون للإعلام والخدمات العامة. يرجى من الأهالي الكرام أخذ العلم والتعاون المباشر.';
+                            }
+                            ?>
+                        </p>
+                        <div class="magical-footer-stamp">
+                            <span class="stamp-item"><i class="fas fa-shield-alt"></i> معاملة معتمدة</span>
+                            <span class="stamp-item"><i class="fas fa-check-circle"></i> تم التدقيق الإلكتروني</span>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+
             <div class="post-share-footer-block">
                 <h3><i class="fas fa-share-alt"></i> مشاركة المقال عبر شبكات التواصل الاجتماعي:</h3>
                 <div class="share-links-btn-grid">
@@ -51,8 +75,6 @@
             </div>
         </aside>
     </div>
-
-    <?php endwhile; ?>
 </div>
 
 <?php get_footer(); ?>
