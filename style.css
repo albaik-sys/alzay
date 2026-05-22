@@ -555,3 +555,17 @@ img { max-width: 100%; height: auto; display: block; }
 .badge-necessary { background: linear-gradient(135deg, #f39c12 0%, #d35400 100%); }
 .badge-following { background: linear-gradient(135deg, #2980b9 0%, #1f618d 100%); }
 .badge-new { background: linear-gradient(135deg, #27ae60 0%, #1e8449 100%); }
+.gov-view-all-link {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--primary);
+    text-decoration: none;
+    background: rgba(17, 92, 56, 0.06);
+    padding: 6px 16px;
+    border-radius: 4px;
+    transition: 0.2s;
+}
+.gov-view-all-link:hover {
+    background: var(--primary);
+    color: #fff;
+}
