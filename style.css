@@ -1163,3 +1163,90 @@ img { max-width: 100%; height: auto; display: block; }
     }
     .v2-hero-text-side h1 { font-size: 32px !important; }
 }
+
+/* ==========================================================================
+   الزيتون V2: خدمات الدليل الرقمي والخريطة التفاعلية
+   ========================================================================== */
+
+/* شبكة Bento المصنفة للدليل الإلكتروني للمحلات */
+.v2-directory-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important;
+    gap: 20px !important;
+    margin-top: 25px !important;
+}
+
+.v2-directory-card {
+    background: var(--v2-glass-bg, rgba(15, 23, 42, 0.6)) !important;
+    border: 1px solid var(--v2-glass-border, rgba(255, 255, 255, 0.05)) !important;
+    backdrop-filter: blur(12px) !important;
+    border-radius: 10px !important;
+    padding: 20px !important;
+    text-align: center !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    cursor: pointer !important;
+}
+
+.v2-directory-card:hover {
+    border-color: var(--v2-neon-emerald, #11BC6F) !important;
+    box-shadow: 0 0 20px var(--v2-neon-glow, rgba(17, 188, 111, 0.15)) !important;
+    transform: translateY(-3px) !important;
+}
+
+.v2-directory-icon {
+    font-size: 28px !important;
+    color: var(--v2-neon-emerald, #11BC6F) !important;
+    margin-bottom: 12px !important;
+    text-shadow: 0 0 10px var(--v2-neon-glow, rgba(17, 188, 111, 0.15)) !important;
+}
+
+.v2-directory-card h4 {
+    font-size: 16px !important;
+    font-weight: 800 !important;
+    color: #fff !important;
+    margin-bottom: 6px !important;
+}
+
+.v2-directory-card span {
+    font-size: 12px !important;
+    color: #94a3b8 !important;
+}
+
+/* حاوية الخريطة التفاعلية الذكية للحي */
+.v2-interactive-map-container {
+    background: var(--v2-glass-bg, rgba(15, 23, 42, 0.6)) !important;
+    border: 1px solid var(--v2-glass-border, rgba(255, 255, 255, 0.05)) !important;
+    backdrop-filter: blur(16px) !important;
+    border-radius: 12px !important;
+    padding: 30px !important;
+    margin: 40px 0 !important;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3) !important;
+}
+
+.v2-map-placeholder {
+    width: 100% !important;
+    height: 350px !important;
+    background: rgba(0, 0, 0, 0.2) !important;
+    border: 1px dashed rgba(17, 188, 111, 0.3) !important;
+    border-radius: 8px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: #94a3b8 !important;
+    gap: 15px !important;
+}
+
+.v2-map-pulse-node {
+    width: 12px; height: 12px;
+    background: var(--v2-neon-emerald, #11BC6F);
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(17, 188, 111, 0.7);
+    animation: v2MapPulse 1.6s infinite;
+}
+
+@keyframes v2MapPulse {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(17, 188, 111, 0.7); }
+    70% { transform: scale(1); box-shadow: 0 0 0 12px rgba(17, 188, 111, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(17, 188, 111, 0); }
+}
