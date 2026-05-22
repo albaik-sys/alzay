@@ -123,16 +123,38 @@
 
             <div class="royal-content-panel royal-box" style="border:1px solid var(--gold);">
                 <div class="panel-header-gov" style="background:var(--primary); color:#fff; font-weight:800;"><i class="fas fa-star" style="color:var(--gold); margin-left:8px;"></i> شخصية الأسبوع البارزة</div>
-                <div class="widget-content" style="padding:25px 20px; text-align:center; background:#fff;">
+                <div class="widget-content" style="padding:20px 15px; text-align:center; background:#fff;">
                     <?php
                     $person_query = new WP_Query(array('post_type' => 'person', 'posts_per_page' => 1, 'post_status' => 'publish'));
                     if ($person_query->have_posts()) : while ($person_query->have_posts()) : $person_query->the_post();
-                    if (has_post_thumbnail()) { the_post_thumbnail('medium', array('style'=>'width:110px;height:110px;border-radius:50%;margin:0 auto 15px;border:3px solid var(--gold);object-fit:cover;display:block;')); }
+                    if (has_post_thumbnail()) { the_post_thumbnail('medium', array('style'=>'width:90px;height:90px;border-radius:50%;margin:0 auto 12px;border:3px solid var(--gold);object-fit:cover;display:block;')); }
                     ?>
-                    <h3 style="color:var(--primary); font-weight:800; font-size:16px; margin-bottom:8px;"><?php the_title(); ?></h3>
-                    <p style="font-size:13px; color:#555; line-height:1.6; margin-bottom:15px; text-align:justify;"><?php echo wp_trim_words(get_the_content(), 18, '...'); ?></p>
-                    <a href="<?php the_permalink(); ?>" class="view-all-gov-btn" style="padding:6px 15px; font-size:12.5px; display:inline-block; font-weight:700; background:#f9fafb; border:1px solid #eee; border-radius:4px;">السيرة الكاملة &laquo;</a>
+                    <h3 style="color:var(--primary); font-weight:800; font-size:15px; margin-bottom:6px;"><?php the_title(); ?></h3>
+                    <p style="font-size:12.5px; color:#555; line-height:1.5; margin-bottom:12px; text-align:justify;"><?php echo wp_trim_words(get_the_content(), 14, '...'); ?></p>
+                    <a href="<?php the_permalink(); ?>" class="view-all-gov-btn" style="padding:5px 12px; font-size:12px; display:inline-block; font-weight:700; background:#f9fafb; border:1px solid #eee; border-radius:4px;">السيرة الكاملة &laquo;</a>
                     <?php endwhile; wp_reset_postdata(); endif; ?>
+                </div>
+            </div>
+
+            <div class="royal-content-panel royal-box" style="border-top:3px solid #e74c3c;">
+                <div class="panel-header-gov" style="background:#fff; color:#e74c3c; font-weight:800;"><i class="fas fa-phone-volume"></i> دليل هاتف الطوارئ والخدمات للحي</div>
+                <div class="panel-inner-body" style="padding:0;">
+                    <div class="emergency-item-row" style="display:flex; justify-content:space-between; align-items:center; padding:10px 15px; border-bottom:1px solid #f9f9f9;">
+                        <span style="font-size:13px; font-weight:700; color:#333;"><i class="fas fa-ambulance" style="color:#e74c3c; margin-left:6px;"></i> الإسعاف والطوارئ</span>
+                        <a href="tel:101" style="font-family:sans-serif !important; font-size:13px; font-weight:900; color:#e74c3c; background:rgba(231,76,60,0.08); padding:2px 8px; border-radius:3px;">101</a>
+                    </div>
+                    <div class="emergency-item-row" style="display:flex; justify-content:space-between; align-items:center; padding:10px 15px; border-bottom:1px solid #f9f9f9;">
+                        <span style="font-size:13px; font-weight:700; color:#333;"><i class="fas fa-fire-extinguisher" style="color:#e67e22; margin-left:6px;"></i> الدفاع المدني</span>
+                        <a href="tel:102" style="font-family:sans-serif !important; font-size:13px; font-weight:900; color:#e67e22; background:rgba(230,126,34,0.08); padding:2px 8px; border-radius:3px;">102</a>
+                    </div>
+                    <div class="emergency-item-row" style="display:flex; justify-content:space-between; align-items:center; padding:10px 15px; border-bottom:1px solid #f9f9f9;">
+                        <span style="font-size:13px; font-weight:700; color:#333;"><i class="fas fa-shield-alt" style="color:#2980b9; margin-left:6px;"></i> الشرطة والنجدة</span>
+                        <a href="tel:100" style="font-family:sans-serif !important; font-size:13px; font-weight:900; color:#2980b9; background:rgba(41,128,185,0.08); padding:2px 8px; border-radius:3px;">100</a>
+                    </div>
+                    <div class="emergency-item-row" style="display:flex; justify-content:space-between; align-items:center; padding:10px 15px;">
+                        <span style="font-size:13px; font-weight:700; color:#333;"><i class="fas fa-faucet" style="color:#27ae60; margin-left:6px;"></i> طوارئ المياه والبلدية</span>
+                        <a href="tel:115" style="font-family:sans-serif !important; font-size:13px; font-weight:900; color:#27ae60; background:rgba(39,174,96,0.08); padding:2px 8px; border-radius:3px;">115</a>
+                    </div>
                 </div>
             </div>
 
