@@ -1,5 +1,4 @@
 <?php
-// ربط التنسيقات والأيقونات
 function alzaytoon_theme_scripts() {
     wp_enqueue_style( 'font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css', array(), '6.5.2' );
     wp_enqueue_style( 'alzaytoon-style', get_stylesheet_uri(), array(), time() ); 
@@ -13,7 +12,6 @@ function alzaytoon_theme_setup() {
 }
 add_action( 'after_setup_theme', 'alzaytoon_theme_setup' );
 
-// تسجيل الأقسام المخصصة
 function alzaytoon_register_custom_post_types() {
     $cpts = array(
         'news'   => array('name' => 'الأخبار', 'singular' => 'خبر', 'icon' => 'dashicons-megaphone'),
@@ -33,57 +31,37 @@ function alzaytoon_register_custom_post_types() {
 }
 add_action( 'init', 'alzaytoon_register_custom_post_types' );
 
-// 🟢 الميزة 1: لوحة تحكم مخصصة لتغيير روابط السوشيال ميديا 🟢
 function alzaytoon_customize_register( $wp_customize ) {
-    $wp_customize->add_section( 'alzaytoon_social', array(
-        'title'    => __( 'إعدادات شبكة حي الزيتون (السوشيال ميديا)', 'alzaytoon' ),
-        'priority' => 30,
-    ));
-    $socials = array(
-        'facebook'  => 'رابط صفحة فيسبوك',
-        'instagram' => 'رابط انستجرام',
-        'telegram'  => 'رابط قناة تيليجرام',
-        'youtube'   => 'رابط قناة يوتيوب',
-        'whatsapp'  => 'رقم الواتساب (مثال: 970591234567)',
-        'phone'     => 'رقم الهاتف للاتصال المباشر'
-    );
+    $wp_customize->add_section( 'alzaytoon_social', array('title' => 'إعدادات شبكة حي الزيتون', 'priority' => 30) );
+    $socials = array('facebook' => 'فيسبوك', 'instagram' => 'انستجرام', 'telegram' => 'تيليجرام', 'youtube' => 'يوتيوب', 'whatsapp' => 'واتساب', 'phone' => 'الهاتف');
     foreach($socials as $key => $label) {
         $wp_customize->add_setting( 'alzaytoon_'.$key, array('default' => '') );
-        $wp_customize->add_control( 'alzaytoon_'.$key, array(
-            'label'   => $label,
-            'section' => 'alzaytoon_social',
-            'type'    => 'text',
-        ));
+        $wp_customize->add_control( 'alzaytoon_'.$key, array('label' => $label, 'section' => 'alzaytoon_social', 'type' => 'text') );
     }
 }
 add_action( 'customize_register', 'alzaytoon_customize_register' );
 
-// 🟢 الميزة 2: برمجة عداد المشاهدات الذكي 🟢
 function alzaytoon_set_post_views($postID) {
     $count_key = 'post_views_count';
     $count = get_post_meta($postID, $count_key, true);
     if($count == ''){
-        $count = 0;
         delete_post_meta($postID, $count_key);
-        add_post_meta($postID, $count_key, '0');
+        add_post_meta($postID, $count_key, '1');
     } else {
         $count++;
         update_post_meta($postID, $count_key, $count);
     }
 }
 function alzaytoon_get_post_views($postID){
-    $count_key = 'post_views_count';
-    $count = get_post_meta($postID, $count_key, true);
-    if($count == ''){ return "0"; }
-    return $count;
+    $count = get_post_meta($postID, 'post_views_count', true);
+    return ($count == '') ? "0" : $count;
 }
-?>
-// 🟢 حساب مدة القراءة التقريبية للمقال 🟢
+
 function alzaytoon_reading_time() {
     $content = get_post_field( 'post_content', get_the_ID() );
     $word_count = str_word_count( strip_tags( $content ) );
     $readingtime = ceil($word_count / 200);
-    if ($readingtime == 1) { return "دقيقة واحدة"; } 
+    if ($readingtime <= 1) { return "دقيقة واحدة"; } 
     elseif ($readingtime == 2) { return "دقيقتان"; } 
     else { return $readingtime . " دقائق"; }
 }

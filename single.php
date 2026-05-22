@@ -5,7 +5,8 @@
         
         <header class="news-header">
             <div class="news-breadcrumbs">
-                <a href="<?php echo home_url(); ?>">الرئيسية</a> / <span><?php echo get_post_type_object(get_post_type())->labels->name; ?></span>
+                <a href="<?php echo home_url(); ?>">الرئيسية</a> / 
+                <a href="<?php echo get_post_type_archive_link(get_post_type()); ?>"><?php echo get_post_type_object(get_post_type())->labels->name; ?></a>
             </div>
             <h1 class="news-title"><?php the_title(); ?></h1>
             
@@ -14,23 +15,13 @@
                     نشر في: <?php echo get_the_date('d F Y'); ?> <span class="time-sep">م</span> <?php echo get_the_time('h:i A'); ?>
                 </div>
                 <div class="meta-reading">
-                    <i class='far fa-clock'></i> <?php echo alzaytoon_reading_time(); ?> للقراءة
+                    <span><i class='far fa-clock'></i> <?php echo alzaytoon_reading_time(); ?> للقراءة</span>
                     <span class="meta-views"><i class='far fa-eye'></i> <?php echo alzaytoon_get_post_views(get_the_ID()); ?> قراءة</span>
                 </div>
             </div>
         </header>
 
         <div class="news-layout">
-            
-            <aside class="news-sidebar">
-                <div class="sticky-share-box">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(get_permalink()); ?>" target="_blank" class="share-icon fb"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://api.whatsapp.com/send?text=<?php echo urlencode(get_the_title() . ' - ' . get_permalink()); ?>" target="_blank" class="share-icon wa"><i class="fab fa-whatsapp"></i></a>
-                    <a href="https://t.me/share/url?url=<?php echo urlencode(get_permalink()); ?>&text=<?php echo urlencode(get_the_title()); ?>" target="_blank" class="share-btn tg"><i class="fab fa-telegram-plane"></i></a>
-                    <a href="#" class="share-icon print" onclick="window.print(); return false;"><i class="fas fa-print"></i></a>
-                </div>
-            </aside>
-
             <article class="news-content-area">
                 
                 <?php if ( has_post_thumbnail() ) : ?>
@@ -61,6 +52,16 @@
                 </div>
 
             </article>
+
+            <aside class="news-sidebar">
+                <div class="sticky-share-box">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(get_permalink()); ?>" target="_blank" class="share-icon fb"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://api.whatsapp.com/send?text=<?php echo urlencode(get_the_title() . ' - ' . get_permalink()); ?>" target="_blank" class="share-icon wa"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://twitter.com/intent/tweet?url=<?php echo urlencode(get_permalink()); ?>&text=<?php echo urlencode(get_the_title()); ?>" target="_blank" class="share-icon tw"><i class="fab fa-x-twitter"></i></a>
+                    <a href="https://t.me/share/url?url=<?php echo urlencode(get_permalink()); ?>&text=<?php echo urlencode(get_the_title()); ?>" target="_blank" class="share-icon tg"><i class="fab fa-telegram-plane"></i></a>
+                    <a href="javascript:window.print()" class="share-icon print"><i class="fas fa-print"></i></a>
+                </div>
+            </aside>
         </div>
 
     <?php endwhile; ?>
