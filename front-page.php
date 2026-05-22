@@ -120,43 +120,72 @@
                 </div>
             </div>
         </div>
-
     </div>
 
-    <section class="home-dual-news-tables" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; margin: 40px 0;">
-        <div class="news-table-block" style="background:#fff; border:1px solid #e2e8f0; border-radius:6px; overflow:hidden;">
-            <div class="news-table-header" style="background:var(--primary); color:#fff; padding:12px 20px; font-weight:800; border-bottom:3px solid var(--gold); display:flex; justify-content:space-between; align-items:center;">
-                <span><i class="fas fa-search-plus"></i> أحدث بلاغات بوابة المفقودات الحالية</span>
-                <span style="background:rgba(255,255,255,0.2); padding:2px 10px; font-size:11px; border-radius:4px;">متابعة فورية</span>
-            </div>
-            <div class="news-table-rows" style="display:flex; flex-direction:column;">
-                <?php
-                $lost_tab_query = new WP_Query(array('post_type' => 'lost', 'posts_per_page' => 3, 'post_status' => 'publish'));
-                if($lost_tab_query->have_posts()) : while($lost_tab_query->have_posts()) : $lost_tab_query->the_post();
-                ?>
-                <div class="news-table-row-item" style="display:flex; justify-content:space-between; padding:14px 20px; border-bottom:1px solid #f0f0f0; gap:15px;">
-                    <a href="<?php the_permalink(); ?>" style="font-weight:700; font-size:14px; color:#222; text-decoration:none; flex:1;"><?php the_title(); ?></a>
-                    <span style="font-size:12px; color:#999; white-space:nowrap;"><i class="far fa-clock"></i> <?php echo get_the_date('d M'); ?></span>
-                </div>
-                <?php endwhile; wp_reset_postdata(); endif; ?>
-            </div>
+    <section class="gov-home-section" style="margin-bottom: 45px;">
+        <div class="block-header-gov" style="margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center;">
+            <h2><i class="fas fa-search"></i> بوابة الاستعلام عن المفقودات الحالية (طلبات وعروض)</h2>
+            <a href="<?php echo get_post_type_archive_link('lost'); ?>" class="gov-view-all-link" style="font-size:13px; font-weight:700; text-decoration:none; background:rgba(17,92,56,0.06); padding:5px 12px; border-radius:3px; color:var(--primary);">مركز المفقودات كامل &laquo;</a>
         </div>
 
-        <div class="news-table-block" style="background:#fff; border:1px solid #e2e8f0; border-radius:6px; overflow:hidden;">
-            <div class="news-table-header" style="background:var(--primary); color:#fff; padding:12px 20px; font-weight:800; border-bottom:3px solid var(--gold); display:flex; justify-content:space-between; align-items:center;">
-                <span><i class="far fa-calendar-alt"></i> أجندة الأنشطة والمناسبات القادمة</span>
-                <span style="background:rgba(255,255,255,0.2); padding:2px 10px; font-size:11px; border-radius:4px;">اللجنة المحلية</span>
-            </div>
-            <div class="news-table-rows" style="display:flex; flex-direction:column;">
-                <?php
-                $event_tab_query = new WP_Query(array('post_type' => 'events', 'posts_per_page' => 3, 'post_status' => 'publish'));
-                if($event_tab_query->have_posts()) : while($event_tab_query->have_posts()) : $event_tab_query->the_post();
-                ?>
-                <div class="news-table-row-item" style="display:flex; justify-content:space-between; padding:14px 20px; border-bottom:1px solid #f0f0f0; gap:15px;">
-                    <a href="<?php the_permalink(); ?>" style="font-weight:700; font-size:14px; color:#222; text-decoration:none; flex:1;"><?php the_title(); ?></a>
-                    <span style="font-size:12px; color:#999; white-space:nowrap;"><i class="far fa-calendar-alt"></i> <?php echo get_the_date('d M'); ?></span>
+        <div class="lost-articles-list-vertical-wrapper" style="display: flex; flex-direction: column; gap: 15px;">
+            <?php 
+            $lost_query = new WP_Query(array('post_type' => 'lost', 'posts_per_page' => 4, 'post_status' => 'publish'));
+            if($lost_query->have_posts()) : while($lost_query->have_posts()) : $lost_query->the_post(); 
+                $p_id = get_the_ID();
+                $card_sender = get_post_meta($p_id, '_gov_sender_name', true);
+                $card_phone = get_post_meta($p_id, '_gov_phone_address', true);
+            ?>
+            <div class="lost-list-row-item-box" style="display: flex; align-items: center; justify-content: space-between; background: #fff; border: 1px solid #e2e8f0; border-right: 4px solid var(--gold); padding: 15px 20px; border-radius: 4px; gap: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.01);">
+                <div style="display: flex; flex-direction: column; gap: 6px; flex: 1;">
+                    <h3 style="font-size: 15.5px; font-weight: 800; margin: 0;"><a href="<?php the_permalink(); ?>" style="color:#1a1a1a; text-decoration:none;"><?php the_title(); ?></a></h3>
+                    <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 15px; font-size: 12.5px; color: #666;">
+                        <?php if(!empty($card_sender)) : ?>
+                            <span><i class="fas fa-user-circle" style="color:var(--primary);"></i> <strong>المعلن:</strong> <?php echo esc_html($card_sender); ?></span>
+                        <?php endif; ?>
+                        <?php if(!empty($card_phone)) : ?>
+                            <span style="color:var(--primary); font-weight:700;"><i class="fas fa-phone-alt"></i> <?php echo esc_html($card_phone); ?></span>
+                        <?php endif; ?>
+                    </div>
                 </div>
-                <?php endwhile; wp_reset_postdata(); endif; ?>
+                <span style="font-size: 12px; color: #999; white-space: nowrap;"><i class="far fa-calendar-check"></i> اليوم: <?php echo get_the_date('l, d/m'); ?></span>
+            </div>
+            <?php endwhile; wp_reset_postdata(); endif; ?>
+        </div>
+    </section>
+
+    <section class="custom-categories-master-section" style="margin: 40px 0;">
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px;">
+            <div class="royal-content-panel royal-box">
+                <div class="panel-header-gov" style="background:#1e7e4e; color:#fff; border-bottom-color:var(--gold);"><i class="fas fa-laptop-code"></i> نبض التكنولوجيا والرقميات بالحي</div>
+                <div class="panel-inner-body" style="padding:10px 0;">
+                    <?php
+                    $tech_query = new WP_Query(array('post_type' => 'news', 'posts_per_page' => 3, 'post_status' => 'publish'));
+                    if ($tech_query->have_posts()) : while ($tech_query->have_posts()) : $tech_query->the_post();
+                    ?>
+                    <div class="compact-news-row-item">
+                        <span class="compact-tech-dot"></span>
+                        <a href="<?php the_permalink(); ?>" class="compact-news-link-txt"><?php the_title(); ?></a>
+                        <span class="compact-news-time-badge"><?php echo get_the_date('d/m'); ?></span>
+                    </div>
+                    <?php endwhile; wp_reset_postdata(); endif; ?>
+                </div>
+            </div>
+
+            <div class="royal-content-panel royal-box">
+                <div class="panel-header-gov" style="background:#1e7e4e; color:#fff; border-bottom-color:var(--gold);"><i class="fas fa-feather-alt"></i> شؤون محلية وتقارير ومقالات مصورة</div>
+                <div class="panel-inner-body" style="padding:10px 0;">
+                    <?php
+                    $local_query = new WP_Query(array('post_type' => 'events', 'posts_per_page' => 3, 'post_status' => 'publish'));
+                    if ($local_query->have_posts()) : while ($local_query->have_posts()) : $local_query->the_post();
+                    ?>
+                    <div class="compact-news-row-item">
+                        <span class="compact-tech-dot" style="background:var(--gold);"></span>
+                        <a href="<?php the_permalink(); ?>" class="compact-news-link-txt"><?php the_title(); ?></a>
+                        <span class="compact-news-time-badge"><?php echo get_the_date('d/m'); ?></span>
+                    </div>
+                    <?php endwhile; wp_reset_postdata(); endif; ?>
+                </div>
             </div>
         </div>
     </section>
@@ -164,30 +193,6 @@
     <section class="home-bottom-adv-banner" style="background: linear-gradient(135deg, #115c38 0%, #0b3d25 100%); border: 2px solid var(--gold); border-radius: 6px; padding: 30px; text-align: center; color: #fff; margin: 40px 0; position: relative; overflow: hidden;">
         <h3 style="font-size: 20px; font-weight: 900; color: var(--gold); margin-bottom: 8px;">مساحة إعلانية مخصصة لشركات ومحلات حي الزيتون</h3>
         <p style="font-size: 14px; color: #e2e8f0; max-width: 600px; margin: 0 auto;">لرعاية وتطوير الأنشطة الخيرية والخدمية داخل الحي، يرجى التواصل مع إدارة الشبكة عبر بوابة اتصل بنا الرسمية أو عبر رقم الواتساب المعتمد.</p>
-    </section>
-
-    <section class="random-articles-section" style="margin-top:40px;">
-        <div class="block-header-gov center-aligned-header" style="text-align:center;"><i class="fas fa-layer-group"></i> منوعات ومختارات من شبكة الزيتون</div>
-        <div class="random-articles-grid" style="display:grid; grid-template-columns: repeat(4, 1fr); gap:20px; margin-top:25px;">
-            <?php
-            $random_articles = new WP_Query(array('post_type' => array('news', 'events'), 'orderby' => 'rand', 'posts_per_page' => 4, 'post_status' => 'publish'));
-            if($random_articles->have_posts()) : while($random_articles->have_posts()) : $random_articles->the_post();
-            ?>
-            <article class="random-article-card gov-archive-card" style="background:#fff; border:1px solid #eee; border-radius:6px; overflow:hidden;">
-                <a href="<?php the_permalink(); ?>" class="random-card-img-wrap" style="display:block; position:relative; height:150px; overflow:hidden;">
-                    <?php if(has_post_thumbnail()) { the_post_thumbnail('medium_large'); } else { echo "<img src='https://picsum.photos/400/260?random=".get_the_ID()."' style='width:100%; height:100%; object-fit:cover;'>"; } ?>
-                    <span class="random-type-badge" style="position:absolute; top:10px; right:10px; background:var(--gold); color:#fff; font-size:11px; font-weight:800; padding:3px 8px; border-radius:4px;"><?php echo get_post_type_object(get_post_type())->labels->singular_name; ?></span>
-                </a>
-                <div class="random-card-text" style="padding:15px;">
-                    <h3 style="font-size:14px; font-weight:800; line-height:1.5; margin-bottom:10px;"><a href="<?php the_permalink(); ?>"><?php echo wp_trim_words(get_the_title(), 9, '...'); ?></a></h3>
-                    <div class="random-card-footer-meta" style="display:flex; justify-content:space-between; font-size:11px; color:#888; border-top:1px solid #f5f5f5; padding-top:10px;">
-                        <span><i class="far fa-calendar-alt"></i> <?php echo get_the_date(); ?></span>
-                        <span><i class="far fa-eye"></i> <?php echo alzaytoon_get_post_views(get_the_ID()); ?> قراءة</span>
-                    </div>
-                </div>
-            </article>
-            <?php endwhile; wp_reset_postdata(); endif; ?>
-        </div>
     </section>
 
 </div>

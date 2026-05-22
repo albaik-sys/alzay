@@ -999,3 +999,23 @@ img { max-width: 100%; height: auto; display: block; }
         gap: 20px !important;
     }
 }
+.lost-list-row-item-box {
+    transition: all 0.25s ease-in-out !important;
+}
+.lost-list-row-item-box:hover {
+    transform: translateX(-5px) !important;
+    border-color: var(--primary) !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.04) !important;
+}
+.lost-list-row-item-box h3 a:hover {
+    color: var(--primary) !important;
+}
+
+@media(max-width: 768px) {
+    .lost-list-row-item-box {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        padding: 15px !important;
+        gap: 10px !important;
+    }
+}
