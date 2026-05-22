@@ -66,7 +66,6 @@
     </div>
 </div>
 
-/* إصلاح مستهدف لضمان رندرة الفوتر في الأرشيف */
 ?>
 <div style="clear: both;"></div>
 <?php get_footer(); ?>

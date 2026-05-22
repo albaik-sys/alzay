@@ -50,3 +50,6 @@
 
 <div style="clear: both;"></div>
 <?php get_footer(); ?>
+<?php
+// Clean injection closure
+?>
