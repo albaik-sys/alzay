@@ -78,3 +78,12 @@ function alzaytoon_get_post_views($postID){
     return $count;
 }
 ?>
+// 🟢 حساب مدة القراءة التقريبية للمقال 🟢
+function alzaytoon_reading_time() {
+    $content = get_post_field( 'post_content', get_the_ID() );
+    $word_count = str_word_count( strip_tags( $content ) );
+    $readingtime = ceil($word_count / 200);
+    if ($readingtime == 1) { return "دقيقة واحدة"; } 
+    elseif ($readingtime == 2) { return "دقيقتان"; } 
+    else { return $readingtime . " دقائق"; }
+}

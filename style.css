@@ -112,3 +112,65 @@ ul { list-style: none; padding: 0; margin: 0; }
     .header-actions { justify-content: center; flex-wrap: wrap; }
     .footer-left, .footer-right { flex-direction: column; text-align: center; gap: 10px; }
 }
+
+/* =========================================================
+   تنسيقات صفحة المقال الاحترافية (News Article Layout)
+========================================================= */
+.news-container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+
+/* الهيدر الخاص بالخبر */
+.news-header { margin-bottom: 30px; border-bottom: 2px solid var(--border); padding-bottom: 20px; }
+.news-breadcrumbs { font-size: 13px; color: var(--green); font-weight: 700; margin-bottom: 15px; }
+.news-breadcrumbs a { color: #888; transition: 0.3s; }
+.news-breadcrumbs a:hover { color: var(--green); }
+.news-title { font-size: 38px; font-weight: 900; color: #111; line-height: 1.4; margin-bottom: 20px; font-family: 'Cairo', sans-serif; }
+.news-meta-info { display: flex; justify-content: space-between; align-items: center; font-size: 14px; color: #666; flex-wrap: wrap; gap: 10px; }
+.meta-publish { font-weight: 600; }
+.meta-reading { display: flex; gap: 15px; align-items: center; }
+.meta-views { color: #d9534f; font-weight: 700; }
+
+/* الهيكل الشبكي (Grid Layout) للمقال */
+.news-layout { display: grid; grid-template-columns: 60px 1fr; gap: 40px; align-items: start; }
+
+/* الشريط الجانبي للمشاركة */
+.news-sidebar { position: relative; height: 100%; }
+.sticky-share-box { position: sticky; top: 100px; display: flex; flex-direction: column; gap: 12px; }
+.share-icon, .share-btn { width: 45px; height: 45px; display: flex; justify-content: center; align-items: center; border-radius: 50%; color: #fff; font-size: 18px; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+.share-icon:hover, .share-btn:hover { transform: translateY(-3px); color: #fff; box-shadow: 0 6px 15px rgba(0,0,0,0.2); }
+.fb { background: #1877F2; }
+.wa { background: #25D366; }
+.tg { background: #0088cc; }
+.print { background: #555; }
+
+/* منطقة المحتوى والتيبوغرافي */
+.news-content-area { max-width: 800px; width: 100%; }
+.news-featured-image { margin-bottom: 30px; border-radius: 8px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+.news-featured-image img { width: 100%; height: auto; display: block; }
+
+.news-typography { font-size: 20px; line-height: 2.2; color: #333; font-weight: 600; }
+.news-typography p { margin-bottom: 25px; }
+.news-typography h2, .news-typography h3 { color: var(--green); margin: 35px 0 15px; font-weight: 800; }
+.news-typography img { max-width: 100%; height: auto; border-radius: 8px; margin: 20px 0; }
+.news-typography blockquote { border-right: 5px solid var(--yellow); background: var(--light-bg); padding: 20px; font-style: italic; color: #555; font-size: 22px; margin: 30px 0; border-radius: 4px; }
+
+/* أخبار ذات صلة (شكل البطاقات) */
+.news-related-section { margin-top: 50px; padding-top: 30px; border-top: 2px solid var(--border); }
+.related-title { color: var(--green); font-weight: 900; font-size: 22px; border-right: 4px solid var(--yellow); padding-right: 12px; margin-bottom: 25px; }
+.related-grid-news { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.related-news-card { display: flex; gap: 15px; background: #fff; border: 1px solid var(--border); padding: 10px; border-radius: 8px; transition: 0.3s; align-items: center; }
+.related-news-card:hover { border-color: var(--green); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+.related-news-card img { width: 100px; height: 80px; object-fit: cover; border-radius: 6px; }
+.related-news-card h4 { font-size: 15px; font-weight: 700; color: #222; line-height: 1.5; }
+
+/* Responsive للموبايل */
+@media(max-width: 992px) {
+    .news-title { font-size: 28px; }
+    .news-layout { grid-template-columns: 1fr; gap: 20px; }
+    
+    /* تحويل أزرار المشاركة لتصبح أفقية أعلى المحتوى */
+    .sticky-share-box { position: static; flex-direction: row; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
+    .news-sidebar { height: auto; border-bottom: 1px solid var(--border); padding-bottom: 15px; margin-bottom: 15px; }
+    
+    .news-typography { font-size: 18px; line-height: 2; }
+    .related-grid-news { grid-template-columns: 1fr; }
+}
