@@ -901,3 +901,54 @@ img { max-width: 100%; height: auto; display: block; }
         padding: 12px 15px !important;
     }
 }
+
+/* ==========================================================================
+   تنسيقات نظام الأسطر المصغرة والمدمجة الفاخرة للقسم الأخير بالرئيسية
+   ========================================================================== */
+.compact-gov-list-row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 12px 20px !important;
+    border-bottom: 1px solid #f5f5f5 !important;
+    transition: background 0.2s ease !important;
+}
+.compact-gov-list-row:last-child {
+    border-bottom: none !important;
+}
+.compact-gov-list-row:hover {
+    background: #fafbfc !important;
+}
+.compact-right-side {
+    display: flex !important;
+    align-items: center !important;
+    gap: 15px !important;
+    flex: 1 !important;
+}
+.compact-row-title-link {
+    font-size: 14.5px !important;
+    font-weight: 700 !important;
+    color: #222 !important;
+    line-height: 1.4 !important;
+}
+.compact-gov-list-row:hover .compact-row-title-link {
+    color: var(--primary, #115c38) !important;
+}
+.compact-row-date-stamp {
+    font-size: 12px !important;
+    color: #999 !important;
+    white-space: nowrap !important;
+}
+
+@media(max-width: 768px) {
+    .home-dual-news-tables {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+    .compact-gov-list-row {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 8px !important;
+        padding: 12px 15px !important;
+    }
+}
