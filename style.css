@@ -463,3 +463,95 @@ img { max-width: 100%; height: auto; display: block; }
         max-height: calc(100vh - 30px) !important;
     }
 }
+
+/* ==========================================================================
+   تحسينات التجاوب والـ 6 أسطر وبطاقات الأرشيف لشبكة الزيتون
+   ========================================================================== */
+.gov-archive-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.07) !important;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02) !important;
+    transition: 0.3s ease;
+}
+.gov-archive-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(17,92,56,0.08) !important;
+    border-color: rgba(17,92,56,0.15) !important;
+}
+.gov-archive-title a {
+    font-size: 16px !important;
+    font-weight: 800 !important;
+    color: var(--primary) !important;
+    line-height: 1.4 !important;
+    display: block;
+    margin-bottom: 12px;
+}
+/* ضبط صندوق الـ 6 أسطر بدقة هندسية موحدة */
+.gov-archive-excerpt-6lines {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: #666;
+    font-weight: 600;
+    text-align: justify;
+    height: 115px; /* ارتفاع ثابت يضمن محاكاة 6 أسطر متوازية تماماً */
+    overflow: hidden;
+    margin-bottom: 15px;
+    position: relative;
+}
+/* شريط اسم مقدم الطلب المطور */
+.gov-card-author-strip {
+    background: rgba(214, 175, 55, 0.07);
+    border-right: 3px solid var(--gold);
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #333;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+.gov-card-author-strip i {
+    color: var(--primary);
+    margin-left: 5px;
+}
+/* رقم الجوال */
+.gov-card-phone-row {
+    font-size: 13px;
+    color: var(--primary);
+    font-weight: 800;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: sans-serif !important;
+}
+/* شريط اليوم والتاريخ المطور */
+.gov-archive-footer {
+    border-top: 1px solid #f0f0f0;
+    padding-top: 12px;
+    margin-top: auto;
+}
+.gov-day-badge {
+    color: #555 !important;
+    font-weight: 700 !important;
+}
+/* أوسمة مسميات الإدارة الفخمة */
+.gov-badge-status-key {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 800;
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+.badge-urgent { background: linear-gradient(135deg, #d93838 0%, #b32424 100%); }
+.badge-necessary { background: linear-gradient(135deg, #f39c12 0%, #d35400 100%); }
+.badge-following { background: linear-gradient(135deg, #2980b9 0%, #1f618d 100%); }
+.badge-new { background: linear-gradient(135deg, #27ae60 0%, #1e8449 100%); }
