@@ -1441,3 +1441,43 @@ img { max-width: 100%; height: auto; display: block; }
         padding-top: 8px !important;
     }
 }
+
+/* ==========================================================================
+   التعديل الأول: تنظيف هيدر الموبايل وتعديل الدليل
+   ========================================================================== */
+@media (max-width: 768px) {
+    /* إخفاء الشريط الأخضر العلوي والتاريخ والسوشيال ميديا */
+    .top-header, .upper-bar, [class*="top-bar"], div[style*="background-color: #115c38"] {
+        display: none !important;
+    }
+    
+    /* إخفاء منطقة اللوجو بالكامل وشجرة الزيتون المحيطة به */
+    .main-header, .logo-container, .header-branding, header .container, .royal-hero-section > div:first-child {
+        display: none !important;
+    }
+    
+    /* إزالة أي فراغات علوية ناتجة عن الإخفاء */
+    body, .site-content {
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+    }
+    
+    /* تنسيق رأس القائمة الجديد ليظهر بشكل ملوكي عند الفتح */
+    .mobile-menu-v2-title {
+        display: block !important;
+        padding: 15px 20px;
+        font-size: 16px;
+        font-weight: 900;
+        color: #d4af37;
+        background: #0b3d25;
+        text-align: center;
+        border-bottom: 2px solid #d4af37;
+        margin-bottom: 10px;
+    }
+}
+
+@media (min-width: 769px) {
+    .mobile-menu-v2-title {
+        display: none !important;
+    }
+}

@@ -48,8 +48,9 @@
 </header>
 
 <nav class="navbar-wrap">
+<div class="mobile-menu-v2-title"><i class="fas fa-layer-group"></i> شبكة حي الزيتون الرسمية</div>
     <div class="container">
-        <button class="mobile-menu-btn" id="mobileToggle"><i class="fas fa-bars"></i> قائمة الشبكة الرسمية</button>
+        <button class="mobile-menu-btn" id="mobileToggle"><i class="fas fa-bars"></i> الدليل</button>
         <div class="nav-menu-container">
             <ul class="nav-ul" id="navUl">
                 <li class="close-mobile-li"><a href="javascript:void(0)" id="mobileCloseMenu"><i class="fas fa-times"></i> إغلاق القائمة</a></li>
