@@ -12,10 +12,10 @@
         <div class='date'><i class='far fa-calendar-alt'></i> <?php echo wp_date('l d F Y'); ?></div>
         <div class='topbar-text'>من قلب حي الزيتون... نكتب لأجل أهلنا</div>
         <div class='social'>
-            <a href='#'><i class='fab fa-facebook-f'></i></a>
-            <a href='#'><i class='fab fa-instagram'></i></a>
-            <a href='#'><i class='fab fa-telegram'></i></a>
-            <a href='#'><i class='fab fa-youtube'></i></a>
+            <a href='<?php echo esc_url(get_theme_mod("alzaytoon_facebook", "#")); ?>'><i class='fab fa-facebook-f'></i></a>
+            <a href='<?php echo esc_url(get_theme_mod("alzaytoon_instagram", "#")); ?>'><i class='fab fa-instagram'></i></a>
+            <a href='<?php echo esc_url(get_theme_mod("alzaytoon_telegram", "#")); ?>'><i class='fab fa-telegram'></i></a>
+            <a href='<?php echo esc_url(get_theme_mod("alzaytoon_youtube", "#")); ?>'><i class='fab fa-youtube'></i></a>
         </div>
     </div>
 </div>
@@ -54,6 +54,6 @@
                 <li><a href='#'><i class='fas fa-info-circle'></i> من نحن</a></li>
             </ul>
         </div>
-        <a href='#' class='contact-btn'><i class='fas fa-phone-alt'></i> اتصل بنا</a>
+        <a href='tel:<?php echo esc_attr(get_theme_mod("alzaytoon_phone", "")); ?>' class='contact-btn'><i class='fas fa-phone-alt'></i> اتصل بنا</a>
     </div>
 </nav>
