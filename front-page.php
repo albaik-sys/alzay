@@ -154,8 +154,14 @@
         </div>
     </section>
 
-    <section class="custom-categories-master-section" style="margin: 40px 0;">
+    <section class="home-bottom-adv-banner" style="background: linear-gradient(135deg, #115c38 0%, #0b3d25 100%); border: 2px solid var(--gold); border-radius: 6px; padding: 30px; text-align: center; color: #fff; margin: 40px 0; position: relative; overflow: hidden;">
+        <h3 style="font-size: 20px; font-weight: 900; color: var(--gold); margin-bottom: 8px;">مساحة إعلانية مخصصة لشركات ومحلات حي الزيتون</h3>
+        <p style="font-size: 14px; color: #e2e8f0; max-width: 600px; margin: 0 auto;">لرعاية وتطوير الأنشطة الخيرية والخدمية داخل الحي، يرجى التواصل مع إدارة الشبكة عبر بوابة اتصل بنا الرسمية أو عبر رقم الواتساب المعتمد.</p>
+    </section>
+
+    <section class="custom-categories-master-section" style="margin: 40px 0 60px 0;">
         <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px;">
+            
             <div class="royal-content-panel royal-box">
                 <div class="panel-header-gov" style="background:#1e7e4e; color:#fff; border-bottom-color:var(--gold);"><i class="fas fa-laptop-code"></i> نبض التكنولوجيا والرقميات بالحي</div>
                 <div class="panel-inner-body" style="padding:10px 0;">
@@ -187,12 +193,8 @@
                     <?php endwhile; wp_reset_postdata(); endif; ?>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <section class="home-bottom-adv-banner" style="background: linear-gradient(135deg, #115c38 0%, #0b3d25 100%); border: 2px solid var(--gold); border-radius: 6px; padding: 30px; text-align: center; color: #fff; margin: 40px 0; position: relative; overflow: hidden;">
-        <h3 style="font-size: 20px; font-weight: 900; color: var(--gold); margin-bottom: 8px;">مساحة إعلانية مخصصة لشركات ومحلات حي الزيتون</h3>
-        <p style="font-size: 14px; color: #e2e8f0; max-width: 600px; margin: 0 auto;">لرعاية وتطوير الأنشطة الخيرية والخدمية داخل الحي، يرجى التواصل مع إدارة الشبكة عبر بوابة اتصل بنا الرسمية أو عبر رقم الواتساب المعتمد.</p>
+        </div>
     </section>
 
 </div>
