@@ -1346,3 +1346,53 @@ img { max-width: 100%; height: auto; display: block; }
     0% { transform: translate3d(100%, 0, 0); }
     100% { transform: translate3d(-100%, 0, 0); }
 }
+
+/* ==========================================================================
+   نظام القائمة السينمائي المدمج (Premium Compact List Layout)
+   ========================================================================== */
+@keyframes v2ListReveal {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.v2-list-row-item {
+    will-change: transform, box-shadow, border-color !important;
+}
+
+/* تأثير التمرير (Hover Effect) الفخم والناعم جداً */
+.v2-list-row-item:hover {
+    transform: translateX(-5px) scale(1.005) !important;
+    border-color: #115c38 !important;
+    box-shadow: 0 6px 20px rgba(17, 92, 56, 0.06) !important;
+    background: #fcfdfe !important;
+}
+
+.v2-list-row-item h3 a:hover {
+    color: #115c38 !important;
+}
+
+/* جدولة أنيميشن الظهور المتتالي للسطور ليعطي إحساساً تفاعلياً رائعاً */
+.v2-premium-list-wrapper article:nth-child(1) { animation-delay: 0.05s; }
+.v2-premium-list-wrapper article:nth-child(2) { animation-delay: 0.1s; }
+.v2-premium-list-wrapper article:nth-child(3) { animation-delay: 0.15s; }
+.v2-premium-list-wrapper article:nth-child(4) { animation-delay: 0.2s; }
+.v2-premium-list-wrapper article:nth-child(5) { animation-delay: 0.25s; }
+.v2-premium-list-wrapper article:nth-child(6) { animation-delay: 0.3s; }
+
+/* توافق تام وشامل للهواتف الجوالة لمنع أي تداخل للأعمدة */
+@media(max-width: 768px) {
+    .v2-list-row-item {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        padding: 15px !important;
+        gap: 12px !important;
+    }
+    .v2-list-date-box {
+        text-align: right !important;
+        width: 100% !important;
+        border-top: 1px solid #f0f0f0 !important;
+        padding-top: 8px !important;
+    }
+}
