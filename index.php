@@ -205,3 +205,51 @@
 </div>
 
 <?php get_footer(); ?>
+    <section class="home-dual-news-tables">
+        <div class="news-table-block">
+            <div class="news-table-header">
+                <span><i class="fas fa-bullhorn"></i> التعميمات والبلاغات الرسمية</span>
+                <span class="table-badge">الديوان العام</span>
+            </div>
+            <div class="news-table-rows">
+                <?php
+                // استعلام لجلب آخر 3 تدوينات من تصنيف معين أو من المفقودات/المناشدات
+                $table_query1 = new WP_Query(array('post_type' => array('news', 'help'), 'posts_per_page' => 3, 'post_status' => 'publish'));
+                if($table_query1->have_posts()) : while($table_query1->have_posts()) : $table_query1->the_post();
+                ?>
+                <div class="news-table-row-item">
+                    <a href="<?php the_permalink(); ?>" class="table-row-title"><?php the_title(); ?></a>
+                    <span class="table-row-date"><i class="far fa-clock"></i> <?php echo get_the_date('d M'); ?></span>
+                </div>
+                <?php endwhile; else: ?>
+                <div class="news-table-row-item"><span class="table-row-title">لا توجد بلاغات رسمية منشورة حالياً.</span></div>
+                <?php endif; wp_reset_postdata(); ?>
+            </div>
+        </div>
+
+        <div class="news-table-block">
+            <div class="news-table-header">
+                <span><i class="far fa-calendar-check"></i> أجندة الفعاليات والأنشطة القادمة</span>
+                <span class="table-badge">اللجنة المجتمعية</span>
+            </div>
+            <div class="news-table-rows">
+                <?php
+                $table_query2 = new WP_Query(array('post_type' => 'events', 'posts_per_page' => 3, 'post_status' => 'publish'));
+                if($table_query2->have_posts()) : while($table_query2->have_posts()) : $table_query2->the_post();
+                ?>
+                <div class="news-table-row-item">
+                    <a href="<?php the_permalink(); ?>" class="table-row-title"><?php the_title(); ?></a>
+                    <span class="table-row-date"><i class="far fa-calendar-alt"></i> <?php echo get_the_date('d M'); ?></span>
+                </div>
+                <?php endwhile; else: ?>
+                <div class="news-table-row-item"><span class="table-row-title">لا توجد فعاليات مجدولة حالياً.</span></div>
+                <?php endif; wp_reset_postdata(); ?>
+            </div>
+        </div>
+    </section>
+
+    <section class="home-bottom-adv-banner">
+        <h3 class="adv-banner-title">مساحة إعلانية مخصصة لشركات ومحلات حي الزيتون</h3>
+        <p class="adv-banner-desc">لرعاية وتطوير الأنشطة الخيرية والخدمية داخل الحي، يرجى التواصل مع إدارة الشبكة عبر بوابة اتصل بنا الرسمية أو عبر رقم الواتساب المعتمد.</p>
+    </section>
+
