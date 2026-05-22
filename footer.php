@@ -152,3 +152,52 @@
 <?php wp_footer(); ?>
 </body>
 </html>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // 🖥️ جافاسكربت الـ Terminal Live Typing Effect
+    const lines = [
+        "> initializing alzaytoon v2 intelligence layer... [OK]",
+        "> establishing end-to-end secure gateway... [SECURE]",
+        "> indexing dynamic civic database records... [READY]",
+        "> system online. welcome to the future core."
+    ];
+    let lineIdx = 0, charIdx = 0;
+    const termBody = document.getElementById("v2TerminalBody");
+    
+    function typeTerminal() {
+        if (lineIdx < lines.length) {
+            if (charIdx === 0) {
+                if(lineIdx > 0) termBody.innerHTML += "<br>";
+            }
+            termBody.innerHTML += lines[lineIdx].charAt(charIdx);
+            charIdx++;
+            if (charIdx < lines[lineIdx].length) {
+                setTimeout(typeTerminal, 30);
+            } else {
+                charIdx = 0;
+                lineIdx++;
+                setTimeout(typeTerminal, 600);
+            }
+        }
+    }
+    if(termBody) typeTerminal();
+
+    // 📈 جافاسكربت الـ Live Metrics Counter الأوتوماتيكي
+    const counters = document.querySelectorAll('.v2-counter-trigger');
+    counters.forEach(counter => {
+        const updateCount = () => {
+            const target = +counter.getAttribute('data-target');
+            const count = +counter.innerText.replace('+', '');
+            const speed = 200; 
+            const inc = target / speed;
+            if (count < target) {
+                counter.innerText = '+' + Math.ceil(count + inc);
+                setTimeout(updateCount, 15);
+            } else {
+                counter.innerText = '+' + target.toLocaleString();
+            }
+        };
+        updateCount();
+    });
+});
+</script>

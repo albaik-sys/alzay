@@ -1019,3 +1019,147 @@ img { max-width: 100%; height: auto; display: block; }
         gap: 10px !important;
     }
 }
+
+/* ==========================================================================
+   الزيتون V2: الترسانة المرئية المستقبلية المستوحاة من Stripe & Linear
+   ========================================================================== */
+:root {
+    --v2-dark-bg: #0B0F19;
+    --v2-neon-emerald: #11BC6F;
+    --v2-neon-glow: rgba(17, 188, 111, 0.15);
+    --v2-glass-border: rgba(255, 255, 255, 0.05);
+    --v2-glass-bg: rgba(15, 23, 42, 0.6);
+}
+
+/* ستايل مخصص للـ Hero Section المستقبلية والـ Bento Container */
+.v2-futuristic-wrapper {
+    background-color: var(--v2-dark-bg) !important;
+    color: #f1f5f9 !important;
+    position: relative !important;
+    overflow: hidden !important;
+    padding: 60px 0 !important;
+}
+
+/* طبقة الـ Mesh Gradient المتحركة خلف النصوص */
+.v2-mesh-glow-bg {
+    position: absolute !important;
+    top: -10%; left: -10%; width: 120%; height: 120%;
+    background: radial-gradient(circle at 30% 20%, var(--v2-neon-glow) 0%, transparent 40%),
+                radial-gradient(circle at 70% 60%, rgba(214, 175, 55, 0.08) 0%, transparent 45%) !important;
+    z-index: 1 !important;
+    pointer-events: none !important;
+}
+
+/* الهيكل السينمائي للـ Hero */
+.v2-hero-cinema-grid {
+    position: relative !important;
+    z-index: 2 !important;
+    display: grid !important;
+    grid-template-columns: 1.2fr 1fr !important;
+    gap: 40px !important;
+    align-items: center !important;
+    margin-bottom: 60px !important;
+}
+
+.v2-hero-text-side h1 {
+    font-size: 46px !important;
+    font-weight: 900 !important;
+    line-height: 1.2 !important;
+    background: linear-gradient(135deg, #fff 30%, #a7f3d0 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    margin-bottom: 20px !important;
+}
+
+/* شاشة الـ Terminal UI المتفاعلة */
+.v2-terminal-container {
+    background: var(--v2-glass-bg) !important;
+    border: 1px solid var(--v2-glass-border) !important;
+    backdrop-filter: blur(16px) !important;
+    border-radius: 12px !important;
+    padding: 20px !important;
+    font-family: monospace !important;
+    color: #34d399 !important;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 30px var(--v2-neon-glow) !important;
+    direction: ltr !important;
+    text-align: left !important;
+    min-height: 180px !important;
+}
+
+.v2-terminal-header {
+    display: flex !important;
+    gap: 6px !important;
+    margin-bottom: 15px !important;
+    border-bottom: 1px solid var(--v2-glass-border) !important;
+    padding-bottom: 10px !important;
+}
+.v2-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.v2-dot.r { background: #ef4444; } .v2-dot.y { background: #f59e0b; } .v2-dot.g { background: #10b981; }
+
+/* أزرار الـ CTA الوهجية المتنفسة */
+.v2-btn-neon-pulse {
+    background: linear-gradient(135deg, var(--v2-neon-emerald) 0%, #059669 100%) !important;
+    color: #fff !important;
+    border: none !important;
+    padding: 14px 32px !important;
+    font-weight: 800 !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    box-shadow: 0 0 20px var(--v2-neon-glow) !important;
+    transition: 0.3s ease-in-out !important;
+}
+.v2-btn-neon-pulse:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 0 30px var(--v2-neon-emerald) !important;
+}
+
+/* هيكلة شبكة الـ Bento Grid المتوهجة */
+.v2-bento-master-grid {
+    position: relative !important;
+    z-index: 2 !important;
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    grid-auto-rows: minmax(160px, auto) !important;
+    gap: 20px !important;
+}
+
+.v2-bento-card {
+    background: var(--v2-glass-bg) !important;
+    border: 1px solid var(--v2-glass-border) !important;
+    backdrop-filter: blur(12px) !important;
+    border-radius: 12px !important;
+    padding: 25px !important;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    position: relative !important;
+}
+.v2-bento-card:hover {
+    border-color: rgba(17, 188, 111, 0.4) !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 15px rgba(17, 188, 111, 0.1) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* تقسيم مساحات البينتو بشكل احترافي */
+.bento-size-large { grid-column: span 2 !important; grid-row: span 2 !important; }
+.bento-size-medium { grid-column: span 1 !important; grid-row: span 2 !important; }
+.bento-size-small { grid-column: span 1 !important; }
+
+/* شريط الـ Animated Metrics الحية */
+.v2-metric-number {
+    font-size: 38px !important;
+    font-weight: 900 !important;
+    color: var(--v2-neon-emerald) !important;
+    text-shadow: 0 0 15px var(--v2-neon-glow) !important;
+    font-family: sans-serif !important;
+}
+
+/* استجابة شاشات الجوال لمنع أي كسر بصري */
+@media(max-width: 992px) {
+    .v2-hero-cinema-grid, .v2-bento-master-grid {
+        grid-template-columns: 1fr !important;
+    }
+    .bento-size-large, .bento-size-medium, .bento-size-small {
+        grid-column: span 1 !important;
+        grid-row: auto !important;
+    }
+    .v2-hero-text-side h1 { font-size: 32px !important; }
+}
