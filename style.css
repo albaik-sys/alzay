@@ -1396,3 +1396,48 @@ img { max-width: 100%; height: auto; display: block; }
         padding-top: 8px !important;
     }
 }
+
+/* ==========================================================================
+   تنسيقات وانتقالات قائمة المناشدات الفخمة المدمجة archive-help.php
+   ========================================================================== */
+@keyframes v2HelpReveal {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* حركة التمرير التفاعلية الرائعة للسطر الأفقي */
+.v2-help-list-row:hover {
+    transform: translateX(-6px) scale(1.003) !important;
+    border-color: #115c38 !important;
+    box-shadow: 0 6px 18px rgba(17, 92, 56, 0.05) !important;
+    background: #fdfefe !important;
+}
+
+.v2-help-list-row h3 a:hover {
+    color: #115c38 !important;
+}
+
+/* تأثير التتابع التلقائي لظهور السطور لمنع التكدس البصري */
+.v2-help-premium-list article:nth-child(1) { animation-delay: 0.04s; }
+.v2-help-premium-list article:nth-child(2) { animation-delay: 0.08s; }
+.v2-help-premium-list article:nth-child(3) { animation-delay: 0.12s; }
+.v2-help-premium-list article:nth-child(4) { animation-delay: 0.16s; }
+.v2-help-premium-list article:nth-child(5) { animation-delay: 0.20s; }
+
+/* تجاوب شاشات الهواتف الذكية */
+@media(max-width: 768px) {
+    .v2-help-list-row {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        padding: 15px !important;
+        gap: 12px !important;
+    }
+    .v2-help-date-stamp {
+        text-align: right !important;
+        width: 100% !important;
+        border-top: 1px solid #f3f4f6 !important;
+        padding-top: 8px !important;
+    }
+}
