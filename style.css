@@ -572,3 +572,126 @@ img { max-width: 100%; height: auto; display: block; }
 @media(max-width: 992px) {
     .gov-two-column-master-grid { grid-template-columns: 1fr !important; gap: 25px; }
 }
+
+/* ==========================================================================
+   نظام القائمة الملكي (List System) لإعادة هيكلة القسم الأخير بالكامل
+   ========================================================================== */
+
+/* تحويل الحاوية إلى نظام عمودي ممتد يتسع للقوائم الأفقية */
+.home-layout .random-articles-grid,
+.main-front-content-wrap .random-articles-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 15px !important;
+    margin-top: 25px !important;
+}
+
+/* صياغة السطر (List Item) كمستطيل أفقي منسق يشبه الأنظمة الإخبارية المتقدمة */
+.gov-archive-card, .random-article-card {
+    display: flex !important;
+    flex-direction: row !important; /* فرض الاصطفاف الأفقي للكمبيوتر */
+    align-items: center !important;
+    justify-content: space-between !important;
+    background: #fff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 6px !important;
+    padding: 15px 20px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.01) !important;
+    transition: all 0.3s ease !important;
+    gap: 20px !important;
+}
+
+.gov-archive-card:hover {
+    transform: translateX(-5px) !important; /* تحريك طفيف لليمين عند التمرير كحركة تفاعلية */
+    border-color: var(--primary, #115c38) !important;
+    box-shadow: 0 4px 15px rgba(17,92,56,0.05) !important;
+}
+
+/* قسم تفاصيل النص داخل السطر الأفقي */
+.gov-archive-card-main-info {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    flex: 1 !important;
+}
+
+/* إخفاء أو قفل الـ Excerpt الممتد لجعله نظام قائمة إخبارية سريع وبسيط */
+.gov-archive-excerpt-6lines {
+    display: none !important; /* إخفاء النص الطويل لتركيز العين على العنوان والميتا */
+}
+
+/* تنسيق عنوان المقال داخل القائمة ليصبح عريضاً ومريحاً */
+.gov-archive-title a, .random-card-text h3 a {
+    font-size: 16px !important;
+    font-weight: 800 !important;
+    color: #1a1a1a !important;
+    line-height: 1.4 !important;
+    transition: color 0.2s !important;
+}
+.gov-archive-card:hover .gov-archive-title a {
+    color: var(--primary, #115c38) !important;
+}
+
+/* تجميع عناصر الوقت والاسم والتوقيت في شريط أفقي موحد وعالي الأناقة */
+.gov-card-meta-inline-wrapper {
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    gap: 15px !important;
+    font-size: 13px !important;
+    color: #666 !important;
+}
+
+/* تنسيق اسم مقدم الطلب التوقيتي الداخلي */
+.gov-card-author-strip {
+    background: rgba(214, 175, 55, 0.08) !important;
+    border-right: 3px solid var(--gold, #d4af37) !important;
+    padding: 3px 10px !important;
+    border-radius: 3px !important;
+    color: #333 !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
+}
+
+/* رقم جوال التواصل البشري المرن */
+.gov-card-phone-row {
+    color: var(--primary, #115c38) !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+}
+
+/* شريط التوقيت واليوم والتاريخ */
+.gov-archive-footer, .random-card-footer-meta {
+    border-top: none !important;
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+    font-size: 12.5px !important;
+    color: #888 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+}
+
+/* متجاوب الهواتف الذكية الحامي للتصميم لمنع خروج العناصر */
+@media(max-width: 768px) {
+    .gov-archive-card, .random-article-card {
+        flex-direction: column !important; /* العودة للاصطفاف العمودي المتناسق فقط على الجوال لراحة اليد */
+        align-items: flex-start !important;
+        padding: 15px !important;
+        gap: 12px !important;
+    }
+    .gov-card-meta-inline-wrapper {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 8px !important;
+        width: 100% !important;
+    }
+    .gov-archive-footer {
+        border-top: 1px solid #f0f0f0 !important;
+        padding-top: 8px !important;
+        width: 100% !important;
+    }
+}
