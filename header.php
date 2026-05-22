@@ -49,7 +49,6 @@
 
 <nav class="navbar-wrap">
 <div class="mobile-menu-v2-title"><i class="fas fa-layer-group"></i> شبكة حي الزيتون الرسمية</div>
-    <ul class="mobile-custom-menu-list" style="list-style:none; padding:0; margin:0;"><li style="border-bottom:1px solid #f0f0f0;"><a href="?post_type=lost" style="display:block; padding:12px 20px; color:#333; font-weight:bold; text-decoration:none;"><i class="fas fa-search-location" style="color:#f1c40f; margin-left:8px;"></i> بوابة المفقودات والأمانات</a></li></ul>
     <div class="container">
         <button class="mobile-menu-btn" id="mobileToggle"><i class="fas fa-bars"></i> الدليل</button>
         <div class="nav-menu-container">
@@ -60,6 +59,7 @@
                 <li><a href="<?php echo get_post_type_archive_link('events'); ?>"><i class="far fa-calendar-alt"></i> المناسبات والفعاليات</a></li>
                 <li><a href="<?php echo get_post_type_archive_link('help'); ?>"><i class="fas fa-hand-holding-heart"></i> المناشدات والدعم</a></li>
                 <li><a href="<?php echo get_post_type_archive_link('person'); ?>"><i class="fas fa-user-tie"></i> شخصية الأسبوع</a></li>
+    <li class="menu-item-lost" style="border-bottom:1px solid #f0f0f0;"><a href="?post_type=lost" style="display:block; padding:12px 20px; color:#115c38; font-weight:bold; text-decoration:none;"><i class="fas fa-search-location" style="color:#f1c40f; margin-left:8px;"></i> بوابة المفقودات والأمانات</a></li>
             </ul>
         </div>
         <a href="tel:<?php echo esc_attr(get_theme_mod('alzaytoon_phone', '')); ?>" class="nav-contact-link"><i class="fas fa-phone-alt"></i> اتصل بنا</a>

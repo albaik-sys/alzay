@@ -1494,3 +1494,14 @@ img { max-width: 100%; height: auto; display: block; }
         display: none !important;
     }
 }
+
+/* ==========================================================================
+   التعديل الرابع: تنسيق خيار المفقودات الحقيقي داخل القائمة المنزلقة
+   ========================================================================== */
+.menu-item-lost a {
+    transition: all 0.2s ease-in-out !important;
+}
+.menu-item-lost a:hover {
+    background: rgba(17, 92, 56, 0.04) !important;
+    color: #d4af37 !important;
+}
