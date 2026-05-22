@@ -426,3 +426,40 @@ img { max-width: 100%; height: auto; display: block; }
 @media(max-width: 768px) {
     .gov-double-column-rows { grid-template-columns: 1fr; gap: 20px; }
 }
+
+/* ==========================================================================
+   تحديث مرونة واستجابة النافذة المنبثقة (Modal) على شاشات الجوال
+   ========================================================================== */
+.gov-modal-overlay {
+    align-items: flex-start !important; /* السماح للنافذة بالبدء من الأعلى */
+    padding-top: 30px !important;
+    padding-bottom: 30px !important;
+    overflow-y: auto !important; /* تفعيل التمرير على مستوى الشاشة الخلفية */
+}
+
+.gov-modal-container {
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+    max-height: calc(100vh - 60px) !important; /* ضمان عدم تجاوز طول الشاشة */
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.gov-form-wrapper {
+    overflow-y: auto !important; /* تفعيل التمرير الداخلي للاستمارة */
+    max-height: calc(100vh - 160px) !important;
+    padding: 20px !important;
+}
+
+/* تحسينات إضافية للمسافات على الجوال لتقليل الطول */
+@media(max-width: 992px) {
+    .gov-form-wrapper {
+        padding: 15px !important;
+    }
+    .form-group-box {
+        margin-bottom: 12px !important;
+    }
+    .gov-modal-container {
+        max-height: calc(100vh - 30px) !important;
+    }
+}
