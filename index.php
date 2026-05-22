@@ -124,15 +124,9 @@
         <div class="block-header-gov center-aligned-header"><i class="fas fa-layer-group"></i> منوعات ومختارات شاملة من كافة أقسام المنصة</div>
         <div class="random-articles-grid">
             <?php
-            // تعديل الاستعلام لجلب المقالات من كافة الأقسام الخمسة بالتساوي وعشوائياً
-            $random_articles = new WP_Query(array(
-                'post_type' => array('news', 'events', 'help', 'lost', 'person'), 
-                'orderby' => 'rand', 
-                'posts_per_page' => 4
-            ));
+            $random_articles = new WP_Query(array('post_type' => array('news', 'events', 'help', 'lost', 'person'), 'orderby' => 'rand', 'posts_per_page' => 4));
             if($random_articles->have_posts()) : while($random_articles->have_posts()) : $random_articles->the_post();
-                $c_id = get_the_ID();
-                $c_type = get_post_type($c_id);
+                $c_id = get_the_ID(); $c_type = get_post_type($c_id);
                 $c_sender = get_post_meta($c_id, '_gov_sender_name', true);
                 $c_phone = get_post_meta($c_id, '_gov_phone_address', true);
             ?>
@@ -143,7 +137,6 @@
                 </a>
                 <div class="random-card-text">
                     <h3><a href="<?php the_permalink(); ?>"><?php echo wp_trim_words(get_the_title(), 9, '...'); ?></a></h3>
-                    
                     <?php if(in_array($c_type, array('help', 'lost')) && (!empty($c_sender) || !empty($c_phone))) : ?>
                         <div class="grid-gov-info-badge">
                             <?php if(!empty($c_phone)) : ?>
@@ -153,7 +146,6 @@
                             <?php endif; ?>
                         </div>
                     <?php endif; ?>
-
                     <div class="random-card-footer-meta">
                         <span><i class="far fa-calendar-alt"></i> <?php echo get_the_date(); ?></span>
                         <span><i class="far fa-eye"></i> <?php echo alzaytoon_get_post_views($c_id); ?> قراءة</span>
@@ -161,6 +153,52 @@
                 </div>
             </article>
             <?php endwhile; endif; wp_reset_postdata(); ?>
+        </div>
+    </section>
+
+    <section class="gov-categorized-rows-section">
+        <div class="gov-double-column-rows">
+            
+            <div class="gov-row-block">
+                <div class="block-header-gov"><i class="far fa-newspaper"></i> منوعات أخبار حي الزيتون</div>
+                <div class="gov-row-list-items">
+                    <?php
+                    $block_news = new WP_Query(array('post_type' => 'news', 'posts_per_page' => 3));
+                    if($block_news->have_posts()) : while($block_news->have_posts()) : $block_news->the_post();
+                    ?>
+                    <div class="gov-row-horizontal-card">
+                        <div class="horizontal-card-img">
+                            <?php if(has_post_thumbnail()) { the_post_thumbnail('thumbnail'); } else { echo "<img src='https://picsum.photos/120/90?random=".rand(1,99)."'>"; } ?>
+                        </div>
+                        <div class="horizontal-card-info">
+                            <h4><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
+                            <small><i class="far fa-calendar-alt"></i> <?php echo get_the_date(); ?></small>
+                        </div>
+                    </div>
+                    <?php endwhile; endif; wp_reset_postdata(); ?>
+                </div>
+            </div>
+
+            <div class="gov-row-block">
+                <div class="block-header-gov"><i class="far fa-calendar-alt"></i> مناسبات وفعاليات المجتمع</div>
+                <div class="gov-row-list-items">
+                    <?php
+                    $block_events = new WP_Query(array('post_type' => 'events', 'posts_per_page' => 3));
+                    if($block_events->have_posts()) : while($block_events->have_posts()) : $block_events->the_post();
+                    ?>
+                    <div class="gov-row-horizontal-card">
+                        <div class="horizontal-card-img">
+                            <?php if(has_post_thumbnail()) { the_post_thumbnail('thumbnail'); } else { echo "<img src='https://picsum.photos/120/90?random=".rand(1,99)."'>"; } ?>
+                        </div>
+                        <div class="horizontal-card-info">
+                            <h4><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
+                            <small><i class="far fa-calendar-alt"></i> <?php echo get_the_date(); ?></small>
+                        </div>
+                    </div>
+                    <?php endwhile; endif; wp_reset_postdata(); ?>
+                </div>
+            </div>
+
         </div>
     </section>
 
