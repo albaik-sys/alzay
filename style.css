@@ -164,3 +164,58 @@ ul { list-style: none; padding: 0; margin: 0; }
     .archive-grid { grid-template-columns: 1fr; }
     .archive-main-title { font-size: 28px; }
 }
+
+/* =========================================================
+   تنسيقات الصفحة الرئيسية المتطابقة مع الصورة
+========================================================= */
+.homepage-container { margin-top: 30px; }
+
+/* قسم الهيرو (أخبار + سلايدر) */
+.hero-section { display: grid; grid-template-columns: 1fr 2.5fr; gap: 20px; }
+@media(max-width: 992px) { .hero-section { grid-template-columns: 1fr; } }
+
+/* أحدث الأخبار */
+.news-box { background: #fff; border: 1px solid var(--green); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; }
+.news-box .box-title { background: var(--green); color: #fff; padding: 12px; text-align: center; font-size: 18px; font-weight: 700; border-bottom: 3px solid var(--yellow); }
+.news-list { display: flex; flex-direction: column; flex: 1; }
+.news-item { display: flex; gap: 15px; padding: 15px; border-bottom: 1px solid #eee; align-items: center; }
+.news-item:last-child { border-bottom: none; }
+.news-item img { width: 90px; height: 65px; border-radius: 4px; object-fit: cover; }
+.news-info h4 { font-size: 13px; margin-bottom: 5px; color: #111; font-weight: 700; line-height: 1.5; }
+.news-info h4 a { color: inherit; transition: 0.3s; }
+.news-info h4 a:hover { color: var(--green); }
+.news-info small { color: #888; font-size: 11px; }
+
+/* السلايدر المميز */
+.slider-box { position: relative; border-radius: 8px; overflow: hidden; min-height: 400px; }
+.slider-overlay { position: absolute; inset: 0; background: linear-gradient(to left, rgba(17,92,56,0.95) 0%, rgba(17,92,56,0.1) 100%); display: flex; flex-direction: column; justify-content: center; padding: 40px; color: #fff; }
+
+/* المربعات السريعة */
+.services-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin: 30px 0; }
+.service-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 25px 15px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px; transition: 0.3s; color: inherit; }
+.service-card:hover { border-color: var(--green); transform: translateY(-3px); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+
+/* الأعمدة الثلاثة السفلية */
+.bottom-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 50px; align-items: start; }
+@media(max-width: 992px) { .bottom-grid { grid-template-columns: 1fr; } }
+
+/* صندوق شخصية الأسبوع */
+.person-card { background: var(--green); color: #fff; border-radius: 8px; overflow: hidden; border: 2px solid var(--yellow); }
+.person-card .box-title { background: var(--green); border-bottom: 1px solid rgba(255,255,255,0.2); padding: 12px 20px; display: flex; justify-content: space-between; font-size: 18px; font-weight: 700; }
+.person-content { padding: 25px; text-align: center; }
+.person-content img { width: 140px; height: 140px; border-radius: 50%; border: 4px solid var(--yellow); object-fit: cover; margin-bottom: 15px; }
+
+/* صندوق المناشدات */
+.appeals-box { background: #fff; border: 1px solid var(--green); border-radius: 8px; overflow: hidden; }
+
+/* 🟢 صندوق التصويت 🟢 */
+.poll-widget { background: #fff; border: 1px solid var(--green); border-radius: 8px; overflow: hidden; }
+.poll-content { padding: 20px; }
+.poll-content h4 { font-size: 15px; color: #222; font-weight: 700; margin-bottom: 20px; line-height: 1.6; text-align: center; }
+.poll-option { display: block; margin-bottom: 15px; position: relative; cursor: pointer; }
+.poll-option input[type="radio"] { margin-left: 10px; accent-color: var(--green); }
+.poll-text { font-size: 14px; font-weight: 600; color: #444; }
+.poll-bar-bg { width: 100%; height: 6px; background: #eee; border-radius: 3px; margin-top: 8px; overflow: hidden; }
+.poll-bar-fill { height: 100%; background: var(--yellow); width: 0%; transition: width 1s ease-in-out; }
+.poll-percent { position: absolute; left: 0; top: 0; font-size: 12px; font-weight: 700; color: var(--green); }
+.poll-submit-btn { width: 100%; margin-top: 15px; padding: 12px; border: none; cursor: pointer; font-size: 15px; }

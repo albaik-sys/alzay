@@ -65,3 +65,22 @@ function alzaytoon_reading_time() {
     elseif ($readingtime == 2) { return "دقيقتان"; } 
     else { return $readingtime . " دقائق"; }
 }
+
+// 🟢 إعدادات نظام التصويت في لوحة التخصيص 🟢
+function alzaytoon_poll_customizer( $wp_customize ) {
+    $wp_customize->add_section( 'alzaytoon_poll_section', array(
+        'title'    => __( 'إعدادات التصويت (الرئيسية)', 'alzaytoon' ),
+        'priority' => 31,
+    ));
+    
+    // سؤال التصويت
+    $wp_customize->add_setting( 'alzaytoon_poll_question', array('default' => 'ما رأيك في مستوى الخدمات المقدمة في حي الزيتون مؤخراً؟') );
+    $wp_customize->add_control( 'alzaytoon_poll_question', array('label' => 'سؤال التصويت:', 'section' => 'alzaytoon_poll_section', 'type' => 'text') );
+
+    // الخيارات
+    for($i=1; $i<=3; $i++) {
+        $wp_customize->add_setting( 'alzaytoon_poll_opt'.$i, array('default' => 'خيار '.$i) );
+        $wp_customize->add_control( 'alzaytoon_poll_opt'.$i, array('label' => 'الخيار رقم '.$i.':', 'section' => 'alzaytoon_poll_section', 'type' => 'text') );
+    }
+}
+add_action( 'customize_register', 'alzaytoon_poll_customizer' );
