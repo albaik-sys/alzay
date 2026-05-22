@@ -84,3 +84,69 @@ function alzaytoon_poll_customizer( $wp_customize ) {
     }
 }
 add_action( 'customize_register', 'alzaytoon_poll_customizer' );
+
+/* =========================================================
+   نظام المناشدات التفاعلي (استقبال + حقول مخصصة)
+========================================================= */
+
+// 1. إضافة الحقول المخصصة (رقم الجوال، التواريخ) لصفحة تعديل المناشدة في الإدارة
+function alzaytoon_help_meta_boxes() {
+    add_meta_box( 'help_details', 'تفاصيل المناشدة (من الزوار)', 'alzaytoon_help_meta_box_html', 'help', 'normal', 'high' );
+}
+add_action( 'add_meta_boxes', 'alzaytoon_help_meta_boxes' );
+
+function alzaytoon_help_meta_box_html( $post ) {
+    $phone = get_post_meta( $post->ID, '_help_phone', true );
+    $start_date = get_post_meta( $post->ID, '_help_start', true );
+    $end_date = get_post_meta( $post->ID, '_help_end', true );
+    $sender_name = get_post_meta( $post->ID, '_help_sender', true );
+    ?>
+    <div style="padding: 10px;">
+        <p><label><strong>اسم المرسل:</strong></label><br><input type="text" style="width:100%" value="<?php echo esc_attr($sender_name); ?>" readonly></p>
+        <p><label><strong>رقم الجوال:</strong></label><br><input type="text" style="width:100%" value="<?php echo esc_attr($phone); ?>" readonly></p>
+        <p><label><strong>تاريخ البداية:</strong></label><br><input type="date" value="<?php echo esc_attr($start_date); ?>" readonly></p>
+        <p><label><strong>تاريخ الانتهاء:</strong></label><br><input type="date" value="<?php echo esc_attr($end_date); ?>" readonly></p>
+    </div>
+    <?php
+}
+
+// 2. معالجة طلب إرسال المناشدة من الزوار (AJAX)
+add_action('wp_ajax_submit_appeal', 'alzaytoon_handle_submit_appeal');
+add_action('wp_ajax_nopriv_submit_appeal', 'alzaytoon_handle_submit_appeal');
+
+function alzaytoon_handle_submit_appeal() {
+    if ( !isset($_POST['appeal_title']) || empty($_POST['appeal_title']) ) {
+        wp_send_json_error(array('message' => 'يرجى إدخال عنوان المناشدة.'));
+    }
+
+    // إنشاء المقال بحالة "بانتظار المراجعة" (Pending)
+    $post_data = array(
+        'post_title'   => sanitize_text_field($_POST['appeal_title']),
+        'post_content' => sanitize_textarea_field($_POST['appeal_content']),
+        'post_status'  => 'pending', // لن يظهر بالموقع حتى توافق عليه
+        'post_type'    => 'help',
+    );
+    $post_id = wp_insert_post($post_data);
+
+    if ($post_id) {
+        // حفظ البيانات الإضافية
+        update_post_meta($post_id, '_help_sender', sanitize_text_field($_POST['appeal_name']));
+        update_post_meta($post_id, '_help_phone', sanitize_text_field($_POST['appeal_phone']));
+        update_post_meta($post_id, '_help_start', sanitize_text_field($_POST['appeal_start']));
+        update_post_meta($post_id, '_help_end', sanitize_text_field($_POST['appeal_end']));
+
+        // معالجة الصورة المرفقة
+        if (!empty($_FILES['appeal_image']['name'])) {
+            require_once(ABSPATH . 'wp-admin/includes/image.php');
+            require_once(ABSPATH . 'wp-admin/includes/file.php');
+            require_once(ABSPATH . 'wp-admin/includes/media.php');
+            $attachment_id = media_handle_upload('appeal_image', $post_id);
+            if (!is_wp_error($attachment_id)) {
+                set_post_thumbnail($post_id, $attachment_id);
+            }
+        }
+        wp_send_json_success(array('message' => 'تم إرسال مناشدتك بنجاح! سيتم مراجعتها من قبل الإدارة قريباً.'));
+    } else {
+        wp_send_json_error(array('message' => 'حدث خطأ أثناء الإرسال. حاول مرة أخرى.'));
+    }
+}

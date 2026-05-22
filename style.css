@@ -219,3 +219,69 @@ ul { list-style: none; padding: 0; margin: 0; }
 .poll-bar-fill { height: 100%; background: var(--yellow); width: 0%; transition: width 1s ease-in-out; }
 .poll-percent { position: absolute; left: 0; top: 0; font-size: 12px; font-weight: 700; color: var(--green); }
 .poll-submit-btn { width: 100%; margin-top: 15px; padding: 12px; border: none; cursor: pointer; font-size: 15px; }
+
+/* =========================================================
+   التصميم الملكي (Royal Design) 
+========================================================= */
+* { font-family: 'Cairo', sans-serif !important; }
+
+.royal-box {
+    background: #fff;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    overflow: hidden;
+}
+.royal-box .box-title {
+    background: var(--green);
+    background: linear-gradient(135deg, #0f4c2e 0%, #17834d 100%);
+    color: #fff;
+    padding: 16px 20px;
+    font-size: 19px;
+    font-weight: 800;
+    border-bottom: 4px solid var(--yellow);
+}
+
+.royal-shadow { box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+.royal-btn { background: linear-gradient(135deg, #f5b915 0%, #d4af37 100%); border: none; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4); color: #fff !important; text-shadow: 0 1px 2px rgba(0,0,0,0.2); transition: 0.3s; }
+.royal-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6); }
+.royal-btn-small { padding: 6px 15px; font-size: 12px; border-radius: 20px; font-weight: 800; cursor: pointer; }
+
+/* المربعات السريعة - تحديث التصميم الملكي */
+.royal-card { border: none !important; border-radius: 16px !important; box-shadow: 0 10px 25px rgba(0,0,0,0.04) !important; padding: 30px 20px !important; }
+.royal-card:hover { transform: translateY(-8px) !important; box-shadow: 0 15px 35px rgba(0,0,0,0.08) !important; }
+.icon-wrap { width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 30px; margin-bottom: 15px; transition: 0.3s; }
+.royal-card:hover .icon-wrap { transform: scale(1.1) rotate(5deg); }
+.royal-card h3 { font-size: 18px !important; color: #111 !important; margin-bottom: 8px; }
+
+/* شخصية الأسبوع */
+.person-card { border: none !important; }
+.person-card .person-content { background: #fff; color: #333; }
+.person-card .img-frame { padding: 8px; background: linear-gradient(135deg, var(--yellow), var(--green)); border-radius: 50%; display: inline-block; margin-bottom: 15px; }
+.person-card img { border: 4px solid #fff !important; margin-bottom: 0 !important; }
+
+/* المناشدات */
+.appeal-item { transition: 0.3s; border-bottom: 1px solid #f0f0f0 !important; }
+.appeal-item:hover { background: #fdfdfd; padding-right: 15px; border-right: 4px solid var(--green); }
+.royal-badge { background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%) !important; box-shadow: 0 3px 8px rgba(231, 76, 60, 0.3); }
+
+/* أزرار جميع الأخبار */
+.all-news-btn { background: #f9f9f9 !important; border-top: none !important; color: var(--green) !important; transition: 0.3s; }
+.all-news-btn:hover { background: var(--green) !important; color: #fff !important; }
+
+/* =========================================================
+   تنسيقات نافذة إرسال المناشدة (Modal) 
+========================================================= */
+.royal-modal { display: none; position: fixed; z-index: 100000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6); backdrop-filter: blur(5px); justify-content: center; align-items: center; }
+.modal-content { background-color: #fff; padding: 40px; border-radius: 20px; width: 90%; max-width: 600px; position: relative; box-shadow: 0 25px 50px rgba(0,0,0,0.2); animation: modalFadeIn 0.4s ease; }
+@keyframes modalFadeIn { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+.close-modal { color: #aaa; position: absolute; top: 20px; left: 25px; font-size: 28px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+.close-modal:hover { color: #e74c3c; }
+.modal-content h2 { margin-bottom: 10px; font-weight: 900; color: #111; }
+.modal-content p { color: #666; margin-bottom: 25px; font-size: 14px; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
+.royal-input { width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; margin-bottom: 15px; transition: 0.3s; background: #fafafa; }
+.royal-input:focus { border-color: var(--green); background: #fff; outline: none; box-shadow: 0 0 0 3px rgba(17, 92, 56, 0.1); }
+.file-upload-lbl { display: block; text-align: center; padding: 15px; border: 2px dashed var(--green); border-radius: 8px; color: var(--green); cursor: pointer; font-weight: 700; transition: 0.3s; background: rgba(17,92,56,0.03); }
+.file-upload-lbl:hover { background: rgba(17,92,56,0.1); }
+@media(max-width: 768px) { .form-grid { grid-template-columns: 1fr; } .modal-content{ padding: 25px; } }
