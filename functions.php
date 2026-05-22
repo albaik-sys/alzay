@@ -1,6 +1,6 @@
 <?php
 /**
- * Al-Zaytoon Official Theme Functions
+ * Al-Zaytoon Official Theme Functions - Master Version
  */
 
 // ربط المكتبات وملف التنسيقات الرئيسي مع كاسر الكاش
@@ -46,8 +46,9 @@ function alzaytoon_royal_cpts() {
 }
 add_action( 'init', 'alzaytoon_royal_cpts' );
 
-// إدارة لوحة التحكم (Customizer) للتصويت والسوشيال ميديا
+// إدارة لوحة التحكم (Customizer) للتصويت والسوشيال ميديا والشريط الإخباري
 function alzaytoon_royal_customizer( $wp_customize ) {
+    // السوشيال ميديا
     $wp_customize->add_section( 'alzaytoon_social_section', array( 'title' => 'إعدادات شبكة الزيتون (التواصل)', 'priority' => 30 ) );
     $fields = array('facebook' => 'رابط الفيسبوك', 'whatsapp' => 'رقم الواتساب', 'telegram' => 'رابط التيليجرام', 'phone' => 'رقم الهاتف للاتصال');
     foreach($fields as $key => $label) {
@@ -55,6 +56,14 @@ function alzaytoon_royal_customizer( $wp_customize ) {
         $wp_customize->add_control( 'alzaytoon_'.$key, array('label' => $label, 'section' => 'alzaytoon_social_section', 'type' => 'text') );
     }
 
+    // نظام الشريط الإخباري الذكي (آلة الكتابة)
+    $wp_customize->add_section( 'alzaytoon_ticker_section', array( 'title' => 'إعدادات الشريط الإخباري العاجل', 'priority' => 32 ) );
+    $wp_customize->add_setting( 'alzaytoon_ticker_title', array('default' => 'تنويه رسمي عاجل') );
+    $wp_customize->add_control( 'alzaytoon_ticker_title', array('label' => 'عنوان الشريط الأحمر:', 'section' => 'alzaytoon_ticker_section', 'type' => 'text') );
+    $wp_customize->add_setting( 'alzaytoon_ticker_text', array('default' => 'باقي 5 أيام على الإطلاق الرسمي للمنصة الإلكترونية الموحدة لحي الزيتون... شاركنا الآن برأيك وبلاغاتك.') );
+    $wp_customize->add_control( 'alzaytoon_ticker_text', array('label' => 'نص آلة الكتابة المتحرك:', 'section' => 'alzaytoon_ticker_section', 'type' => 'textarea') );
+
+    // نظام التصويت المطور
     $wp_customize->add_section( 'alzaytoon_poll_section', array( 'title' => 'إعدادات استطلاعات الرأي والقرار', 'priority' => 31 ) );
     $wp_customize->add_setting( 'alzaytoon_poll_question', array('default' => 'ما رأيك في مستوى الخدمات المقدمة في حي الزيتون مؤخراً؟') );
     $wp_customize->add_control( 'alzaytoon_poll_question', array('label' => 'سؤال الاستطلاع الحالي:', 'section' => 'alzaytoon_poll_section', 'type' => 'text') );
@@ -65,7 +74,7 @@ function alzaytoon_royal_customizer( $wp_customize ) {
 }
 add_action( 'customize_register', 'alzaytoon_royal_customizer' );
 
-// نظام المشاهدات ووقت القراءة
+// نظام عداد المشاهدات
 function alzaytoon_set_post_views($postID) {
     $count_key = 'post_views_count';
     $count = get_post_meta($postID, $count_key, true);
@@ -117,7 +126,6 @@ function alzaytoon_gov_meta_html($post) {
     <?php
 }
 
-// حفظ بيانات لوحة التخصيص والمربعات
 function alzaytoon_save_gov_meta($post_id) {
     if (array_key_exists('appeal_badge_status', $_POST)) { update_post_meta($post_id, '_appeal_badge_status', sanitize_text_field($_POST['appeal_badge_status'])); }
     if (array_key_exists('gov_sender_name', $_POST)) { update_post_meta($post_id, '_gov_sender_name', sanitize_text_field($_POST['gov_sender_name'])); }

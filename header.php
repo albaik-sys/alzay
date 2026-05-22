@@ -49,7 +49,7 @@
 
 <nav class="navbar-wrap">
     <div class="container">
-        <button class="mobile-menu-btn" id="mobileToggle"><i class="fas fa-bars"></i> قائمة الشبكة</button>
+        <button class="mobile-menu-btn" id="mobileToggle"><i class="fas fa-bars"></i> قائمة الشبكة الرسمية</button>
         <div class="nav-menu-container">
             <ul class="nav-ul" id="navUl">
                 <li class="close-mobile-li"><a href="javascript:void(0)" id="mobileCloseMenu"><i class="fas fa-times"></i> إغلاق القائمة</a></li>
@@ -63,3 +63,15 @@
         <a href="tel:<?php echo esc_attr(get_theme_mod('alzaytoon_phone', '')); ?>" class="nav-contact-link"><i class="fas fa-phone-alt"></i> اتصل بنا</a>
     </div>
 </nav>
+
+<div class="gov-news-ticker-strip">
+    <div class="container ticker-flex-container">
+        <div class="ticker-badge-title">
+            <i class="fas fa-bullhorn"></i> <?php echo esc_html(get_theme_mod('alzaytoon_ticker_title', 'تنويه رسمي عاجل')); ?>
+        </div>
+        <div class="ticker-text-window">
+            <span id="typingTickerElement" class="typing-text-data"></span>
+            <span class="typing-cursor">|</span>
+        </div>
+    </div>
+</div>

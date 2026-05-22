@@ -56,11 +56,11 @@
             <h3>شخصيات بارزة</h3>
             <p>سجل الشرف والرموز والعلماء والملهمين في الحي</p>
         </a>
-        <a href="javascript:void(0)" onclick="openGovModal('lost')" class="portal-box color-2">
+        <button class="portal-box color-2" onclick="openGovModal('lost')" style="width:100%; text-align:right; border:none; cursor:pointer;">
             <div class="portal-icon-circle"><i class="fas fa-search-location"></i></div>
             <h3>بوابة المفقودات</h3>
             <p>النظام الذكي للإبلاغ والمساعدة في إيجاد المفقودات</p>
-        </a>
+        </button>
         <a href="<?php echo get_post_type_archive_link('help'); ?>" class="portal-box color-3">
             <div class="portal-icon-circle"><i class="fas fa-hand-holding-heart"></i></div>
             <h3>لجنة المساعدات</h3>
@@ -80,7 +80,6 @@
                 <?php
                 $help_list = new WP_Query(array('post_type' => 'help', 'posts_per_page' => 4));
                 if($help_list->have_posts()) : while($help_list->have_posts()) : $help_list->the_post();
-                    // جلب حالة الوسم لتغيير الأيقونة واللون ديناميكياً
                     $badge = get_post_meta(get_the_ID(), '_appeal_badge_status', true);
                     $badge_class = 'badge-new'; $badge_txt = 'جديد'; $badge_ico = 'fas fa-star';
                     if($badge == 'urgent') { $badge_class = 'badge-urgent'; $badge_txt = 'عاجلة'; $badge_ico = 'fas fa-exclamation-triangle'; }
@@ -122,22 +121,42 @@
     </section>
 
     <section class="random-articles-section">
-        <div class="block-header-gov center-aligned-header"><i class="fas fa-layer-group"></i> منوعات ومختارات من شبكة الزيتون</div>
+        <div class="block-header-gov center-aligned-header"><i class="fas fa-layer-group"></i> منوعات ومختارات شاملة من كافة أقسام المنصة</div>
         <div class="random-articles-grid">
             <?php
-            $random_articles = new WP_Query(array('post_type' => array('news', 'events', 'person'), 'orderby' => 'rand', 'posts_per_page' => 4));
+            // تعديل الاستعلام لجلب المقالات من كافة الأقسام الخمسة بالتساوي وعشوائياً
+            $random_articles = new WP_Query(array(
+                'post_type' => array('news', 'events', 'help', 'lost', 'person'), 
+                'orderby' => 'rand', 
+                'posts_per_page' => 4
+            ));
             if($random_articles->have_posts()) : while($random_articles->have_posts()) : $random_articles->the_post();
+                $c_id = get_the_ID();
+                $c_type = get_post_type($c_id);
+                $c_sender = get_post_meta($c_id, '_gov_sender_name', true);
+                $c_phone = get_post_meta($c_id, '_gov_phone_address', true);
             ?>
             <article class="random-article-card">
                 <a href="<?php the_permalink(); ?>" class="random-card-img-wrap">
                     <?php if(has_post_thumbnail()) { the_post_thumbnail('medium_large'); } else { echo "<img src='https://picsum.photos/400/260?random=".rand(1,999)."'>"; } ?>
-                    <span class="random-type-badge"><?php echo get_post_type_object(get_post_type())->labels->singular_name; ?></span>
+                    <span class="random-type-badge"><?php echo get_post_type_object($c_type)->labels->singular_name; ?></span>
                 </a>
                 <div class="random-card-text">
-                    <h3><a href="<?php the_permalink(); ?>"><?php echo wp_trim_words(get_the_title(), 10, '...'); ?></a></h3>
+                    <h3><a href="<?php the_permalink(); ?>"><?php echo wp_trim_words(get_the_title(), 9, '...'); ?></a></h3>
+                    
+                    <?php if(in_array($c_type, array('help', 'lost')) && (!empty($c_sender) || !empty($c_phone))) : ?>
+                        <div class="grid-gov-info-badge">
+                            <?php if(!empty($c_phone)) : ?>
+                                <span><i class="fas fa-phone-alt"></i> <?php echo esc_html($c_phone); ?></span>
+                            <?php elseif(!empty($c_sender)) : ?>
+                                <span><i class="fas fa-user"></i> <?php echo esc_html($c_sender); ?></span>
+                            <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
+
                     <div class="random-card-footer-meta">
                         <span><i class="far fa-calendar-alt"></i> <?php echo get_the_date(); ?></span>
-                        <span><i class="far fa-eye"></i> <?php echo alzaytoon_get_post_views(get_the_ID()); ?> قراءة</span>
+                        <span><i class="far fa-eye"></i> <?php echo alzaytoon_get_post_views($c_id); ?> قراءة</span>
                     </div>
                 </div>
             </article>
