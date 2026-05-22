@@ -49,6 +49,7 @@
 
 <nav class="navbar-wrap">
 <div class="mobile-menu-v2-title"><i class="fas fa-layer-group"></i> شبكة حي الزيتون الرسمية</div>
+    <ul class="mobile-custom-menu-list" style="list-style:none; padding:0; margin:0;"><li style="border-bottom:1px solid #f0f0f0;"><a href="?post_type=lost" style="display:block; padding:12px 20px; color:#333; font-weight:bold; text-decoration:none;"><i class="fas fa-search-location" style="color:#f1c40f; margin-left:8px;"></i> بوابة المفقودات والأمانات</a></li></ul>
     <div class="container">
         <button class="mobile-menu-btn" id="mobileToggle"><i class="fas fa-bars"></i> الدليل</button>
         <div class="nav-menu-container">
