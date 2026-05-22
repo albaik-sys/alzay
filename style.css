@@ -952,3 +952,50 @@ img { max-width: 100%; height: auto; display: block; }
         padding: 12px 15px !important;
     }
 }
+
+/* ==========================================================================
+   تنسيقات الصناديق والأقسام الإخبارية المدمجة الصغيرة (Compact Categories)
+   ========================================================================== */
+.compact-news-row-item {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 12px 20px !important;
+    border-bottom: 1px solid #f9f9f9 !important;
+    gap: 15px !important;
+}
+.compact-news-row-item:last-child {
+    border-bottom: none !important;
+}
+.compact-news-row-item:hover {
+    background: #fafafa !important;
+}
+.compact-tech-dot {
+    width: 6px !important;
+    height: 6px !important;
+    background: var(--primary) !important;
+    border-radius: 50% !important;
+    display: inline-block !important;
+}
+.compact-news-link-txt {
+    font-size: 13.5px !important;
+    font-weight: 700 !important;
+    color: #333 !important;
+    flex: 1 !important;
+    text-decoration: none !important;
+}
+.compact-news-row-item:hover .compact-news-link-txt {
+    color: var(--primary) !important;
+}
+.compact-news-time-badge {
+    font-size: 11.5px !important;
+    color: #aaa !important;
+    font-family: sans-serif !important;
+}
+
+@media(max-width: 768px) {
+    .custom-categories-master-section > div {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+}
