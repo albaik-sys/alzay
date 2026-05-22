@@ -1,5 +1,7 @@
 <?php get_header(); ?>
 
+<?php if ( function_exists('alzaytoon_render_hero_banner') ) { alzaytoon_render_hero_banner(); } ?>
+
 <div class="container main-front-content-wrap" style="margin-top: 40px; margin-bottom: 60px;">
 
     <section class="gov-home-section" style="margin-bottom: 55px;">
@@ -60,14 +62,12 @@
                     </div>
                 </div>
             </article>
-            <?php endwhile; wp_reset_postdata(); else: ?>
-                <p style="grid-column:1/-1; text-align:center; padding:40px; background:#fff; border-radius:8px;">لا توجد مناشدات حية منشورة حالياً.</p>
-            <?php endif; ?>
+            <?php endwhile; wp_reset_postdata(); endif; ?>
         </div>
     </section>
 
 
-    <section class="gov-home-section">
+    <section class="gov-home-section" style="margin-bottom: 55px;">
         <div class="block-header-gov" style="margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center;">
             <h2><i class="fas fa-search"></i> بوابة الاستعلام عن المفقودات الحالية</h2>
             <a href="<?php echo get_post_type_archive_link('lost'); ?>" class="gov-view-all-link">عرض كافة المفقودات <i class="fas fa-angle-left"></i></a>
@@ -77,7 +77,7 @@
             <?php 
             $lost_query = new WP_Query(array(
                 'post_type' => 'lost',
-                'posts_per_page' => 3, // عرض 3 مفقودات مميزة لتناسق الصفحة رئيسية
+                'posts_per_page' => 3,
                 'post_status' => 'publish'
             ));
             if($lost_query->have_posts()) : while($lost_query->have_posts()) : $lost_query->the_post(); 
@@ -123,11 +123,16 @@
                     </div>
                 </div>
             </article>
-            <?php endwhile; wp_reset_postdata(); else: ?>
-                <p style="grid-column:1/-1; text-align:center; padding:40px; background:#fff; border-radius:8px;">لا توجد بلاغات مفقودات منشورة حالياً.</p>
-            <?php endif; ?>
+            <?php endwhile; wp_reset_postdata(); endif; ?>
         </div>
     </section>
+
+    <?php 
+    // استدعاء الأقسام الأخرى المتبقية تلقائياً إن وجدت في البنية التحتية للموقع
+    if ( file_exists( get_template_directory() . '/template-parts/home-news-blocks.php' ) ) {
+        get_template_part( 'template-parts/home-news-blocks' );
+    }
+    ?>
 
 </div>
 
