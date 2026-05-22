@@ -56,7 +56,7 @@
             <h3>شخصيات بارزة</h3>
             <p>سجل الشرف والرموز والعلماء والملهمين في الحي</p>
         </a>
-        <a href="<?php echo get_post_type_archive_link('lost'); ?>" class="portal-box color-2">
+        <a href="javascript:void(0)" onclick="openGovModal('lost')" class="portal-box color-2">
             <div class="portal-icon-circle"><i class="fas fa-search-location"></i></div>
             <h3>بوابة المفقودات</h3>
             <p>النظام الذكي للإبلاغ والمساعدة في إيجاد المفقودات</p>
@@ -66,7 +66,7 @@
             <h3>لجنة المساعدات</h3>
             <p>بوابة التكافل والدعم المجتمعي الشامل لأهلنا</p>
         </a>
-        <button class="portal-box color-4" onclick="openAppealModal()" style="width:100%; text-align:right; border:none; cursor:pointer;">
+        <button class="portal-box color-4" onclick="openGovModal('help')" style="width:100%; text-align:right; border:none; cursor:pointer;">
             <div class="portal-icon-circle"><i class="fas fa-mail-bulk"></i></div>
             <h3>تقديم مناشدة</h3>
             <p>الديوان الإلكتروني العام لاستقبال وتوجيه الطلبات والشكاوى</p>
@@ -80,9 +80,15 @@
                 <?php
                 $help_list = new WP_Query(array('post_type' => 'help', 'posts_per_page' => 4));
                 if($help_list->have_posts()) : while($help_list->have_posts()) : $help_list->the_post();
+                    // جلب حالة الوسم لتغيير الأيقونة واللون ديناميكياً
+                    $badge = get_post_meta(get_the_ID(), '_appeal_badge_status', true);
+                    $badge_class = 'badge-new'; $badge_txt = 'جديد'; $badge_ico = 'fas fa-star';
+                    if($badge == 'urgent') { $badge_class = 'badge-urgent'; $badge_txt = 'عاجلة'; $badge_ico = 'fas fa-exclamation-triangle'; }
+                    elseif($badge == 'necessary') { $badge_class = 'badge-necessary'; $badge_txt = 'ضرورية'; $badge_ico = 'fas fa-exclamation-circle'; }
+                    elseif($badge == 'following') { $badge_class = 'badge-following'; $badge_txt = 'قيد المتابعة'; $badge_ico = 'fas fa-sync'; }
                 ?>
                 <div class="appeal-official-row">
-                    <span class="appeal-gov-tag">قيد المتابعة</span>
+                    <span class="appeal-gov-tag <?php echo $badge_class; ?>"><i class="<?php echo $badge_ico; ?>"></i> <?php echo $badge_txt; ?></span>
                     <a href="<?php the_permalink(); ?>" class="appeal-title-link"><?php the_title(); ?></a>
                     <span class="appeal-row-date"><i class="far fa-calendar"></i> <?php echo get_the_date('d/m/Y'); ?></span>
                 </div>
@@ -135,64 +141,10 @@
                     </div>
                 </div>
             </article>
-            <?php endwhile; else: ?>
-                <p style="grid-column:1/-1; text-align:center; color:#666; padding:40px;">يرجى تزويد قاعدة البيانات بالمقالات لتفعيل نظام الترشيح العشوائي والمختارات الفخم.</p>
-            <?php endif; wp_reset_postdata(); ?>
+            <?php endwhile; endif; wp_reset_postdata(); ?>
         </div>
     </section>
 
 </div>
 
-<div id="appealGovModal" class="gov-modal-overlay">
-    <div class="gov-modal-container">
-        <span class="gov-modal-close-icon" onclick="closeAppealModal()">&times;</span>
-        <div class="gov-modal-title-header">
-            <h3><i class="fas fa-file-signature"></i> بوابة الديوان الإلكتروني لاستقبال طلبات المواطنين</h3>
-        </div>
-        <form id="govAppealForm" class="gov-form-wrapper" enctype="multipart/form-data">
-            <div class="gov-form-row-grid">
-                <div class="form-group-box">
-                    <label>الاسم الكامل رباعي:</label>
-                    <input type="text" name="appeal_name" placeholder="أدخل اسمك الكامل" class="gov-form-input">
-                </div>
-                <div class="form-group-box">
-                    <label>رقم هاتف التواصل والتحقق *:</label>
-                    <input type="text" name="appeal_phone" placeholder="مثال: 059XXXXXXX" required class="gov-form-input">
-                </div>
-            </div>
-            
-            <div class="form-group-box">
-                <label>موضوع المناشدة الرئيسي *:</label>
-                <input type="text" name="appeal_title" placeholder="اكتب عنواناً واضحاً للمناشدة والطلب" required class="gov-form-input">
-            </div>
-
-            <div class="form-group-box">
-                <label>شرح تفصيلي للطلب والمناشدة *:</label>
-                <textarea name="appeal_content" placeholder="اكتب تفاصيل المناشدة والظروف والطلبات هنا بالتفصيل المكتمل..." required class="gov-form-input" rows="4"></textarea>
-            </div>
-
-            <div class="gov-form-row-grid">
-                <div class="form-group-box">
-                    <label>تاريخ بدء النشر المطلوب:</label>
-                    <input type="date" name="appeal_start" class="gov-form-input">
-                </div>
-                <div class="form-group-box">
-                    <label>تاريخ انتهاء النشر التلقائي:</label>
-                    <input type="date" name="appeal_end" class="gov-form-input">
-                </div>
-            </div>
-
-            <div class="form-group-box">
-                <label>إرفاق وثائق، تقارير أو صور داعمة (اختياري):</label>
-                <label class="custom-gov-file-uploader">
-                    <i class="fas fa-upload"></i> تحميل الملفات أو الصور الداعمة للمناشدة
-                    <input type="file" name="appeal_image" accept="image/*" style="display:none;">
-                </label>
-            </div>
-
-            <input type="hidden" name="action" value="submit_appeal">
-            <button type="submit" class="btn-royal-gold full-width-btn" id="govAppealSubmitBtn" style="margin-top:20px; font-size:16px;">إرسال المعاملة بشكل رسمي للديوان</button>
-            <div id="govAppealStatusMsg" class="gov-ajax-response-message"></div>
-        </form>
-    </div>
-</div>
+<?php get_footer(); ?>

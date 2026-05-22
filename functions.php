@@ -86,11 +86,10 @@ function alzaytoon_get_post_views($postID){
 function alzaytoon_reading_time() {
     $content = get_post_field( 'post_content', get_the_ID() );
     $word_count = str_word_count( strip_tags( $content ) );
-    $readingtime = ceil($word_count / 200);
-    return ($readingtime <= 1) ? "دقيقة واحدة" : $readingtime . " دقائق";
+    return ceil($word_count / 200) . " دقائق";
 }
 
-// عرض الصناديق في لوحة التحكم لمراجعة ومعاينة تفاصيل الإرسال
+// إضافة صناديق التحكم (Meta Boxes) للمناشدات والمفقودات في لوحة الإدارة
 function alzaytoon_register_gov_boxes() {
     add_meta_box( 'gov_meta_details', 'تفاصيل الاستمارة الإلكترونية المحفوظة', 'alzaytoon_gov_meta_html', array('help', 'lost'), 'normal', 'high' );
 }
@@ -100,31 +99,44 @@ function alzaytoon_gov_meta_html($post) {
     $phone = get_post_meta($post->ID, '_gov_phone_address', true);
     $sender = get_post_meta($post->ID, '_gov_sender_name', true);
     $end_date = get_post_meta($post->ID, '_gov_end_date', true);
+    $badge_status = get_post_meta($post->ID, '_appeal_badge_status', true);
     ?>
     <div style="padding:12px; font-size:14px; line-height: 1.6;">
-        <p><strong>اسم مقدم الطلب:</strong> <?php echo esc_html($sender); ?></p>
-        <p><strong>رقم الجوال / العنوان:</strong> <?php echo esc_html($phone); ?></p>
-        <p><strong>تاريخ انتهاء النشر والاهتمام:</strong> <?php echo esc_html($end_date); ?></p>
+        <p><strong>اسم مقدم الطلب:</strong> <input type="text" style="width:100%;" value="<?php echo esc_attr($sender); ?>" readonly></p>
+        <p><strong>رقم الجوال / العنوان:</strong> <input type="text" style="width:100%;" value="<?php echo esc_attr($phone); ?>" readonly></p>
+        <p><strong>تاريخ انتهاء النشر:</strong> <input type="text" style="width:100%;" value="<?php echo esc_attr($end_date); ?>" readonly></p>
+        
+        <p><strong>وسم وحالة المناشدة (يظهر بالرئيسية):</strong><br>
+        <select name="appeal_badge_status" style="width:100%; height:35px; margin-top:5px; font-weight:bold;">
+            <option value="urgent" <?php selected($badge_status, 'urgent'); ?>>🚨 عاجلة</option>
+            <option value="necessary" <?php selected($badge_status, 'necessary'); ?>>⚠️ ضرورية</option>
+            <option value="following" <?php selected($badge_status, 'following'); ?>>🔄 قيد المتابعة</option>
+            <option value="new" <?php selected($badge_status, 'new'); ?>>✨ جديد</option>
+        </select></p>
     </div>
     <?php
 }
 
-// معالج الأجاكس المتطور لاستقبال وحفظ المفقودات والمناشدات مع التحقق الرياضي العشوائي الآمن
+// حفظ حالة الوسم عند قيام المشرف بتعديل المقال أو قبوله للرد
+function alzaytoon_save_gov_meta($post_id) {
+    if (array_key_exists('appeal_badge_status', $_POST)) {
+        update_post_meta($post_id, '_appeal_badge_status', sanitize_text_field($_POST['appeal_badge_status']));
+    }
+}
+add_action('save_post', 'alzaytoon_save_gov_meta');
+
+// معالج الأجاكس لحفظ المقالات بانتظار المراجعة
 function alzaytoon_submit_gov_form_ajax() {
-    // 1. التحقق من الكابتشا العشوائية
     $user_captcha = isset($_POST['captcha_input']) ? intval($_POST['captcha_input']) : 0;
     $correct_captcha = isset($_POST['captcha_correct']) ? intval($_POST['captcha_correct']) : -1;
 
     if ($user_captcha !== $correct_captcha) {
-        wp_send_json_error(array('message' => 'رمز التحقق العشوائي (الكابتشا) غير صحيح، يرجى المحاولة مرة أخرى.'));
+        wp_send_json_error(array('message' => 'رمز التحقق العشوائي غير صحيح، حاول مرة أخرى.'));
     }
 
-    $form_type = sanitize_text_field($_POST['form_type']); // إما help أو lost
-    $title_prefix = ($form_type == 'lost') ? 'بلاغ مفقود: ' : 'مناشدة عاجلة: ';
-
-    // 2. إدخال المقال بالداتابيز في حالة الانتظار والمراجعة (Pending)
+    $form_type = sanitize_text_field($_POST['form_type']);
     $post_id = wp_insert_post(array(
-        'post_title'   => $title_prefix . sanitize_text_field($_POST['appeal_title']),
+        'post_title'   => sanitize_text_field($_POST['appeal_title']),
         'post_content' => sanitize_textarea_field($_POST['appeal_content']),
         'post_status'  => 'pending', 
         'post_type'    => $form_type,
@@ -134,8 +146,8 @@ function alzaytoon_submit_gov_form_ajax() {
         update_post_meta($post_id, '_gov_sender_name', sanitize_text_field($_POST['appeal_name']));
         update_post_meta($post_id, '_gov_phone_address', sanitize_text_field($_POST['appeal_phone']));
         update_post_meta($post_id, '_gov_end_date', sanitize_text_field($_POST['appeal_end']));
+        update_post_meta($post_id, '_appeal_badge_status', 'new'); // الوسم الافتراضي للمقالات الجديدة
         
-        // رفع وتعيين الصورة المرفقة إن وجدت
         if (!empty($_FILES['appeal_image']['name'])) {
             require_once(ABSPATH . 'wp-admin/includes/image.php');
             require_once(ABSPATH . 'wp-admin/includes/file.php');
@@ -143,9 +155,9 @@ function alzaytoon_submit_gov_form_ajax() {
             $attach_id = media_handle_upload('appeal_image', $post_id);
             if (!is_wp_error($attach_id)) { set_post_thumbnail($post_id, $attach_id); }
         }
-        wp_send_json_success(array('message' => 'تم استلام المعاملة بنجاح وحفظها برقم إشاري بروتوكولي في لوحة القيادة وهي قيد المراجعة والتدقيق الآن.'));
+        wp_send_json_success(array('message' => 'تم استلام المعاملة بنجاح، وهي بانتظار مراجعة وقبول الإدارة.'));
     } else {
-        wp_send_json_error(array('message' => 'عذراً، فشل في حفظ البيانات بنظام الجدار الحمايتي.'));
+        wp_send_json_error(array('message' => 'فشل في حفظ البيانات.'));
     }
 }
 add_action('wp_ajax_submit_gov_form', 'alzaytoon_submit_gov_form_ajax');
