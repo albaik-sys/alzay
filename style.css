@@ -1250,3 +1250,77 @@ img { max-width: 100%; height: auto; display: block; }
     70% { transform: scale(1); box-shadow: 0 0 0 12px rgba(17, 188, 111, 0); }
     100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(17, 188, 111, 0); }
 }
+
+/* ==========================================================================
+   الزيتون V2: ترقية بوابة المفقودات ولوحة الإحصائيات الشفافة
+   ========================================================================== */
+
+/* كرت المفقودات المطور بالصورة والتصنيف */
+.v2-lost-card-enhanced {
+    background: var(--v2-glass-bg, rgba(15, 23, 42, 0.6)) !important;
+    border: 1px solid var(--v2-glass-border, rgba(255, 255, 255, 0.05)) !important;
+    backdrop-filter: blur(12px) !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.v2-lost-card-enhanced:hover {
+    border-color: rgba(214, 175, 55, 0.4) !important;
+    transform: translateY(-4px) !important;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5) !important;
+}
+
+/* شارات التصنيف المضيئة للمفقودات */
+.v2-lost-category-badge {
+    position: absolute !important;
+    top: 12px !important;
+    right: 12px !important;
+    padding: 4px 10px !important;
+    font-size: 11.5px !important;
+    font-weight: 800 !important;
+    border-radius: 4px !important;
+    backdrop-filter: blur(8px) !important;
+    color: #fff !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+}
+
+/* الألوان الخاصة بكل تصنيف */
+.badge-cat-persons { background: rgba(231, 76, 60, 0.85) !important; border: 1px solid #e74c3c; }
+.badge-cat-docs { background: rgba(52, 152, 219, 0.85) !important; border: 1px solid #3498db; }
+.badge-cat-vehicles { background: rgba(241, 196, 15, 0.85) !important; border: 1px solid #f1c40f; color: #000 !important; }
+.badge-cat-assets { background: rgba(155, 89, 182, 0.85) !important; border: 1px solid #9b59b6; }
+
+/* دائرة تقدم الإحصائيات المتوهجة */
+.v2-stats-progress-circle {
+    position: relative !important;
+    width: 80px !important;
+    height: 80px !important;
+    border-radius: 50% !important;
+    background: conic-gradient(var(--v2-neon-emerald, #11BC6F) 78%, rgba(255,255,255,0.05) 0) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 auto 15px !important;
+    box-shadow: 0 0 15px var(--v2-neon-glow, rgba(17, 188, 111, 0.2)) !important;
+}
+
+.v2-stats-progress-circle::before {
+    content: "" !important;
+    position: absolute !important;
+    width: 66px !important;
+    height: 66px !important;
+    border-radius: 50% !important;
+    background: #0B0F19 !important;
+}
+
+.v2-stats-percent-text {
+    position: relative !important;
+    z-index: 2 !important;
+    font-size: 16px !important;
+    font-weight: 900 !important;
+    color: #fff !important;
+    font-family: sans-serif !important;
+}
