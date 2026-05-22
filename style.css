@@ -1481,3 +1481,16 @@ img { max-width: 100%; height: auto; display: block; }
         display: none !important;
     }
 }
+
+/* ==========================================================================
+   التعديل الثالث: إخفاء بوابة المفقودات من هيدر الموبايل لتظهر داخل الدليل فقط
+   ========================================================================== */
+@media (max-width: 768px) {
+    /* إخفاء كرت أو زر المفقودات العلوي المزدحم في الهيدر والواجهة */
+    .lost-header-portal, 
+    .lost-and-found-btn, 
+    [class*="lost-portal"], 
+    div[style*="background-color: #f1c40f"] {
+        display: none !important;
+    }
+}
