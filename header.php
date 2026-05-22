@@ -29,8 +29,8 @@
             </div>
         </div>
         <div class="header-action-buttons">
-            <button class="gov-btn btn-dark-green" onclick="openAppealModal()"><i class="fas fa-bullhorn"></i> أرسل مناشدة للديوان</button>
-            <a href="<?php echo get_post_type_archive_link('lost'); ?>" class="gov-btn btn-gold-outline"><i class="fas fa-search"></i> بوابـة المفقودات</a>
+            <button class="gov-btn btn-dark-green" onclick="openGovModal('help')"><i class="fas fa-bullhorn"></i> أرسل مناشدة للديوان</button>
+            <button class="gov-btn btn-gold-outline" onclick="openGovModal('lost')"><i class="fas fa-search"></i> الإبلاغ عن مفقود</button>
         </div>
     </div>
 </header>

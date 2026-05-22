@@ -48,7 +48,6 @@ add_action( 'init', 'alzaytoon_royal_cpts' );
 
 // إدارة لوحة التحكم (Customizer) للتصويت والسوشيال ميديا
 function alzaytoon_royal_customizer( $wp_customize ) {
-    // السوشيال ميديا
     $wp_customize->add_section( 'alzaytoon_social_section', array( 'title' => 'إعدادات شبكة الزيتون (التواصل)', 'priority' => 30 ) );
     $fields = array('facebook' => 'رابط الفيسبوك', 'whatsapp' => 'رقم الواتساب', 'telegram' => 'رابط التيليجرام', 'phone' => 'رقم الهاتف للاتصال');
     foreach($fields as $key => $label) {
@@ -56,7 +55,6 @@ function alzaytoon_royal_customizer( $wp_customize ) {
         $wp_customize->add_control( 'alzaytoon_'.$key, array('label' => $label, 'section' => 'alzaytoon_social_section', 'type' => 'text') );
     }
 
-    // نظام التصويت المطور
     $wp_customize->add_section( 'alzaytoon_poll_section', array( 'title' => 'إعدادات استطلاعات الرأي والقرار', 'priority' => 31 ) );
     $wp_customize->add_setting( 'alzaytoon_poll_question', array('default' => 'ما رأيك في مستوى الخدمات المقدمة في حي الزيتون مؤخراً؟') );
     $wp_customize->add_control( 'alzaytoon_poll_question', array('label' => 'سؤال الاستطلاع الحالي:', 'section' => 'alzaytoon_poll_section', 'type' => 'text') );
@@ -67,7 +65,7 @@ function alzaytoon_royal_customizer( $wp_customize ) {
 }
 add_action( 'customize_register', 'alzaytoon_royal_customizer' );
 
-// نظام عداد المشاهدات الفريد لحل الـ Fatal Error
+// نظام المشاهدات ووقت القراءة
 function alzaytoon_set_post_views($postID) {
     $count_key = 'post_views_count';
     $count = get_post_meta($postID, $count_key, true);
@@ -83,11 +81,8 @@ function alzaytoon_set_post_views($postID) {
 function alzaytoon_get_post_views($postID){
     $count_key = 'post_views_count';
     $count = get_post_meta($postID, $count_key, true);
-    if($count == ''){ return "0"; }
-    return $count;
+    return ($count == '') ? "0" : $count;
 }
-
-// حساب مدة القراءة التقديرية
 function alzaytoon_reading_time() {
     $content = get_post_field( 'post_content', get_the_ID() );
     $word_count = str_word_count( strip_tags( $content ) );
@@ -95,43 +90,52 @@ function alzaytoon_reading_time() {
     return ($readingtime <= 1) ? "دقيقة واحدة" : $readingtime . " دقائق";
 }
 
-// لوحة إدارة المناشدات الواردة من الزوار وعرض تفاصيلها برمجياً في المراجعة
-function alzaytoon_help_meta_box() {
-    add_meta_box( 'appeal_meta_details', 'بيانات مرسل المناشدة', 'alzaytoon_appeal_meta_html', 'help', 'normal', 'high' );
+// عرض الصناديق في لوحة التحكم لمراجعة ومعاينة تفاصيل الإرسال
+function alzaytoon_register_gov_boxes() {
+    add_meta_box( 'gov_meta_details', 'تفاصيل الاستمارة الإلكترونية المحفوظة', 'alzaytoon_gov_meta_html', array('help', 'lost'), 'normal', 'high' );
 }
-add_action( 'add_meta_boxes', 'alzaytoon_help_meta_box' );
+add_action( 'add_meta_boxes', 'alzaytoon_register_gov_boxes' );
 
-function alzaytoon_appeal_meta_html($post) {
-    $phone = get_post_meta($post->ID, '_appeal_phone', true);
-    $sender = get_post_meta($post->ID, '_appeal_sender', true);
-    $start = get_post_meta($post->ID, '_appeal_start', true);
-    $end = get_post_meta($post->ID, '_appeal_end', true);
+function alzaytoon_gov_meta_html($post) {
+    $phone = get_post_meta($post->ID, '_gov_phone_address', true);
+    $sender = get_post_meta($post->ID, '_gov_sender_name', true);
+    $end_date = get_post_meta($post->ID, '_gov_end_date', true);
     ?>
-    <div style="padding:10px; font-size:14px;">
+    <div style="padding:12px; font-size:14px; line-height: 1.6;">
         <p><strong>اسم مقدم الطلب:</strong> <?php echo esc_html($sender); ?></p>
-        <p><strong>رقم جوال التواصل البشري:</strong> <?php echo esc_html($phone); ?></p>
-        <p><strong>الفترة الزمنية المستهدفة للمناشدة:</strong> من <?php echo esc_html($start); ?> إلى <?php echo esc_html($end); ?></p>
+        <p><strong>رقم الجوال / العنوان:</strong> <?php echo esc_html($phone); ?></p>
+        <p><strong>تاريخ انتهاء النشر والاهتمام:</strong> <?php echo esc_html($end_date); ?></p>
     </div>
     <?php
 }
 
-// استقبال المناشدات عبر الـ AJAX لحفظها كمسودات بانتظار المراجعة والقبول في لوحة التحكم
-function alzaytoon_submit_appeal_ajax() {
-    if(!isset($_POST['appeal_title']) || empty($_POST['appeal_title'])) {
-        wp_send_json_error(array('message' => 'الرجاء إدخال عنوان المناشدة الرسمي.'));
+// معالج الأجاكس المتطور لاستقبال وحفظ المفقودات والمناشدات مع التحقق الرياضي العشوائي الآمن
+function alzaytoon_submit_gov_form_ajax() {
+    // 1. التحقق من الكابتشا العشوائية
+    $user_captcha = isset($_POST['captcha_input']) ? intval($_POST['captcha_input']) : 0;
+    $correct_captcha = isset($_POST['captcha_correct']) ? intval($_POST['captcha_correct']) : -1;
+
+    if ($user_captcha !== $correct_captcha) {
+        wp_send_json_error(array('message' => 'رمز التحقق العشوائي (الكابتشا) غير صحيح، يرجى المحاولة مرة أخرى.'));
     }
+
+    $form_type = sanitize_text_field($_POST['form_type']); // إما help أو lost
+    $title_prefix = ($form_type == 'lost') ? 'بلاغ مفقود: ' : 'مناشدة عاجلة: ';
+
+    // 2. إدخال المقال بالداتابيز في حالة الانتظار والمراجعة (Pending)
     $post_id = wp_insert_post(array(
-        'post_title'   => sanitize_text_field($_POST['appeal_title']),
+        'post_title'   => $title_prefix . sanitize_text_field($_POST['appeal_title']),
         'post_content' => sanitize_textarea_field($_POST['appeal_content']),
-        'post_status'  => 'pending', // حالة الانتظار والمراجعة قبل القبول والنشر
-        'post_type'    => 'help',
+        'post_status'  => 'pending', 
+        'post_type'    => $form_type,
     ));
+
     if($post_id) {
-        update_post_meta($post_id, '_appeal_sender', sanitize_text_field($_POST['appeal_name']));
-        update_post_meta($post_id, '_appeal_phone', sanitize_text_field($_POST['appeal_phone']));
-        update_post_meta($post_id, '_appeal_start', sanitize_text_field($_POST['appeal_start']));
-        update_post_meta($post_id, '_appeal_end', sanitize_text_field($_POST['appeal_end']));
+        update_post_meta($post_id, '_gov_sender_name', sanitize_text_field($_POST['appeal_name']));
+        update_post_meta($post_id, '_gov_phone_address', sanitize_text_field($_POST['appeal_phone']));
+        update_post_meta($post_id, '_gov_end_date', sanitize_text_field($_POST['appeal_end']));
         
+        // رفع وتعيين الصورة المرفقة إن وجدت
         if (!empty($_FILES['appeal_image']['name'])) {
             require_once(ABSPATH . 'wp-admin/includes/image.php');
             require_once(ABSPATH . 'wp-admin/includes/file.php');
@@ -139,10 +143,10 @@ function alzaytoon_submit_appeal_ajax() {
             $attach_id = media_handle_upload('appeal_image', $post_id);
             if (!is_wp_error($attach_id)) { set_post_thumbnail($post_id, $attach_id); }
         }
-        wp_send_json_success(array('message' => 'تم استلام طلب المناشدة بنجاح وهو قيد الفحص والمراجعة حالياً من قبل الإدارة.'));
+        wp_send_json_success(array('message' => 'تم استلام المعاملة بنجاح وحفظها برقم إشاري بروتوكولي في لوحة القيادة وهي قيد المراجعة والتدقيق الآن.'));
     } else {
-        wp_send_json_error(array('message' => 'فشل في إرسال المناشدة، يرجى التحقق من الخادم.'));
+        wp_send_json_error(array('message' => 'عذراً، فشل في حفظ البيانات بنظام الجدار الحمايتي.'));
     }
 }
-add_action('wp_ajax_submit_appeal', 'alzaytoon_submit_appeal_ajax');
-add_action('wp_ajax_nopriv_submit_appeal', 'alzaytoon_submit_appeal_ajax');
+add_action('wp_ajax_submit_gov_form', 'alzaytoon_submit_gov_form_ajax');
+add_action('wp_ajax_nopriv_submit_gov_form', 'alzaytoon_submit_gov_form_ajax');
