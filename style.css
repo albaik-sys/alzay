@@ -569,3 +569,6 @@ img { max-width: 100%; height: auto; display: block; }
     background: var(--primary);
     color: #fff;
 }
+@media(max-width: 992px) {
+    .gov-two-column-master-grid { grid-template-columns: 1fr !important; gap: 25px; }
+}

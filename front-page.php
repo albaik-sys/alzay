@@ -67,82 +67,109 @@
         </button>
     </section>
 
-    <div class="middle-layout-grid" style="margin-bottom: 40px;">
+    <div class="gov-two-column-master-grid" style="display: grid; grid-template-columns: 2fr 1fr; gap: 30px; margin-bottom: 50px; align-items: start;">
         
-        <div class="royal-content-panel royal-box">
-            <div class="panel-header-gov">
-                <span><i class="fas fa-file-invoice" style="color:var(--gold); margin-left:8px;"></i> ديوان ومتابعة المناشدات الحالية</span>
-                <button class="btn-yellow royal-btn-small" onclick="openGovModal('help')" style="background:var(--gold); color:#fff; border:none; padding:5px 12px; cursor:pointer;">+ أضف مناشدة</button>
-            </div>
-            <div class="panel-inner-body" style="padding:0;">
-                <?php
-                $help_query = new WP_Query(array('post_type' => 'help', 'posts_per_page' => 6, 'post_status' => 'publish'));
-                if ($help_query->have_posts()) : while ($help_query->have_posts()) : $help_query->the_post();
-                    $badge = get_post_meta(get_the_ID(), '_appeal_badge_status', true);
-                    $badge_class = 'badge-new'; $badge_txt = 'جديد'; $badge_ico = 'fas fa-star';
-                    if($badge == 'urgent') { $badge_class = 'badge-urgent'; $badge_txt = 'عاجلة'; $badge_ico = 'fas fa-exclamation-triangle'; }
-                    elseif($badge == 'necessary') { $badge_class = 'badge-necessary'; $badge_txt = 'ضرورية'; $badge_ico = 'fas fa-exclamation-circle'; }
-                    elseif($badge == 'following') { $badge_class = 'badge-following'; $badge_txt = 'قيد المتابعة'; $badge_ico = 'fas fa-sync'; }
-                ?>
-                <div class="appeal-official-row" style="padding: 15px 20px; border-bottom: 1px solid #f0f0f0;">
-                    <span class="appeal-gov-tag <?php echo $badge_class; ?>"><i class="<?php echo $badge_ico; ?>"></i> <?php echo $badge_txt; ?></span>
-                    <a href="<?php the_permalink(); ?>" class="appeal-title-link" style="font-weight:700; font-size:14.5px;"><?php the_title(); ?></a>
-                    <span class="appeal-row-date" style="color:#888; font-size:12px;"><i class="far fa-calendar-alt"></i> <?php echo get_the_date('d/m/Y'); ?></span>
+        <div class="gov-main-panels-stack" style="display: flex; flex-direction: column; gap: 35px;">
+            
+            <div class="royal-content-panel royal-box">
+                <div class="panel-header-gov">
+                    <span><i class="fas fa-hand-holding-heart" style="color:var(--gold); margin-left:8px;"></i> ديوان ومتابعة المناشدات الحالية</span>
+                    <button class="btn-yellow royal-btn-small" onclick="openGovModal('help')" style="background:var(--gold); color:#fff; border:none; padding:5px 12px; cursor:pointer;">+ أضف مناشدة</button>
                 </div>
-                <?php endwhile; wp_reset_postdata(); endif; ?>
+                <div class="panel-inner-body" style="padding:0;">
+                    <?php
+                    $help_query = new WP_Query(array('post_type' => 'help', 'posts_per_page' => 6, 'post_status' => 'publish'));
+                    if ($help_query->have_posts()) : while ($help_query->have_posts()) : $help_query->the_post();
+                        $badge = get_post_meta(get_the_ID(), '_appeal_badge_status', true);
+                        $badge_class = 'badge-new'; $badge_txt = 'جديد'; $badge_ico = 'fas fa-star';
+                        if($badge == 'urgent') { $badge_class = 'badge-urgent'; $badge_txt = 'عاجلة'; $badge_ico = 'fas fa-exclamation-triangle'; }
+                        elseif($badge == 'necessary') { $badge_class = 'badge-necessary'; $badge_txt = 'ضرورية'; $badge_ico = 'fas fa-exclamation-circle'; }
+                        elseif($badge == 'following') { $badge_class = 'badge-following'; $badge_txt = 'قيد المتابعة'; $badge_ico = 'fas fa-sync'; }
+                    ?>
+                    <div class="appeal-official-row" style="padding: 15px 20px; border-bottom: 1px solid #f0f0f0; display: flex; align-items: center; justify-content: space-between;">
+                        <div style="display:flex; align-items:center; gap:15px; flex:1;">
+                            <span class="appeal-gov-tag <?php echo $badge_class; ?>"><i class="<?php echo $badge_ico; ?>"></i> <?php echo $badge_txt; ?></span>
+                            <a href="<?php the_permalink(); ?>" class="appeal-title-link" style="font-weight:700; font-size:14.5px; color:#222;"><?php the_title(); ?></a>
+                        </div>
+                        <span class="appeal-row-date" style="color:#888; font-size:12px; white-space:nowrap;"><i class="far fa-calendar-alt"></i> <?php echo get_the_date('d/m/Y'); ?></span>
+                    </div>
+                    <?php endwhile; wp_reset_postdata(); endif; ?>
+                </div>
+                <a href="<?php echo get_post_type_archive_link('help'); ?>" class="view-all-gov-btn" style="text-align:center; display:block; padding:12px; background:#fafafa; font-weight:700; border-top:1px solid #eee;">تصفح كافة المناشدات المعتمدة &laquo;</a>
             </div>
-            <a href="<?php echo get_post_type_archive_link('help'); ?>" class="view-all-gov-btn" style="text-align:center; display:block; padding:12px; background:#fafafa; font-weight:700;">تصفح كافة المناشدات المعتمدة &laquo;</a>
+
+            <div class="royal-content-panel royal-box">
+                <div class="panel-header-gov">
+                    <span><i class="fas fa-search" style="color:var(--gold); margin-left:8px;"></i> بوابة الاستعلام عن المفقودات الحالية</span>
+                    <button class="btn-yellow royal-btn-small" onclick="openGovModal('lost')" style="background:var(--primary); color:#fff; border:none; padding:5px 12px; cursor:pointer;">+ أبلغ عن مفقود</button>
+                </div>
+                <div class="panel-inner-body" style="padding:0;">
+                    <?php
+                    $lost_query = new WP_Query(array('post_type' => 'lost', 'posts_per_page' => 6, 'post_status' => 'publish'));
+                    if ($lost_query->have_posts()) : while ($lost_query->have_posts()) : $lost_query->the_post();
+                    ?>
+                    <div class="appeal-official-row" style="padding: 15px 20px; border-bottom: 1px solid #f0f0f0; display: flex; align-items: center; justify-content: space-between;">
+                        <div style="display:flex; align-items:center; gap:15px; flex:1;">
+                            <span class="appeal-gov-tag" style="background:rgba(214,175,55,0.1); color:var(--gold); border:1px solid var(--gold);"><i class="fas fa-question-circle"></i> مفقود</span>
+                            <a href="<?php the_permalink(); ?>" class="appeal-title-link" style="font-weight:700; font-size:14.5px; color:#222;"><?php the_title(); ?></a>
+                        </div>
+                        <span class="appeal-row-date" style="color:#888; font-size:12px; white-space:nowrap;"><i class="far fa-calendar-alt"></i> <?php echo get_the_date('d/m/Y'); ?></span>
+                    </div>
+                    <?php endwhile; wp_reset_postdata(); endif; ?>
+                </div>
+                <a href="<?php echo get_post_type_archive_link('lost'); ?>" class="view-all-gov-btn" style="text-align:center; display:block; padding:12px; background:#fafafa; font-weight:700; border-top:1px solid #eee;">مركز المفقودات كامل &laquo;</a>
+            </div>
+
         </div>
 
-        <div class="sidebar-widgets-wrap" style="display:flex; flex-direction:column; gap:25px;">
+        <div class="sidebar-widgets-wrap" style="display:flex; flex-direction:column; gap:30px;">
             
             <div class="royal-content-panel royal-box">
                 <div class="panel-header-gov"><i class="fas fa-poll-h" style="color:var(--gold); margin-left:8px;"></i> مركز استطلاعات الرأي</div>
                 <div class="panel-inner-body poll-wrapper-box" style="padding:20px;">
                     <h3 class="poll-question-title" style="font-size:14.5px; margin-bottom:15px; font-weight:700; line-height:1.5; text-align:center;"><?php echo get_theme_mod('poll_q', 'ما رأيك في مستوى الخدمات والبنية التحتية في حي الزيتون مؤخراً؟'); ?></h3>
                     <form id="royalPollForm">
-                        <label class="poll-label-radio" style="display:block; margin-bottom:12px; position:relative; padding-right:20px;">
+                        <label class="poll-label-radio" style="display:block; margin-bottom:15px; position:relative; padding-right:20px; cursor:pointer;">
                             <input type="radio" name="poll_vote_radio" value="1" style="position:absolute; right:0; top:4px;">
                             <span class="radio-custom-txt" style="font-size:13.5px; font-weight:700;">ممتاز ومستقر جداً</span>
                             <div class="poll-track-bg" style="width:100%; height:6px; background:#eee; margin-top:5px; border-radius:3px; overflow:hidden;"><div class="poll-fill-progress" id="barFill1" style="height:100%; background:var(--primary); width:0%;"></div></div>
                             <span class="poll-percentage-num" id="percentTxt1" style="position:absolute; left:0; top:0; font-size:11px; font-weight:900;"></span>
                         </label>
-                        <label class="poll-label-radio" style="display:block; margin-bottom:12px; position:relative; padding-right:20px;">
+                        <label class="poll-label-radio" style="display:block; margin-bottom:15px; position:relative; padding-right:20px; cursor:pointer;">
                             <input type="radio" name="poll_vote_radio" value="2" style="position:absolute; right:0; top:4px;">
                             <span class="radio-custom-txt" style="font-size:13.5px; font-weight:700;">متوسط وبحاجة لتحسين</span>
                             <div class="poll-track-bg" style="width:100%; height:6px; background:#eee; margin-top:5px; border-radius:3px; overflow:hidden;"><div class="poll-fill-progress" id="barFill2" style="height:100%; background:var(--primary); width:0%;"></div></div>
                             <span class="poll-percentage-num" id="percentTxt2" style="position:absolute; left:0; top:0; font-size:11px; font-weight:900;"></span>
                         </label>
-                        <button type="button" class="btn-royal-gold full-width-btn" onclick="triggerRoyalPollSubmit()" style="width:100%; padding:10px; border:none; background:var(--gold); color:#fff; font-weight:bold; cursor:pointer; margin-top:10px; border-radius:4px;">اعتماد تصويتي الرسمي</button>
+                        <button type="button" class="btn-royal-gold full-width-btn" onclick="triggerRoyalPollSubmit()" style="width:100%; padding:12px; border:none; background:var(--gold); color:#fff; font-weight:bold; cursor:pointer; margin-top:10px; border-radius:4px;">اعتماد تصويتي الرسمي</button>
                     </form>
                     <p id="pollAckMsg" class="poll-success-ack" style="display:none; text-align:center; color:var(--primary); font-weight:bold; font-size:13px; margin-top:10px;">تم اعتماد الصوت، شكراً لك.</p>
                 </div>
             </div>
 
-            <div class="royal-content-panel royal-box">
-                <div class="panel-header-gov"><i class="fas fa-search" style="color:var(--gold); margin-left:8px;"></i> بوابة المفقودات الحالية</div>
-                <div class="panel-inner-body" style="padding:0;">
+            <div class="royal-content-panel royal-box" style="border:1px solid var(--gold);">
+                <div class="panel-header-gov" style="background:var(--primary); color:#fff;"><i class="fas fa-star" style="color:var(--gold); margin-left:8px;"></i> شخصية الأسبوع البارزة</div>
+                <div class="widget-content" style="padding:25px 20px; text-align:center; background:#fff;">
                     <?php
-                    $lost_query = new WP_Query(array('post_type' => 'lost', 'posts_per_page' => 3, 'post_status' => 'publish'));
-                    if ($lost_query->have_posts()) : while ($lost_query->have_posts()) : $lost_query->the_post();
+                    $person_query = new WP_Query(array('post_type' => 'person', 'posts_per_page' => 1, 'post_status' => 'publish'));
+                    if ($person_query->have_posts()) : while ($person_query->have_posts()) : $person_query->the_post();
+                    if (has_post_thumbnail()) { the_post_thumbnail('medium', array('style'=>'width:120px;height:120px;border-radius:50%;margin:0 auto 15px;border:3px solid var(--gold);object-fit:cover;display:block;')); }
                     ?>
-                    <a href="<?php the_permalink(); ?>" style="display:flex; justify-content:space-between; align-items:center; padding:15px 20px; border-bottom:1px solid #eee; transition:0.3s;" onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#fff'">
-                        <span style="font-size:13.5px; font-weight:700; color:var(--dark);"><i class="fas fa-question-circle" style="color:var(--gold); margin-left:6px;"></i> <?php the_title(); ?></span>
-                        <span style="font-size:11px; color:#888; white-space:nowrap;"><i class="far fa-clock"></i> <?php echo get_the_date('d/m'); ?></span>
-                    </a>
+                    <h3 style="color:var(--primary); font-weight:800; font-size:17px; margin-bottom:10px;"><?php the_title(); ?></h3>
+                    <p style="font-size:13.5px; color:#555; line-height:1.6; margin-bottom:15px;"><?php echo wp_trim_words(get_the_content(), 15, '...'); ?></p>
+                    <a href="<?php the_permalink(); ?>" class="btn-gold" style="padding:8px 20px; font-size:13px; display:inline-block; font-weight:700;">اقرأ السيرة الكاملة &laquo;</a>
                     <?php endwhile; wp_reset_postdata(); endif; ?>
                 </div>
-                <a href="<?php echo get_post_type_archive_link('lost'); ?>" class="view-all-gov-btn" style="text-align:center; display:block; padding:12px; background:#fafafa; font-weight:700;">مركز المفقودات كامل &laquo;</a>
             </div>
 
         </div>
     </div>
 
     <section class="random-articles-section" style="margin-top:40px;">
-        <div class="block-header-gov center-aligned-header"><i class="fas fa-layer-group"></i> منوعات ومختارات من شبكة الزيتون</div>
-        <div class="random-articles-grid" style="margin-top:20px;">
+        <div class="block-header-gov center-aligned-header" style="text-align:center;"><i class="fas fa-layer-group"></i> منوعات ومختارات من شبكة الزيتون</div>
+        <div class="random-articles-grid" style="display:grid; grid-template-columns: repeat(4, 1fr); gap:20px; margin-top:25px;">
             <?php
-            $random_articles = new WP_Query(array('post_type' => array('news', 'events', 'person'), 'orderby' => 'rand', 'posts_per_page' => 4, 'post_status' => 'publish'));
+            $random_articles = new WP_Query(array('post_type' => array('news', 'events'), 'orderby' => 'rand', 'posts_per_page' => 4, 'post_status' => 'publish'));
             if($random_articles->have_posts()) : while($random_articles->have_posts()) : $random_articles->the_post();
             ?>
             <article class="random-article-card gov-archive-card">
