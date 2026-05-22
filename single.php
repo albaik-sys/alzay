@@ -95,3 +95,8 @@
 </div>
 
 <?php get_footer(); ?>
+
+/* إصلاح نهائي لحقن الفوتر وضمان ظهوره */
+?>
+<div style="clear: both;"></div>
+<?php get_footer(); ?>
