@@ -102,11 +102,11 @@ function alzaytoon_gov_meta_html($post) {
     $badge_status = get_post_meta($post->ID, '_appeal_badge_status', true);
     ?>
     <div style="padding:12px; font-size:14px; line-height: 1.6;">
-        <p><strong>اسم مقدم الطلب:</strong> <input type="text" style="width:100%;" value="<?php echo esc_attr($sender); ?>" readonly></p>
-        <p><strong>رقم الجوال / العنوان:</strong> <input type="text" style="width:100%;" value="<?php echo esc_attr($phone); ?>" readonly></p>
-        <p><strong>تاريخ انتهاء النشر:</strong> <input type="text" style="width:100%;" value="<?php echo esc_attr($end_date); ?>" readonly></p>
+        <p><strong>اسم مقدم الطلب / العضو:</strong> <input type="text" name="gov_sender_name" style="width:100%; height:30px;" value="<?php echo esc_attr($sender); ?>"></p>
+        <p><strong>رقم الجوال / العنوان للتواصل الاتصالي:</strong> <input type="text" name="gov_phone_address" style="width:100%; height:30px;" value="<?php echo esc_attr($phone); ?>"></p>
+        <p><strong>تاريخ انتهاء الفعالية والاهتمام:</strong> <input type="date" name="gov_end_date" style="width:100%; height:30px;" value="<?php echo esc_attr($end_date); ?>"></p>
         
-        <p><strong>وسم وحالة المناشدة (يظهر بالرئيسية):</strong><br>
+        <p><strong>مسميات جاهزة لاختيار نوع المقال وعرضه ديناميكياً:</strong><br>
         <select name="appeal_badge_status" style="width:100%; height:35px; margin-top:5px; font-weight:bold;">
             <option value="urgent" <?php selected($badge_status, 'urgent'); ?>>🚨 عاجلة</option>
             <option value="necessary" <?php selected($badge_status, 'necessary'); ?>>⚠️ ضرورية</option>
@@ -117,22 +117,48 @@ function alzaytoon_gov_meta_html($post) {
     <?php
 }
 
-// حفظ حالة الوسم عند قيام المشرف بتعديل المقال أو قبوله للرد
+// حفظ بيانات لوحة التخصيص والمربعات
 function alzaytoon_save_gov_meta($post_id) {
-    if (array_key_exists('appeal_badge_status', $_POST)) {
-        update_post_meta($post_id, '_appeal_badge_status', sanitize_text_field($_POST['appeal_badge_status']));
-    }
+    if (array_key_exists('appeal_badge_status', $_POST)) { update_post_meta($post_id, '_appeal_badge_status', sanitize_text_field($_POST['appeal_badge_status'])); }
+    if (array_key_exists('gov_sender_name', $_POST)) { update_post_meta($post_id, '_gov_sender_name', sanitize_text_field($_POST['gov_sender_name'])); }
+    if (array_key_exists('gov_phone_address', $_POST)) { update_post_meta($post_id, '_gov_phone_address', sanitize_text_field($_POST['gov_phone_address'])); }
+    if (array_key_exists('gov_end_date', $_POST)) { update_post_meta($post_id, '_gov_end_date', sanitize_text_field($_POST['gov_end_date'])); }
 }
 add_action('save_post', 'alzaytoon_save_gov_meta');
+
+// دمج حقل معلومات الاتصال تلقائياً في أول المقال لكل من قسم المناشدات والمفقودات
+function alzaytoon_prepend_contact_box_to_content($content) {
+    if (is_singular(array('help', 'lost'))) {
+        $post_id = get_the_ID();
+        $sender = get_post_meta($post_id, '_gov_sender_name', true);
+        $phone = get_post_meta($post_id, '_gov_phone_address', true);
+        $end_date = get_post_meta($post_id, '_gov_end_date', true);
+        
+        $type_label = (get_post_type($post_id) == 'lost') ? 'صاحب البلاغ' : 'مقدم المناشدة';
+        $icon_label = (get_post_type($post_id) == 'lost') ? 'fa-search' : 'fa-bullhorn';
+
+        if(!empty($phone) || !empty($sender)) {
+            $contact_html = '
+            <div class="royal-contact-info-card">
+                <div class="contact-card-title"><i class="fas ' . $icon_label . '"></i> البيانات الرسمية ومعلومات الاتصال الموثقة</div>
+                <div class="contact-card-grid">
+                    ' . (!empty($sender) ? '<div class="contact-meta-item"><strong><i class="fas fa-user"></i> اسم ' . $type_label . ':</strong> ' . esc_html($sender) . '</div>' : '') . '
+                    ' . (!empty($phone) ? '<div class="contact-meta-item"><strong><i class="fas fa-address-book"></i> الجوال / العنوان:</strong> <span class="gov-highlight-phone">' . esc_html($phone) . '</span></div>' : '') . '
+                    ' . (!empty($end_date) ? '<div class="contact-meta-item"><strong><i class="far fa-calendar-check"></i> تاريخ انتهاء النشر:</strong> ' . esc_html($end_date) . '</div>' : '') . '
+                </div>
+            </div>';
+            $content = $contact_html . $content;
+        }
+    }
+    return $content;
+}
+add_filter('the_content', 'alzaytoon_prepend_contact_box_to_content');
 
 // معالج الأجاكس لحفظ المقالات بانتظار المراجعة
 function alzaytoon_submit_gov_form_ajax() {
     $user_captcha = isset($_POST['captcha_input']) ? intval($_POST['captcha_input']) : 0;
     $correct_captcha = isset($_POST['captcha_correct']) ? intval($_POST['captcha_correct']) : -1;
-
-    if ($user_captcha !== $correct_captcha) {
-        wp_send_json_error(array('message' => 'رمز التحقق العشوائي غير صحيح، حاول مرة أخرى.'));
-    }
+    if ($user_captcha !== $correct_captcha) { wp_send_json_error(array('message' => 'رمز التحقق العشوائي غير صحيح، حاول مرة أخرى.')); }
 
     $form_type = sanitize_text_field($_POST['form_type']);
     $post_id = wp_insert_post(array(
@@ -141,24 +167,18 @@ function alzaytoon_submit_gov_form_ajax() {
         'post_status'  => 'pending', 
         'post_type'    => $form_type,
     ));
-
     if($post_id) {
         update_post_meta($post_id, '_gov_sender_name', sanitize_text_field($_POST['appeal_name']));
         update_post_meta($post_id, '_gov_phone_address', sanitize_text_field($_POST['appeal_phone']));
         update_post_meta($post_id, '_gov_end_date', sanitize_text_field($_POST['appeal_end']));
-        update_post_meta($post_id, '_appeal_badge_status', 'new'); // الوسم الافتراضي للمقالات الجديدة
-        
+        update_post_meta($post_id, '_appeal_badge_status', 'new');
         if (!empty($_FILES['appeal_image']['name'])) {
-            require_once(ABSPATH . 'wp-admin/includes/image.php');
-            require_once(ABSPATH . 'wp-admin/includes/file.php');
-            require_once(ABSPATH . 'wp-admin/includes/media.php');
+            require_once(ABSPATH . 'wp-admin/includes/image.php'); require_once(ABSPATH . 'wp-admin/includes/file.php'); require_once(ABSPATH . 'wp-admin/includes/media.php');
             $attach_id = media_handle_upload('appeal_image', $post_id);
             if (!is_wp_error($attach_id)) { set_post_thumbnail($post_id, $attach_id); }
         }
         wp_send_json_success(array('message' => 'تم استلام المعاملة بنجاح، وهي بانتظار مراجعة وقبول الإدارة.'));
-    } else {
-        wp_send_json_error(array('message' => 'فشل في حفظ البيانات.'));
-    }
+    } else { wp_send_json_error(array('message' => 'فشل في حفظ البيانات.')); }
 }
 add_action('wp_ajax_submit_gov_form', 'alzaytoon_submit_gov_form_ajax');
 add_action('wp_ajax_nopriv_submit_gov_form', 'alzaytoon_submit_gov_form_ajax');

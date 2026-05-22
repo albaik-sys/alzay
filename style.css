@@ -321,3 +321,33 @@ img { max-width: 100%; height: auto; display: block; }
 .badge-following { background: linear-gradient(135deg, #3498db, #2980b9) !important; color: #fff !important; border: none !important; box-shadow: 0 2px 8px rgba(52,152,219,0.2); }
 .badge-new { background: linear-gradient(135deg, #2ecc71, #27ae60) !important; color: #fff !important; border: none !important; box-shadow: 0 2px 8px rgba(46,204,113,0.2); }
 .appeal-gov-tag i { margin-left: 5px; }
+
+/* ==========================================================================
+   حقن التحديثات الملكية الفاخرة للأزرار وصندوق معلومات الاتصال بالمقال
+   ========================================================================== */
+
+/* ستايل الأزرار العلوية المطور الفخم بالهيدر */
+.header-action-buttons-royal { display: flex; gap: 20px; }
+.gov-btn-royal { border: none; padding: 10px 24px; border-radius: 8px; display: flex; align-items: center; gap: 15px; cursor: pointer; text-align: right; box-shadow: 0 4px 15px rgba(0,0,0,0.06); transition: 0.3s; font-family: 'Cairo', sans-serif; }
+.gov-btn-royal:hover { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(0,0,0,0.12); }
+.icon-holder-gov { width: 42px; height: 42px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 20px; background: rgba(255,255,255,0.18); color: #fff; }
+.btn-gov-text { display: flex; flex-direction: column; }
+.btn-gov-text strong { font-size: 15px; color: #fff; font-weight: 800; line-height: 1.2; }
+.btn-gov-text small { font-size: 11px; color: rgba(255,255,255,0.8); font-weight: 600; margin-top: 2px; }
+.bg-emerald { background: linear-gradient(135deg, #115c38 0%, #1e7e4e 100%); }
+.bg-amber { background: linear-gradient(135deg, #d4af37 0%, #b8962c 100%); }
+
+/* صندوق ومربع معلومات الاتصال الفاخر المدمج داخل المقال */
+.royal-contact-info-card { background: #fff; border: 2px solid var(--gold); border-right: 6px solid var(--primary); border-radius: 8px; padding: 25px; margin-bottom: 35px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
+.contact-card-title { font-size: 16px; font-weight: 900; color: var(--primary); margin-bottom: 18px; border-bottom: 1px dashed #ddd; padding-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+.contact-card-title i { color: var(--gold); font-size: 18px; }
+.contact-card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px 25px; }
+.contact-meta-item { font-size: 14.5px; color: #444; font-weight: 600; }
+.contact-meta-item i { color: var(--primary); margin-left: 6px; font-size: 14px; width: 16px; text-align: center; }
+.gov-highlight-phone { background: rgba(17,92,56,0.06); color: var(--primary); font-weight: 800; padding: 3px 12px; border-radius: 4px; border: 1px dashed rgba(17,92,56,0.2); font-size: 15px; letter-spacing: 0.5px; }
+
+@media(max-width: 768px) {
+    .header-action-buttons-royal { flex-direction: column; gap: 10px; width: 100%; }
+    .gov-btn-royal { width: 100%; justify-content: center; }
+    .contact-card-grid { grid-template-columns: 1fr; gap: 12px; }
+}

@@ -28,9 +28,21 @@
                 <span>الإعلاميــة والخدميــة</span>
             </div>
         </div>
-        <div class="header-action-buttons">
-            <button class="gov-btn btn-dark-green" onclick="openGovModal('help')"><i class="fas fa-bullhorn"></i> أرسل مناشدة للديوان</button>
-            <button class="gov-btn btn-gold-outline" onclick="openGovModal('lost')"><i class="fas fa-search"></i> الإبلاغ عن مفقود</button>
+        <div class="header-action-buttons-royal">
+            <button class="gov-btn-royal bg-emerald" onclick="openGovModal('help')">
+                <span class="icon-holder-gov"><i class="fas fa-bullhorn"></i></span>
+                <div class="btn-gov-text">
+                    <strong>تقديم مناشدة</strong>
+                    <small>الديوان الإلكتروني للطلب</small>
+                </div>
+            </button>
+            <button class="gov-btn-royal bg-amber" onclick="openGovModal('lost')">
+                <span class="icon-holder-gov"><i class="fas fa-search-plus"></i></span>
+                <div class="btn-gov-text">
+                    <strong>الإبلاغ عن مفقود</strong>
+                    <small>بوابة المفقودات الذكية</small>
+                </div>
+            </button>
         </div>
     </div>
 </header>
