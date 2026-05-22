@@ -1,19 +1,58 @@
 <?php get_header(); ?>
-<div class="container single-container">
-    <?php while(have_posts()) : the_post(); ?>
-    <div class="single-header">
-        <h1 class="single-title"><?php the_title(); ?></h1>
-        <div class="single-meta">
-            <span><i class="far fa-calendar"></i> <?php echo get_the_date(); ?></span>
-            <span><i class="far fa-folder"></i> <?php echo get_post_type_object(get_post_type())->labels->name; ?></span>
+
+<div class="container single-post-main-container">
+    <?php while(have_posts()) : the_post(); alzaytoon_set_post_views(get_the_ID()); ?>
+    
+    <header class="post-header-gov-style">
+        <div class="post-breadcrumbs-gov">
+            <a href="<?php echo home_url(); ?>">الرئيسية</a> / <span><?php echo get_post_type_object(get_post_type())->labels->name; ?></span>
         </div>
+        <h1 class="post-main-headline"><?php the_title(); ?></h1>
+        
+        <div class="post-meta-details-strip">
+            <div class="meta-publish-datetime">
+                نشر في: <?php echo get_the_date('d F Y'); ?> | الساعة: <?php echo get_the_time('h:i A'); ?>
+            </div>
+            <div class="meta-reading-views-stats">
+                <span><i class="far fa-clock"></i> مدة القراءة: <?php echo alzaytoon_reading_time(); ?></span>
+                <span class="views-count-alert-badge"><i class="far fa-eye"></i> شوهد: <?php echo alzaytoon_get_post_views(get_the_ID()); ?> مرة</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="post-layout-columns-grid">
+        <article class="post-main-content-column">
+            <?php if(has_post_thumbnail()) : ?>
+            <div class="post-featured-photo-frame">
+                <?php the_post_thumbnail('large'); ?>
+            </div>
+            <?php endif; ?>
+
+            <div class="post-body-typography-content">
+                <?php the_content(); ?>
+            </div>
+
+            <div class="post-share-footer-block">
+                <h3><i class="fas fa-share-alt"></i> مشاركة المقال عبر شبكات التواصل الاجتماعي:</h3>
+                <div class="share-links-btn-grid">
+                    <a href="https://api.whatsapp.com/send?text=<?php echo urlencode(get_the_title() . ' - ' . get_permalink()); ?>" target="_blank" class="share-btn-item whatsapp-btn-color"><i class="fab fa-whatsapp"></i> واتســاب</a>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(get_permalink()); ?>" target="_blank" class="share-btn-item facebook-btn-color"><i class="fab fa-facebook-f"></i> فيسبــوك</a>
+                    <a href="https://t.me/share/url?url=<?php echo urlencode(get_permalink()); ?>&text=<?php echo urlencode(get_the_title()); ?>" target="_blank" class="share-btn-item telegram-btn-color"><i class="fab fa-telegram-plane"></i> تيليجــرام</a>
+                </div>
+            </div>
+        </article>
+
+        <aside class="post-sidebar-share-column">
+            <div class="sticky-sidebar-share-holder">
+                <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(get_permalink()); ?>" target="_blank" class="floating-btn-ico f-fb" title="مشاركة عبر فيسبوك"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://api.whatsapp.com/send?text=<?php echo urlencode(get_the_title() . ' - ' . get_permalink()); ?>" target="_blank" class="floating-btn-ico f-wa" title="مشاركة عبر واتساب"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://t.me/share/url?url=<?php echo urlencode(get_permalink()); ?>&text=<?php echo urlencode(get_the_title()); ?>" target="_blank" class="floating-btn-ico f-tg" title="مشاركة عبر تيليجرام"><i class="fab fa-telegram-plane"></i></a>
+                <a href="javascript:window.print()" class="floating-btn-ico f-print" title="طباعة المقال رسمياً"><i class="fas fa-print"></i></a>
+            </div>
+        </aside>
     </div>
-    <?php if(has_post_thumbnail()) : ?>
-    <div class="single-image"><?php the_post_thumbnail('large'); ?></div>
-    <?php endif; ?>
-    <div class="single-content">
-        <?php the_content(); ?>
-    </div>
+
     <?php endwhile; ?>
 </div>
+
 <?php get_footer(); ?>

@@ -94,3 +94,223 @@ img { max-width: 100%; height: auto; display: block; }
     .main-header .container, .navbar .container { flex-direction: column; gap: 15px; text-align: center; }
     .nav-links { flex-wrap: wrap; justify-content: center; }
 }
+
+/* ==========================================================================
+   الترسانة والكتلة التصميمية والهندسية الفاخرة لشبكة حي الزيتون الرسمية
+   ========================================================================== */
+
+/* أشرطة الهيدر والتوجيه والـ Topbar */
+.topbar { background: var(--primary); color: #fff; font-size: 13px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.topbar .container { display: flex; justify-content: space-between; align-items: center; }
+.topbar-middle { font-weight: 700; color: #f5f5f5; }
+.topbar-social a { color: var(--gold); margin-left: 15px; font-size: 16px; transition: 0.3s; }
+.topbar-social a:hover { color: #fff; }
+
+.main-header { background: #fff; padding: 22px 0; border-bottom: 1px solid var(--border); box-shadow: 0 4px 15px rgba(0,0,0,0.01); }
+.main-header .container { display: flex; justify-content: space-between; align-items: center; }
+.header-logo-area { display: flex; align-items: center; gap: 20px; }
+.logo-symbol { font-size: 52px; color: var(--primary); text-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+.logo-title h1 { font-size: 34px; font-weight: 900; color: var(--primary); line-height: 1.1; }
+.logo-title span { color: var(--gold); font-size: 15px; font-weight: 700; display: block; letter-spacing: 1.5px; }
+.header-action-buttons { display: flex; gap: 15px; }
+
+/* أزرار حكومية رسمية حادة الحواف والأناقة */
+.gov-btn { border: none; padding: 12px 24px; font-size: 14px; font-weight: 700; border-radius: 4px; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; transition: 0.3s; font-family: 'Cairo', sans-serif; }
+.btn-dark-green { background: var(--primary); color: #fff; box-shadow: 0 4px 12px rgba(17, 92, 56, 0.2); }
+.btn-dark-green:hover { background: #0b3d24; transform: translateY(-2px); }
+.btn-gold-outline { background: #fff; border: 2px solid var(--gold); color: var(--primary); }
+.btn-gold-outline:hover { background: var(--gold); color: #fff; transform: translateY(-2px); }
+
+/* شريط القوائم الثابت والمطور */
+.navbar-wrap { background: var(--primary); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.navbar-wrap .container { display: flex; justify-content: space-between; align-items: center; }
+.nav-ul { display: flex; list-style: none; padding: 0; margin: 0; }
+.nav-ul li { border-left: 1px solid rgba(255,255,255,0.08); }
+.nav-ul li a { display: block; padding: 18px 24px; color: #fff; font-size: 15px; font-weight: 700; transition: 0.2s; text-decoration: none; }
+.nav-ul li a:hover { background: rgba(0,0,0,0.15); color: var(--gold); }
+.nav-contact-link { background: rgba(255,255,255,0.08); padding: 10px 20px; color: #fff; font-weight: 700; font-size: 13px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.15); }
+.nav-contact-link:hover { background: var(--gold); color: var(--primary); border-color: var(--gold); }
+.mobile-menu-btn, .close-mobile-li { display: none; }
+
+/* === شبكة الهيرو الشاملة المزدوجة === */
+.royal-hero-section { display: grid; grid-template-columns: 1fr 2.5fr; gap: 25px; margin-bottom: 40px; }
+.hero-sidebar-news { background: #fff; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
+.block-header-gov { background: var(--primary); color: #fff; padding: 14px 20px; font-size: 16px; font-weight: 800; border-bottom: 3px solid var(--gold); }
+.center-aligned-header { text-align: center; font-size: 20px; padding: 16px; margin-bottom: 30px; border-bottom: 2px solid var(--primary); background: #fff; color: var(--primary); border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.01); }
+.sidebar-news-list { display: flex; flex-direction: column; flex: 1; }
+.sidebar-news-card { display: flex; gap: 15px; padding: 15px; border-bottom: 1px solid #f0f0f0; align-items: center; }
+.sidebar-news-card:last-child { border-bottom: none; }
+.card-thumb img { width: 85px; height: 65px; object-fit: cover; border-radius: 4px; border: 1px solid #e2e2e2; }
+.card-details h4 { font-size: 13px; font-weight: 700; line-height: 1.5; margin-bottom: 5px; color: #111; }
+.card-details h4 a:hover { color: var(--primary); }
+.card-details small { color: #888; font-size: 11px; }
+.view-all-gov-btn { text-align: center; padding: 12px; background: #fafafa; border-top: 1px solid #eee; font-weight: 700; font-size: 13px; color: var(--primary); display: block; }
+
+.hero-slider-showcase { border-radius: 6px; overflow: hidden; box-shadow: 0 10px 35px rgba(0,0,0,0.05); border: 1px solid var(--border); }
+.slider-panel-img { height: 100%; min-height: 420px; position: relative; }
+.slider-panel-gradient { position: absolute; inset: 0; background: linear-gradient(to top, rgba(11,77,44,0.95) 0%, rgba(0,0,0,0.2) 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 45px; color: #fff; }
+.slider-panel-gradient h2 { font-size: 32px; font-weight: 900; line-height: 1.3; margin-bottom: 12px; text-shadow: 0 2px 4px rgba(0,0,0,0.4); }
+.slider-panel-gradient p { font-size: 15px; color: #e5e5e5; max-width: 600px; margin-bottom: 25px; line-height: 1.6; }
+.badge-gold-royal { background: var(--gold); color: #fff; padding: 5px 14px; font-size: 12px; font-weight: 700; border-radius: 4px; margin-bottom: 15px; width: max-content; box-shadow: 0 3px 6px rgba(0,0,0,0.1); }
+.btn-royal-gold { background: var(--gold); color: #fff; padding: 12px 28px; border-radius: 4px; font-weight: 700; font-size: 14px; display: inline-block; transition: 0.3s; width: max-content; }
+.btn-royal-gold:hover { background: #b8962c; transform: translateY(-2px); }
+
+/* === البوابات الأربع الملوّنة المتقدمة وعالية الجمال === */
+.four-royal-portals { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin: 35px 0; }
+.portal-box { background: #fff; padding: 30px 20px; border-radius: 6px; border: 1px solid var(--border); transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.01); display: flex; flex-direction: column; align-items: flex-start; text-align: right; }
+.portal-icon-circle { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 20px; transition: 0.3s; }
+.portal-box h3 { font-size: 18px; font-weight: 800; color: #111; margin-bottom: 8px; }
+.portal-box p { font-size: 12.5px; color: #666; line-height: 1.6; }
+.portal-box:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.08); }
+
+.color-1 .portal-icon-circle { background: rgba(212,175,55,0.12); color: #d4af37; }
+.color-1:hover { border-color: #d4af37; }
+.color-2 .portal-icon-circle { background: rgba(231,76,60,0.12); color: #e74c3c; }
+.color-2:hover { border-color: #e74c3c; }
+.color-3 .portal-icon-circle { background: rgba(46,204,113,0.12); color: #2ecc71; }
+.color-3:hover { border-color: #2ecc71; }
+.color-4 { background: var(--primary); color: #fff; border-color: var(--primary); }
+.color-4 .portal-icon-circle { background: rgba(255,255,255,0.15); color: #fff; }
+.color-4 h3, .color-4 p { color: #fff; }
+.color-4:hover { background: #0b3d24; }
+
+/* === القسم الأوسط وهيكلية لوحات البيانات والقرار والـ Poll === */
+.middle-layout-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 25px; margin-bottom: 40px; align-items: start; }
+.royal-content-panel { background: #fff; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.01); }
+.panel-header-gov { background: #fcfcfd; border-bottom: 2px solid var(--primary); color: var(--primary); padding: 15px 20px; font-size: 17px; font-weight: 800; position: relative; }
+.panel-header-gov::after { content: ""; position: absolute; bottom: -2px; right: 0; width: 80px; height: 2px; background: var(--gold); }
+.panel-inner-body { padding: 20px; }
+
+.appeal-official-row { display: flex; align-items: center; padding: 14px 0; border-bottom: 1px solid #f0f0f0; font-size: 14px; }
+.appeal-official-row:last-child { border-bottom: none; }
+.appeal-gov-tag { background: rgba(17,92,56,0.06); color: var(--primary); border: 1px solid var(--primary); font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 4px; margin-left: 15px; }
+.appeal-title-link { flex: 1; font-weight: 700; color: #222; }
+.appeal-title-link:hover { color: var(--primary); }
+.appeal-row-date { color: #999; font-size: 12px; }
+.empty-panel-msg { text-align: center; color: #777; padding: 30px; font-size: 14px; }
+
+/* مركز استطلاعات الرأي الشغال والمنظم بصرياً */
+.poll-question-title { font-size: 15px; font-weight: 800; color: #222; line-height: 1.6; margin-bottom: 22px; text-align: center; background: #fafafa; padding: 12px; border-radius: 4px; border: 1px dashed #ddd; }
+.poll-label-radio { display: block; margin-bottom: 18px; position: relative; cursor: pointer; padding-right: 25px; }
+.poll-label-radio input { position: absolute; right: 0; top: 4px; accent-color: var(--primary); }
+.radio-custom-txt { font-size: 14px; font-weight: 700; color: #333; }
+.poll-track-bg { width: 100%; height: 7px; background: #eee; border-radius: 4px; margin-top: 8px; overflow: hidden; }
+.poll-fill-progress { height: 100%; background: linear-gradient(to left, var(--primary), #1e7e4e); width: 0%; transition: width 1s cubic-bezier(0.1, 0.8, 0.2, 1); }
+.poll-percentage-num { position: absolute; left: 0; top: 0; font-size: 12px; font-weight: 900; color: var(--primary); }
+.full-width-btn { width: 100%; text-align: center; display: block; margin-top: 20px; border: none; padding: 13px; font-size: 15px; cursor: pointer; }
+.poll-success-ack { display: none; text-align: center; color: var(--primary); font-weight: 800; font-size: 13px; background: rgba(46,204,113,0.1); padding: 10px; border-radius: 4px; margin-top: 15px; }
+
+/* === 🟢 شبكة المختارات والمقالات العشوائية السفلية الفخمة 🟢 === */
+.random-articles-section { margin: 40px 0 60px 0; }
+.random-articles-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.random-article-card { background: #fff; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.01); transition: 0.3s; display: flex; flex-direction: column; }
+.random-article-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.05); border-color: var(--primary); }
+.random-card-img-wrap { display: block; position: relative; height: 165px; overflow: hidden; background: #eaeaea; }
+.random-card-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+.random-type-badge { position: absolute; top: 12px; right: 12px; background: var(--gold); color: #fff; font-size: 11px; font-weight: 800; padding: 3px 10px; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.15); }
+.random-card-text { padding: 20px; display: flex; flex-direction: column; flex: 1; }
+.random-card-text h3 { font-size: 14.5px; font-weight: 800; line-height: 1.5; color: #111; margin-bottom: 15px; flex: 1; }
+.random-card-text h3 a { color: inherit; }
+.random-card-text h3 a:hover { color: var(--primary); }
+.random-card-footer-meta { display: flex; justify-content: space-between; font-size: 11.5px; color: #888; border-top: 1px solid #f5f5f5; padding-top: 12px; font-weight: 600; }
+
+/* === صفحة المقال الفردي (single.php) الفاخرة المحدثة وايقونات العربية === */
+.single-post-main-container { background: #fff; border-radius: 6px; padding: 45px; margin-top: 40px; margin-bottom: 60px; box-shadow: 0 10px 40px rgba(0,0,0,0.03); border: 1px solid var(--border); }
+.post-header-gov-style { border-bottom: 1px solid #eee; padding-bottom: 25px; margin-bottom: 35px; }
+.post-breadcrumbs-gov { font-size: 13.5px; color: #666; margin-bottom: 15px; font-weight: 600; }
+.post-breadcrumbs-gov a { color: var(--primary); font-weight: 700; }
+.post-main-headline { font-size: 36px; font-weight: 900; color: #111; line-height: 1.4; margin-bottom: 20px; }
+.post-meta-details-strip { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; background: var(--light); padding: 15px 25px; border-radius: 4px; font-size: 14px; color: #555; font-weight: 600; border-right: 4px solid var(--primary); }
+.meta-reading-views-stats { display: flex; gap: 20px; align-items: center; }
+.views-count-alert-badge { color: #e74c3c; font-weight: 700; }
+
+.post-layout-columns-grid { display: grid; grid-template-columns: 1fr 50px; gap: 40px; align-items: start; }
+.post-main-content-column { width: 100%; overflow: hidden; }
+.post-featured-photo-frame { margin-bottom: 35px; border-radius: 6px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.04); }
+.post-featured-photo-frame img { width: 100%; height: auto; object-fit: cover; }
+.post-body-typography-content { font-size: 20px; line-height: 2.2; color: #222; font-weight: 600; text-align: justify; }
+.post-body-typography-content p { margin-bottom: 25px; }
+
+/* أزرار المشاركة السفلية للمقال */
+.post-share-footer-block { margin-top: 50px; padding-top: 30px; border-top: 1px dashed var(--border); }
+.post-share-footer-block h3 { font-size: 16px; font-weight: 800; color: var(--primary); margin-bottom: 20px; }
+.share-links-btn-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+.share-btn-item { padding: 12px; border-radius: 4px; color: #fff !important; font-weight: 700; font-size: 14px; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+.whatsapp-btn-color { background: #25D366; }
+.facebook-btn-color { background: #1877F2; }
+.telegram-btn-color { background: #0088cc; }
+
+/* عمود الأزرار العائمة الجانبية الفاخرة استايل العربية */
+.sticky-sidebar-share-holder { position: sticky; top: 120px; display: flex; flex-direction: column; gap: 12px; align-items: center; }
+.floating-btn-ico { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff !important; font-size: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: 0.3s; }
+.floating-btn-ico:hover { transform: scale(1.1); box-shadow: 0 6px 16px rgba(0,0,0,0.15); }
+.f-fb { background: #1877F2; }
+.f-wa { background: #25D366; }
+.f-tg { background: #0088cc; }
+.f-print { background: #555; }
+
+/* === الفوتر الملكي الفاخر الشامل والكامل الشغال === */
+.main-royal-footer { background: var(--primary); color: #fff; padding: 50px 0 30px 0; border-top: 4px solid var(--gold); }
+.footer-grid-layout { display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 40px; margin-bottom: 30px; }
+.footer-brand-column h3 { font-size: 22px; font-weight: 900; color: var(--gold); margin-bottom: 15px; }
+.footer-brand-column p { font-size: 14px; color: #ccc; line-height: 1.7; max-width: 500px; }
+.footer-newsletter-column h4 { font-size: 16px; font-weight: 800; margin-bottom: 15px; color: #fff; }
+.footer-subscribe-form-wrap { display: flex; background: #fff; border-radius: 4px; overflow: hidden; padding: 3px; width: 100%; max-width: 400px; }
+.footer-mail-input { border: none; padding: 10px 15px; outline: none; font-size: 14px; width: 100%; color: #000; }
+.footer-submit-btn { background: var(--gold); color: var(--primary); font-weight: 800; border: none; padding: 0 20px; font-size: 14px; border-radius: 4px; cursor: pointer; transition: 0.2s; white-space: nowrap; }
+.footer-submit-btn:hover { background: #b8962c; color: #fff; }
+.footer-bottom-copyright-strip { text-align: center; font-size: 13px; color: #ddd; font-weight: 600; }
+
+/* الأيقونات العائمة أسفل اليسار للشاشة التفاعلية الكبرى */
+.floating-social-anchor-box { position: fixed; bottom: 30px; left: 30px; display: flex; flex-direction: column; gap: 15px; z-index: 99999; }
+.float-btn-item { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff !important; font-size: 26px; box-shadow: 0 6px 20px rgba(0,0,0,0.25); transition: 0.3s; text-decoration: none; }
+.float-btn-item:hover { transform: scale(1.1) rotate(5deg); }
+.f-whatsapp { background: #25D366; }
+.f-facebook { background: #1877F2; }
+
+/* === بوابات وتنسيقات النافذة المنبثقة للديوان والطلبات المتقدمة === */
+.gov-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.65); backdrop-filter: blur(4px); z-index: 1000000; align-items: center; justify-content: center; padding: 15px; }
+.gov-modal-container { background: #fff; width: 100%; max-width: 650px; border-radius: 6px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); overflow: hidden; position: relative; animation: govModalIn 0.35s ease; border-top: 5px solid var(--primary); }
+@keyframes govModalIn { from { opacity: 0; transform: translateY(-25px); } to { opacity: 1; transform: translateY(0); } }
+.gov-modal-close-icon { position: absolute; left: 20px; top: 15px; font-size: 30px; font-weight: bold; color: #999; cursor: pointer; transition: 0.2s; }
+.gov-modal-close-icon:hover { color: #e74c3c; }
+.gov-modal-title-header { background: #fcfcfd; padding: 20px 25px; border-bottom: 1px solid var(--border); }
+.gov-modal-title-header h3 { color: var(--primary); font-weight: 900; font-size: 18px; }
+.gov-form-wrapper { padding: 30px; }
+.gov-form-row-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.form-group-box { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+.form-group-box label { font-size: 13.5px; font-weight: 700; color: #444; }
+.gov-form-input { padding: 11px 15px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; background: #fafafa; font-family: 'Cairo', sans-serif; }
+.gov-form-input:focus { border-color: var(--primary); background: #fff; outline: none; box-shadow: 0 0 0 3px rgba(11,77,44,0.1); }
+.custom-gov-file-uploader { display: block; border: 2px dashed var(--primary); padding: 14px; text-align: center; font-weight: 700; color: var(--primary); font-size: 13.5px; background: rgba(11,77,44,0.02); cursor: pointer; border-radius: 4px; }
+.gov-ajax-response-message { text-align: center; margin-top: 15px; font-weight: 800; font-size: 14px; }
+
+/* === استجابة ومرونة الشاشات والجوال الفورية والكاملة === */
+@media(max-width: 992px) {
+    .royal-hero-section, .middle-layout-grid, .footer-grid-layout, .post-layout-columns-grid { grid-template-columns: 1fr; gap: 25px; }
+    .four-royal-portals, .random-articles-grid { grid-template-columns: repeat(2, 1fr); }
+    .main-header .container, .navbar-wrap .container, .topbar .container { flex-direction: column; text-align: center; gap: 15px; }
+    .header-action-buttons { justify-content: center; width: 100%; }
+    .gov-form-row-grid { grid-template-columns: 1fr; gap: 0; }
+    .sticky-sidebar-share-holder { position: static; flex-direction: row; justify-content: center; margin-bottom: 25px; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
+    .share-links-btn-grid { grid-template-columns: 1fr; }
+    .single-post-main-container { padding: 20px; }
+    .post-main-headline { font-size: 25px; }
+    .post-body-typography-content { font-size: 17.5px; line-height: 2; }
+    
+    /* محاكي قائمة الجوال الجانبية */
+    .mobile-menu-btn { display: block; background: none; border: 1px solid rgba(255,255,255,0.2); color: #fff; font-size: 16px; font-weight: 800; padding: 12px; cursor: pointer; border-radius: 4px; margin: 10px 0; width: 100%; }
+    .nav-ul { position: fixed; top: 0; right: -320px; width: 280px; height: 100vh; background: #fff; flex-direction: column; box-shadow: -5px 0 25px rgba(0,0,0,0.4); z-index: 10000000; transition: right 0.4s ease; padding-top: 10px; }
+    .nav-ul.mobile-active-ul { right: 0; }
+    .nav-ul li { width: 100%; border-left: none; border-bottom: 1px solid #eee; }
+    .nav-ul li a { color: var(--primary); padding: 18px 20px; }
+    .close-mobile-li { display: block; background: #fdfdfd; }
+    .close-mobile-li a { color: #e74c3c !important; font-weight: 900; }
+    .nav-contact-link { display: none; }
+}
+@media(max-width: 600px) {
+    .four-royal-portals, .random-articles-grid { grid-template-columns: 1fr; }
+    .slider-panel-gradient { padding: 20px; }
+    .slider-panel-gradient h2 { font-size: 22px; }
+    .slider-panel-gradient p { font-size: 13px; }
+}
