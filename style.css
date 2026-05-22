@@ -1324,3 +1324,25 @@ img { max-width: 100%; height: auto; display: block; }
     color: #fff !important;
     font-family: sans-serif !important;
 }
+
+/* ==========================================================================
+   إصلاح وتفعيل حركة شريط التنويه العاجل (Marquee Speed) للجوال والديسكتوب
+   ========================================================================== */
+.ticker-wrap, .news-ticker-scroller, .alert-marquee-container {
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.ticker-wrap p, .news-ticker-scroller ul, .alert-marquee-text, .alert-marquee-container p {
+    display: inline-block !important;
+    padding-right: 100% !important;
+    animation: zaytoonMarquee 20s linear infinite !important;
+    font-weight: bold !important;
+}
+
+@keyframes zaytoonMarquee {
+    0% { transform: translate3d(100%, 0, 0); }
+    100% { transform: translate3d(-100%, 0, 0); }
+}
