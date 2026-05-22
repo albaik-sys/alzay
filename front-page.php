@@ -97,6 +97,7 @@
         </div>
 
         <div class="sidebar-widgets-wrap" style="display:flex; flex-direction:column; gap:25px;">
+            
             <div class="royal-content-panel royal-box">
                 <div class="panel-header-gov"><i class="fas fa-poll-h" style="color:var(--gold); margin-left:8px;"></i> مركز استطلاعات الرأي</div>
                 <div class="panel-inner-body poll-wrapper-box" style="padding:20px;">
@@ -119,6 +120,22 @@
                     <p id="pollAckMsg" class="poll-success-ack" style="display:none; text-align:center; color:var(--primary); font-weight:bold; font-size:13px; margin-top:10px;">تم اعتماد الصوت، شكراً لك.</p>
                 </div>
             </div>
+
+            <div class="royal-content-panel royal-box" style="border:1px solid var(--gold);">
+                <div class="panel-header-gov" style="background:var(--primary); color:#fff; font-weight:800;"><i class="fas fa-star" style="color:var(--gold); margin-left:8px;"></i> شخصية الأسبوع البارزة</div>
+                <div class="widget-content" style="padding:25px 20px; text-align:center; background:#fff;">
+                    <?php
+                    $person_query = new WP_Query(array('post_type' => 'person', 'posts_per_page' => 1, 'post_status' => 'publish'));
+                    if ($person_query->have_posts()) : while ($person_query->have_posts()) : $person_query->the_post();
+                    if (has_post_thumbnail()) { the_post_thumbnail('medium', array('style'=>'width:110px;height:110px;border-radius:50%;margin:0 auto 15px;border:3px solid var(--gold);object-fit:cover;display:block;')); }
+                    ?>
+                    <h3 style="color:var(--primary); font-weight:800; font-size:16px; margin-bottom:8px;"><?php the_title(); ?></h3>
+                    <p style="font-size:13px; color:#555; line-height:1.6; margin-bottom:15px; text-align:justify;"><?php echo wp_trim_words(get_the_content(), 18, '...'); ?></p>
+                    <a href="<?php the_permalink(); ?>" class="view-all-gov-btn" style="padding:6px 15px; font-size:12.5px; display:inline-block; font-weight:700; background:#f9fafb; border:1px solid #eee; border-radius:4px;">السيرة الكاملة &laquo;</a>
+                    <?php endwhile; wp_reset_postdata(); endif; ?>
+                </div>
+            </div>
+
         </div>
     </div>
 
