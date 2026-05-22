@@ -695,3 +695,78 @@ img { max-width: 100%; height: auto; display: block; }
         width: 100% !important;
     }
 }
+
+/* ==========================================================================
+   توحيد وبناء الأقسام الإخبارية المتعددة (News Blocks & Categories)
+   ========================================================================== */
+
+/* ضبط حاويات الأقسام الإخبارية الإضافية لتصبح متوازية واحترافية */
+.category-news-block,
+.home-multi-categories-wrap,
+.additional-sections-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important; /* قسمين متجاورين في الشاشات الكبيرة */
+    gap: 25px !important;
+    margin-bottom: 30px !important;
+}
+
+/* تنسيق المقالات الفرعية داخل هذه الأقسام الإضافية */
+.sub-news-item, .category-post-card {
+    display: flex !important;
+    flex-direction: row !important; /* اصطفاف أفقي مرن يجمع الصورة والنص */
+    gap: 15px !important;
+    background: #fff !important;
+    border-bottom: 1px solid #f0f0f0 !important;
+    padding-bottom: 15px !important;
+    margin-bottom: 15px !important;
+}
+
+/* إلغاء خط الحدود للمقالة الأخيرة في البلوك */
+.sub-news-item:last-child, .category-post-card:last-child {
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+/* ضبط صور المقالات في الأقسام الإضافية لتكون متناسقة وثابتة الأبعاد */
+.sub-news-item .post-thumbnail img, 
+.category-post-card .post-image img {
+    width: 100px !important;
+    height: 75px !important;
+    object-fit: cover !important;
+    border-radius: 4px !important;
+}
+
+/* تنسيق عناوين الأخبار للأقسام الإضافية */
+.sub-news-title a, .category-post-title a {
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    color: #222 !important;
+    line-height: 1.4 !important;
+    transition: color 0.2s ease !important;
+}
+
+.sub-news-item:hover .sub-news-title a,
+.category-post-card:hover .category-post-title a {
+    color: var(--primary, #115c38) !important;
+}
+
+/* شريط الميتا (الوقت، التاريخ، والكاتب) للأقسام الإخبارية الإضافية */
+.sub-news-meta, .category-post-meta {
+    font-size: 12px !important;
+    color: #777 !important;
+    margin-top: 5px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+/* حماية وتجاوب التصميم للأقسام الإضافية على شاشات الجوال */
+@media(max-width: 992px) {
+    .category-news-block,
+    .home-multi-categories-wrap,
+    .additional-sections-grid {
+        grid-template-columns: 1fr !important; /* سطر واحد ممتد بالكامل على الجوال لراحة التصفح */
+        gap: 20px !important;
+    }
+}
