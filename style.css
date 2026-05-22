@@ -1505,3 +1505,28 @@ img { max-width: 100%; height: auto; display: block; }
     background: rgba(17, 92, 56, 0.04) !important;
     color: #d4af37 !important;
 }
+
+/* ==========================================================================
+   التعديل الخامس: تأثيرات أزرار تبليغ المفقودات التفاعلية
+   ========================================================================== */
+.v2-lost-actions-wrapper button:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+}
+.v2-lost-actions-wrapper button:active {
+    transform: translateY(0) !important;
+}
+@media (max-width: 768px) {
+    .v2-lost-actions-wrapper {
+        width: 100% !important;
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 8px !important;
+        margin-top: 10px !important;
+    }
+    .v2-lost-actions-wrapper button {
+        padding: 10px !important;
+        font-size: 12px !important;
+        text-align: center !important;
+    }
+}
