@@ -45,6 +45,52 @@ if ((is_home() || is_front_page()) && !defined('V2_TOP_AID_NEWS_DONE')) {
 <?php 
 } 
 ?>
+<?php
+// تظهر فقط في الواجهة الرئيسية وتحت الشريط الرسمي مباشرة
+if ((is_home() || is_front_page()) && !defined('V2_TOP_AID_NEWS_DONE')) {
+    define('V2_TOP_AID_NEWS_DONE', true);
+?>
+<div class="container v2-top-aid-news-wrap" style="margin-top: 20px; margin-bottom: 20px; clear: both !important;">
+    <div class="v2-aid-news-section" style="background:#fff; border:1px solid #e2e8f0; border-top:4px solid #e74c3c; padding:22px; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.02);">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:15px; border-bottom:1px solid #f0f0f0; padding-bottom:12px; flex-wrap:wrap; gap:10px;">
+            <h3 style="margin:0; font-size:16.5px; font-weight:900; color:#e74c3c; display:flex; align-items:center; gap:8px;">
+                <i class="fas fa-bullhorn" style="animation: pulse 1s infinite;"></i> آخر التحديثات وأخبار المساعدات الحالية
+            </h3>
+            <span style="font-size:11.5px; background:rgba(231,76,60,0.08); color:#e74c3c; padding:4px 10px; border-radius:4px; font-weight:bold;">📍 تحديث فوري مباشر</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+            
+            <?php 
+            // جلب الأخبار الديناميكية المضافة حديثاً من لوحة التحكم أولاً
+            $aid_news_query = new WP_Query(array('post_type' => 'aid_news', 'posts_per_page' => 4, 'post_status' => 'publish'));
+            if($aid_news_query->have_posts()): while($aid_news_query->have_posts()): $aid_news_query->the_post();
+            ?>
+            <div style="background: #fff5f5; border-right: 4px solid #e74c3c; padding: 15px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.01);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; flex-wrap: wrap; gap: 5px;">
+                    <strong style="color: #c0392b; font-size: 14px; font-weight: 900;"><i class="fas fa-bell"></i> <?php the_title(); ?></strong>
+                    <span style="font-size: 11px; color: #888; background: #fff; padding: 2px 8px; border-radius: 10px; border: 1px solid #ebd3d3;"><?php echo human_time_diff(get_the_time('U'), current_time('timestamp')) . ' ' . __('منذ'); ?></span>
+                </div>
+                <div style="margin: 0; font-size: 13px; color: #444; line-height: 1.6; font-weight: 700;"><?php the_content(); ?></div>
+            </div>
+            <?php endwhile; wp_reset_postdata(); else: ?>
+                
+                <div style="background: #fff5f5; border-right: 4px solid #e74c3c; padding: 15px; border-radius: 4px;">
+                    <strong style="color: #c0392b; font-size: 14px; font-weight: 900;"><i class="fas fa-gas-pump"></i> عاجل: كشوفات وتحديثات توزيع غاز الطهي للحي</strong>
+                    <p style="margin: 5px 0 0 0; font-size: 13px; color: #444; line-height: 1.6; font-weight: 700;">نلفت عناية الإخوة السكان الكرام إلى أنه تم تحديث كشوفات تعبئة غاز الطهي للدورة الحالية بالتعاون مع لجنة الحي الرسمية. يرجى مراجعة الرابط المعتمد بالأسفل للتحقق من الكشوفات.</p>
+                </div>
+                <div style="background: #f4faf7; border-right: 4px solid #115c38; padding: 15px; border-radius: 4px;">
+                    <strong style="color: #115c38; font-size: 14px; font-weight: 900;"><i class="fas fa-box-open"></i> إعلان: بدء توزيع الطرود الغذائية الدورية</strong>
+                    <p style="margin: 5px 0 0 0; font-size: 13px; color: #444; line-height: 1.6; font-weight: 700;">تعلن الهيئة الإغاثية بالتعاون مع المندوبين المحليين عن البدء الفعلي لتوزيع الحصص والطرود الغذائية الجافة للعائلات المستحقة داخل المربعات السكنية المحددة.</p>
+                </div>
+            <?php endif; ?>
+
+        </div>
+    </div>
+</div>
+<?php 
+} 
+?>
 
 <div class="container home-layout official-container royal-layout">
     
