@@ -268,3 +268,26 @@ function v2_aid_links_save_meta($post_id) {
     update_post_meta($post_id, '_v2_aid_is_updated', $is_updated);
 }
 add_action('save_post', 'v2_aid_links_save_meta');
+
+// ✨ نظام تسجيل قسم أخبار وتحديثات المساعدات العاجلة للوحة التحكم ✨
+function v2_register_aid_news_cpt() {
+    $labels = array(
+        'name'               => 'أخبار المساعدات',
+        'singular_name'      => 'خبر مساعدات',
+        'menu_name'          => 'إدارة أخبار المساعدات',
+        'add_new'            => 'إضافة خبر عاجل',
+        'add_new_item'       => 'إضافة خبر مساعدات جديد',
+        'edit_item'          => 'تعديل الخبر',
+        'all_items'          => 'كل الأخبار العاجلة',
+    );
+    $args = array(
+        'labels'             => $labels,
+        'public'             => true,
+        'has_archive'        => false,
+        'menu_icon'          => 'dashicons-megaphone',
+        'supports'           => array('title', 'editor', 'excerpt'),
+        'show_in_rest'       => true,
+    );
+    register_post_type('aid_news', $args);
+}
+add_action('init', 'v2_register_aid_news_cpt');
