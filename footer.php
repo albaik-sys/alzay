@@ -1,3 +1,89 @@
+<?php
+// حماية حديدية: تظهر الكتلة مرة واحدة فقط فوق الفوتر الأخضر بالرئيسية
+if ((is_home() || is_front_page()) && !defined('V2_AID_TOTAL_BLOCK_DONE')) {
+    define('V2_AID_TOTAL_BLOCK_DONE', true);
+?>
+<div class="container v2-aid-master-wrap" style="margin-top: 40px; margin-bottom: 40px; clear: both !important;">
+
+    <div class="v2-aid-news-section" style="background:#fff; border:1px solid #e2e8f0; border-top:4px solid #e74c3c; padding:22px; border-radius:8px; margin-bottom: 25px; box-shadow:0 4px 12px rgba(0,0,0,0.02);">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:18px; border-bottom:1px solid #f0f0f0; padding-bottom:12px; flex-wrap:wrap; gap:10px;">
+            <h3 style="margin:0; font-size:16.5px; font-weight:900; color:#e74c3c; display:flex; align-items:center; gap:8px;">
+                <i class="fas fa-bullhorn" style="animation: pulse 1s infinite;"></i> آخر التحديثات وأخبار المساعدات الحالية
+            </h3>
+            <span style="font-size:11.5px; background:rgba(231,76,60,0.08); color:#e74c3c; padding:4px 10px; border-radius:4px; font-weight:bold;">📍 تحديث فوري مباشر</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+            
+            <div style="background: #fff5f5; border-right: 4px solid #e74c3c; padding: 15px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; flex-wrap: wrap; gap: 5px;">
+                    <strong style="color: #c0392b; font-size: 14px; font-weight: 900;"><i class="fas fa-gas-pump"></i> عاجل: كشوفات وتحديثات توزيع غاز الطهي للحي</strong>
+                    <span style="font-size: 11px; color: #777; background: #fff; padding: 2px 8px; border-radius: 10px; border: 1px solid #ebd3d3;">منذ ساعتين</span>
+                </div>
+                <p style="margin: 0; font-size: 13px; color: #444; line-height: 1.6; font-weight: 700;">
+                    نلفت عناية الإخوة السكان الكرام إلى أنه تم تحديث كشوفات تعبئة غاز الطهي للدورة الحالية بالتعاون مع لجنة الحي الرسمية. يرجى من الواردة أسماؤهم التوجه مباشرة إلى نقطة التوزيع المعتمدة مصطحبين الهوية الشخصية والجرار المسجلة لضمان سير العملية بسلاسة.
+                </p>
+            </div>
+
+            <div style="background: #f4faf7; border-right: 4px solid #115c38; padding: 15px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; flex-wrap: wrap; gap: 5px;">
+                    <strong style="color: #115c38; font-size: 14px; font-weight: 900;"><i class="fas fa-box-open"></i> إعلان: بدء توزيع الطرود الغذائية الدورية</strong>
+                    <span style="font-size: 11px; color: #777; background: #fff; padding: 2px 8px; border-radius: 10px; border: 1px solid #d3ebd3;">اليوم صباحاً</span>
+                </div>
+                <p style="margin: 0; font-size: 13px; color: #444; line-height: 1.6; font-weight: 700;">
+                    تعلن الهيئة الإغاثية بالتعاون مع المندوبين المحليين عن البدء الفعلي لتوزيع الحصص والطرود الغذائية الجافة للعائلات المستحقة داخل المربعات السكنية المحددة. يرجى مراجعة الرابط أدناه في بوابة المنصات للتحقق من حالة الاستحقاق والدور المخصص لعائلتكم.
+                </p>
+            </div>
+
+            <?php 
+            // دمج ديناميكي اختياري في حال رغبت مستقبلاً بربط القسم بنوع منشورات (Aid News CPT)
+            $aid_news_query = new WP_Query(array('post_type' => 'aid_news', 'posts_per_page' => 3, 'post_status' => 'publish'));
+            if($aid_news_query->have_posts()): while($aid_news_query->have_posts()): $aid_news_query->the_post();
+            ?>
+            <div style="background: #f8fafc; border-right: 4px solid #64748b; padding: 15px; border-radius: 4px;">
+                <strong style="color: #334155; font-size: 14px;"><?php the_title(); ?></strong>
+                <div style="font-size: 13px; color: #444; margin-top: 5px;"><?php the_excerpt(); ?></div>
+            </div>
+            <?php endwhile; wp_reset_postdata(); endif; ?>
+
+        </div>
+    </div>
+
+
+    <div class="v2-aid-links-section" style="background:#fff; border:1px solid #e2e8f0; border-top:4px solid #115c38; padding:22px; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.02);">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:18px; border-bottom:1px solid #f0f0f0; padding-bottom:12px; flex-wrap:wrap; gap:10px;">
+            <h3 style="margin:0; font-size:16.5px; font-weight:900; color:#115c38; display:flex; align-items:center; gap:8px;">
+                <i class="fas fa-hand-holding-heart" style="color:#e74c3c;"></i> بوابة منصات وروابط المساعدات الرسمية للحي
+            </h3>
+            <span style="font-size:11.5px; background:rgba(17,92,56,0.06); color:#115c38; padding:4px 10px; border-radius:4px; font-weight:bold;"><i class="fas fa-shield-alt"></i> روابط موثوقة ومعتمدة</span>
+        </div>
+        
+        <div class="v2-aid-grid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:14px;">
+            <?php 
+            $aid_query = new WP_Query(array('post_type' => 'aid_links', 'posts_per_page' => -1, 'post_status' => 'publish'));
+            if($aid_query->have_posts()): while($aid_query->have_posts()): $aid_query->the_post();
+                $aid_url = get_post_meta(get_the_ID(), '_v2_aid_url', true);
+                $is_up = get_post_meta(get_the_ID(), '_v2_aid_is_updated', true);
+            ?>
+            <a href="<?php echo esc_url($aid_url); ?>" target="_blank" class="v2-aid-card" style="display:flex; align-items:center; justify-content:space-between; background:#f8fafc; border:1px solid #edf2f7; padding:14px 18px; border-radius:6px; text-decoration:none; color:#222; font-weight:800; font-size:13.5px; transition:all 0.25s ease-in-out; box-shadow: 0 1px 3px rgba(0,0,0,0.01);">
+                <span style="display:flex; align-items:center; gap:10px;">
+                    <i class="fas fa-external-link-alt" style="color:#115c38; font-size:11px;"></i>
+                    <?php the_title(); ?>
+                </span>
+                <?php if($is_up === '1'): ?>
+                <span class="badge-updated" style="background:#e74c3c; color:#fff; font-size:10px; padding:3px 8px; border-radius:3px; font-weight:900; animation: pulse 1.5s infinite; white-space:nowrap;"><i class="fas fa-fire"></i> مُحدّث</span>
+                <?php endif; ?>
+            </a>
+            <?php endwhile; wp_reset_postdata(); else: ?>
+                <p style="font-size:13px; color:#777; margin:0; padding:10px 0; font-style:italic;">📍 يرجى إضافة الروابط الرسمية للمنصات والمواقع الآن من لوحة تحكم ووردبريس لتظهر هنا فوراً...</p>
+            <?php endif; ?>
+        </div>
+    </div>
+
+</div>
+<?php 
+} 
+?>
 <footer class="main-royal-footer">
     <div class="container">
         <div class="footer-grid-layout">
