@@ -202,7 +202,6 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 <script>
-function triggerSmartLostModal(actionType) {
     // 1. فتح الـ Modal الأصلي للمفقودات المتواجد بالمنصة
     if(typeof openGovModal === 'function') {
         openGovModal('lost'); 

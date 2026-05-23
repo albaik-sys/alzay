@@ -28,10 +28,10 @@
                 <span style="background: rgba(155, 89, 182, 0.1); color: #9b59b6; padding: 3px 8px; font-size: 11px; font-weight: 800; border-radius: 4px; white-space: nowrap;">💼 أمانات</span>
                 <div style="display: flex; flex-direction: column; gap: 4px; flex: 1;">
                     <h3 style="font-size: 14.5px; font-weight: 800; margin: 0;">
-                        <a href="<?php the_permalink(); ?>" style="color: #222; text-decoration: none; transition: color 0.2s;"><?php the_title(); ?></a>
+                        <a href="<?php the_permalink(); ?>" style="color: #222; text-decoration: none;"><?php the_title(); ?></a>
                     </h3>
                     <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 15px; font-size: 12px; color: #666;">
-                        <?php if(!empty($sender)) : <span><i class="far fa-user"></i> <strong>المعلن:</strong> <?php echo esc_html($sender); ?></span><?php endif; ?>
+                        <?php if(!empty($sender)) : ?><span><i class="far fa-user"></i> <strong>المعلن:</strong> <?php echo esc_html($sender); ?></span><?php endif; ?>
                         <?php if(!empty($phone)) : ?><span style="color: #115c38; font-weight: bold; font-family: sans-serif;"><i class="fas fa-phone-alt"></i> <?php echo esc_html($phone); ?></span><?php endif; ?>
                     </div>
                 </div>
@@ -41,9 +41,7 @@
                 <span style="font-family: sans-serif; font-size: 11px;"><?php echo get_the_date('d/m/Y'); ?></span>
             </div>
         </article>
-        <?php endwhile; else: ?>
-            <p style="text-align: center; color: #777; padding: 50px; background: #fff; border-radius: 8px; border: 1px dashed #e2e8f0;">لا توجد مفقودات أو أمانات منشورة حالياً في هذا القسم.</p>
-        <?php endif; ?>
+        <?php endwhile; endif; ?>
     </div>
 
     <div class="v2-pagination-container" style="margin-top: 35px; text-align: center;">
@@ -51,6 +49,26 @@
     </div>
 
 </div>
+
+<script>
+function triggerSmartLostModal(actionType) {
+    if(typeof openGovModal === 'function') {
+        openGovModal('lost'); 
+    }
+    setTimeout(function() {
+        const modalTitle = document.querySelector('#govLostModal h3, .lost-modal-title, #govLostModal .modal-header');
+        const typeInputField = document.querySelector('#govLostModal input[name="lost_type"], #govLostModal .select-lost-type');
+        
+        if(actionType === 'lost') {
+            if(modalTitle) { modalTitle.innerText = "📋 استمارة التبليغ عن مفقودات جديدة بالحي"; modalTitle.style.color = "#e74c3c"; }
+            if(typeInputField) typeInputField.value = "lost";
+        } else if(actionType === 'found') {
+            if(modalTitle) { modalTitle.innerText = "🟢 استمارة إثبات أمانات ومفقودات معثور عليها"; modalTitle.style.color = "#2ecc71"; }
+            if(typeInputField) typeInputField.value = "found";
+        }
+    }, 150);
+}
+</script>
 
 <div style="clear: both;"></div>
 <?php get_footer(); ?>
