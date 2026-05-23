@@ -1,82 +1,47 @@
 <?php get_header(); ?>
 
-<div class="container main-content-wrap v2-list-cinema-container" style="margin-top: 30px; margin-bottom: 60px; min-height: 75vh;">
-    
-    <div class="v2-aid-links-section" style="background:#fff; border:1px solid #e2e8f0; border-top:4px solid #115c38; padding:20px; border-radius:8px; margin-bottom:25px; box-shadow:0 2px 8px rgba(0,0,0,0.01);">
-        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:15px; border-bottom:1px solid #f0f0f0; padding-bottom:10px;">
-            <h3 style="margin:0; font-size:16px; font-weight:900; color:#115c38;"><i class="fas fa-hand-holding-heart" style="margin-left:6px; color:#e74c3c;"></i> بوابة منصات وروابط المساعدات الرسمية للحي</h3>
-            <span style="font-size:11px; background:rgba(17,92,56,0.06); color:#115c38; padding:3px 8px; border-radius:4px; font-weight:bold;"><i class="fas fa-shield-alt"></i> روابط موثوقة ومراقبة</span>
+<div class="container main-content-wrap v2-master-home-layout" style="margin-top: 20px; margin-bottom: 60px; min-height: 75vh;">
+
+    <div class="v2-aid-links-section" style="background:#fff; border:1px solid #e2e8f0; border-top:4px solid #115c38; padding:22px; border-radius:8px; margin-bottom:30px; box-shadow:0 4px 12px rgba(0,0,0,0.02); clear:both;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:18px; border-bottom:1px solid #f0f0f0; padding-bottom:12px; flex-wrap:wrap; gap:10px;">
+            <h3 style="margin:0; font-size:16.5px; font-weight:900; color:#115c38; display:flex; align-items:center; gap:8px;">
+                <i class="fas fa-hand-holding-heart" style="color:#e74c3c;"></i> بوابة منصات وروابط المساعدات الرسمية للحي
+            </h3>
+            <span style="font-size:11.5px; background:rgba(17,92,56,0.06); color:#115c38; padding:4px 10px; border-radius:4px; font-weight:bold;"><i class="fas fa-shield-alt"></i> روابط موثوقة ومعتمدة</span>
         </div>
-        <div class="v2-aid-grid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:12px;">
+        
+        <div class="v2-aid-grid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:14px;">
             <?php 
-            $aid_query = new WP_Query(array('post_type' => 'aid_links', 'posts_per_page' => -1));
+            $aid_query = new WP_Query(array('post_type' => 'aid_links', 'posts_per_page' => -1, 'post_status' => 'publish'));
             if($aid_query->have_posts()): while($aid_query->have_posts()): $aid_query->the_post();
                 $aid_url = get_post_meta(get_the_ID(), '_v2_aid_url', true);
                 $is_up = get_post_meta(get_the_ID(), '_v2_aid_is_updated', true);
             ?>
-            <a href="<?php echo esc_url($aid_url); ?>" target="_blank" class="v2-aid-card" style="display:flex; align-items:center; justify-content:space-between; background:#f8fafc; border:1px solid #edf2f7; padding:12px 15px; border-radius:6px; text-decoration:none; color:#333; font-weight:bold; font-size:13.5px; transition:all 0.2s ease-in-out;">
-                <span style="display:flex; align-items:center; gap:8px;">
-                    <i class="fas fa-external-link-alt" style="color:#115c38; font-size:12px;"></i>
+            <a href="<?php echo esc_url($aid_url); ?>" target="_blank" class="v2-aid-card" style="display:flex; align-items:center; justify-content:space-between; background:#f8fafc; border:1px solid #edf2f7; padding:14px 18px; border-radius:6px; text-decoration:none; color:#222; font-weight:800; font-size:13.5px; transition:all 0.25s ease-in-out; box-shadow: 0 1px 3px rgba(0,0,0,0.01);">
+                <span style="display:flex; align-items:center; gap:10px;">
+                    <i class="fas fa-external-link-alt" style="color:#115c38; font-size:11px;"></i>
                     <?php the_title(); ?>
                 </span>
                 <?php if($is_up === '1'): ?>
-                <span class="badge-updated" style="background:#e74c3c; color:#fff; font-size:10px; padding:2px 7px; border-radius:3px; font-weight:800; animation: pulse 1.5s infinite;"><i class="fas fa-fire"></i> مُحدّث</span>
+                <span class="badge-updated" style="background:#e74c3c; color:#fff; font-size:10px; padding:3px 8px; border-radius:3px; font-weight:900; animation: pulse 1.5s infinite; white-space:nowrap;"><i class="fas fa-fire"></i> مُحدّث</span>
                 <?php endif; ?>
             </a>
             <?php endwhile; wp_reset_postdata(); else: ?>
-                <p style="font-size:12px; color:#888; margin:0;">سيتم إضافة الروابط الرسمية للمنصات فوراً من لوحة التحكم...</p>
+                <p style="font-size:13px; color:#777; margin:0; padding:10px 0; font-style:italic;">📍 يرجى إضافة الروابط الرسمية للمنصات والمواقع الآن من لوحة تحكم ووردبريس لتظهر هنا فوراً...</p>
             <?php endif; ?>
         </div>
     </div>
-    
-    <div class="block-header-gov" style="margin-bottom: 25px; border-bottom: 2px solid #115c38; padding-bottom: 10px;">
-        <h2 style="color: #115c38; font-weight: 900; font-size: 19px; margin: 0;">
-            <i class="fas fa-folder-open" style="margin-left: 8px;"></i> 
-            تصفح السجلات والطلبات المعتمدة داخل الديوان
-        </h2>
-    </div>
 
-    <div class="v2-premium-list-wrapper" style="display: flex; flex-direction: column; gap: 12px;">
-        <?php if (have_posts()) : while (have_posts()) : the_post(); $p_id = get_the_ID(); ?>
-        
-        <article class="v2-list-row-item" style="display: flex; align-items: center; justify-content: space-between; background: #fff; border: 1px solid #e2e8f0; border-right: 4px solid #d4af37; padding: 12px 20px; border-radius: 6px; gap: 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.01); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); opacity: 0; transform: translateY(10px); animation: v2ListReveal 0.5s forwards;">
-            
-            <div style="display: flex; align-items: center; gap: 15px; flex: 1;">
-                <div class="v2-list-icon-box" style="width: 40px; height: 40px; background: rgba(17,92,56,0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #115c38; font-size: 14px;">
-                    <i class="fas fa-file-alt"></i>
-                </div>
-                
-                <div style="display: flex; flex-direction: column; gap: 4px; flex: 1;">
-                    <h3 style="font-size: 14.5px; font-weight: 800; margin: 0; line-height: 1.4;">
-                        <a href="<?php the_permalink(); ?>" style="color: #222; text-decoration: none; transition: color 0.2s;"><?php the_title(); ?></a>
-                    </h3>
-                    <div class="v2-list-meta-inline" style="display: flex; align-items: center; flex-wrap: wrap; gap: 15px; font-size: 12px; color: #666;">
-                        <span><i class="far fa-user" style="color:#d4af37;"></i> السجل العام للديوان</span>
-                        <span><i class="far fa-eye"></i> <?php echo alzaytoon_get_post_views($p_id); ?> قراءة</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="v2-list-date-box" style="text-align: left; font-size: 12px; color: #999; white-space: nowrap;">
-                <span style="display: block; font-weight: 700; color: #115c38;"><i class="far fa-calendar-alt"></i> <?php echo get_the_date('l'); ?></span>
-                <span style="font-family: sans-serif; font-size: 11px;"><?php echo get_the_date('d/m/Y'); ?></span>
-            </div>
-
-        </article>
-
-        <?php endwhile; else: ?>
-            <p style="text-align: center; color: #666; padding: 40px; background: #fff; border-radius: 6px; border: 1px dashed #ccc;">لا توجد سجلات منشورة في هذا القسم حالياً.</p>
-        <?php endif; ?>
-    </div>
-
-    <div class="v2-pagination-wrap" style="margin-top: 30px; text-align: center;">
-        <?php the_posts_pagination(array('mid_size' => 2, 'prev_text' => __('&laquo; السابق', 'textdomain'), 'next_text' => __('التالي &raquo;', 'textdomain'))); ?>
+    <div class="main-home-news-feed" style="margin-top:20px;">
+        <?php 
+        // هنا ينساب اللوب الكلاسيكي الطبيعي لعرض أحدث الأخبار كالمعتاد
+        if (have_posts()) : while (have_posts()) : the_post();
+            // رندرة الكروت الكلاسيكية
+        endwhile; endif; 
+        ?>
     </div>
 
 </div>
 
 <div style="clear: both;"></div>
 <?php get_footer(); ?>
-<?php
-// Clean injection closure
-?>
