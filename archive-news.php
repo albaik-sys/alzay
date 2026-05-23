@@ -10,7 +10,7 @@
                 <div style="width: 40px; height: 40px; background: rgba(17,92,56,0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #115c38;"><i class="fas fa-bullhorn"></i></div>
                 <div>
                     <h3 style="font-size: 14.5px; font-weight: 800; margin: 0;"><a href="<?php the_permalink(); ?>" style="color: #222; text-decoration: none;"><?php the_title(); ?></a></h3>
-                    <div style="font-size: 12px; color: #777; margin-top: 4px;"><i class="far fa-eye"></i> <?php echo alzaytoon_get_post_views(get_the_ID()); ?> قراءة</div>
+                    <div style="font-size: 12px; color: #777; margin-top: 4px;"><i class="far fa-eye"></i> <?php echo v2_global_smart_views(get_the_ID()); ?> قراءة</div>
                 </div>
             </div>
             <div style="text-align: left; font-size: 12px; color: #999; white-space: nowrap;">

@@ -190,3 +190,23 @@ function alzaytoon_submit_gov_form_ajax() {
 }
 add_action('wp_ajax_submit_gov_form', 'alzaytoon_submit_gov_form_ajax');
 add_action('wp_ajax_nopriv_submit_gov_form', 'alzaytoon_submit_gov_form_ajax');
+
+/* ==========================================================================
+   التعديل العاشر: النظام العالمي لتوليد وزيادة المشاهدات ديناميكياً (+100)
+   ========================================================================== */
+function v2_global_smart_views($post_id) {
+    // جلب المشاهدات الفعلية من قاعدة البيانات
+    $actual_views = get_post_meta($post_id, 'post_views_count', true);
+    if($actual_views == '') {
+        $actual_views = 0;
+    }
+    
+    // جلب أو توليد رقم التأسيس العشوائي (بين 100 و 200) ليظل ثابتاً للمقال
+    $seed_views = get_post_meta($post_id, '_v2_seed_views_count', true);
+    if (empty($seed_views)) {
+        $seed_views = rand(100, 200);
+        update_post_meta($post_id, '_v2_seed_views_count', $seed_views);
+    }
+    
+    return (int)$actual_views + (int)$seed_views;
+}
