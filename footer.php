@@ -407,3 +407,31 @@ document.addEventListener("DOMContentLoaded", function() {
     }, 150); // تأخير بسيط ملي ثانية للتأكد من رندرة الـ DOM للبوب أب
 }
 </script>
+<script>
+function triggerSmartLostModal(actionType) {
+    // 1. فتح الـ Modal الأصلي للمفقودات المتواجد بالمنصة
+    if(typeof openGovModal === 'function') {
+        openGovModal('lost'); 
+    }
+    
+    // 2. البحث عن عناصر النموذج لتعديل موضوعها ونوعها حياً بناءً على ضغطة الزر
+    setTimeout(function() {
+        const modalTitle = document.querySelector('#govLostModal h3, .lost-modal-title, #govLostModal .modal-header');
+        const typeInputField = document.querySelector('#govLostModal input[name="lost_type"], #govLostModal .select-lost-type');
+        
+        if(actionType === 'lost') {
+            if(modalTitle) {
+                modalTitle.innerText = "📋 استمارة التبليغ عن مفقودات جديدة بالحي";
+                modalTitle.style.color = "#e74c3c";
+            }
+            if(typeInputField) typeInputField.value = "lost";
+        } else if(actionType === 'found') {
+            if(modalTitle) {
+                modalTitle.innerText = "🟢 استمارة إثبات أمانات ومفقودات معثور عليها";
+                modalTitle.style.color = "#2ecc71";
+            }
+            if(typeInputField) typeInputField.value = "found";
+        }
+    }, 150); // تأخير بسيط ملي ثانية للتأكد من رندرة الـ DOM للبوب أب
+}
+</script>
