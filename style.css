@@ -1577,3 +1577,31 @@ img { max-width: 100%; height: auto; display: block; }
     50% { transform: scale(1.06); box-shadow: 0 0 8px rgba(231,76,60,0.4); }
     100% { transform: scale(1); }
 }
+
+/* ==========================================================================
+   التعديل الثامن: تأثيرات شريط تفاعلات المقالات الفخم وفتح التعليقات للزوار
+   ========================================================================== */
+.v2-action-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 3px 10px rgba(231, 76, 60, 0.1) !important;
+}
+#respond h3 {
+    font-size: 15px !important;
+    font-weight: 800 !important;
+    color: #115c38 !important;
+    margin-bottom: 15px !important;
+}
+.submit {
+    background: #115c38 !important;
+    color: #fff !important;
+    border: none !important;
+    padding: 8px 22px !important;
+    font-weight: bold !important;
+    font-size: 13px !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    transition: background 0.2s !important;
+}
+.submit:hover {
+    background: #0b3d25 !important;
+}
