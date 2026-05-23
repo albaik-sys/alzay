@@ -2,6 +2,33 @@
 
 <div class="container main-content-wrap v2-list-cinema-container" style="margin-top: 30px; margin-bottom: 60px; min-height: 75vh;">
     
+    <div class="v2-aid-links-section" style="background:#fff; border:1px solid #e2e8f0; border-top:4px solid #115c38; padding:20px; border-radius:8px; margin-bottom:25px; box-shadow:0 2px 8px rgba(0,0,0,0.01);">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:15px; border-bottom:1px solid #f0f0f0; padding-bottom:10px;">
+            <h3 style="margin:0; font-size:16px; font-weight:900; color:#115c38;"><i class="fas fa-hand-holding-heart" style="margin-left:6px; color:#e74c3c;"></i> بوابة منصات وروابط المساعدات الرسمية للحي</h3>
+            <span style="font-size:11px; background:rgba(17,92,56,0.06); color:#115c38; padding:3px 8px; border-radius:4px; font-weight:bold;"><i class="fas fa-shield-alt"></i> روابط موثوقة ومراقبة</span>
+        </div>
+        <div class="v2-aid-grid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:12px;">
+            <?php 
+            $aid_query = new WP_Query(array('post_type' => 'aid_links', 'posts_per_page' => -1));
+            if($aid_query->have_posts()): while($aid_query->have_posts()): $aid_query->the_post();
+                $aid_url = get_post_meta(get_the_ID(), '_v2_aid_url', true);
+                $is_up = get_post_meta(get_the_ID(), '_v2_aid_is_updated', true);
+            ?>
+            <a href="<?php echo esc_url($aid_url); ?>" target="_blank" class="v2-aid-card" style="display:flex; align-items:center; justify-content:space-between; background:#f8fafc; border:1px solid #edf2f7; padding:12px 15px; border-radius:6px; text-decoration:none; color:#333; font-weight:bold; font-size:13.5px; transition:all 0.2s ease-in-out;">
+                <span style="display:flex; align-items:center; gap:8px;">
+                    <i class="fas fa-external-link-alt" style="color:#115c38; font-size:12px;"></i>
+                    <?php the_title(); ?>
+                </span>
+                <?php if($is_up === '1'): ?>
+                <span class="badge-updated" style="background:#e74c3c; color:#fff; font-size:10px; padding:2px 7px; border-radius:3px; font-weight:800; animation: pulse 1.5s infinite;"><i class="fas fa-fire"></i> مُحدّث</span>
+                <?php endif; ?>
+            </a>
+            <?php endwhile; wp_reset_postdata(); else: ?>
+                <p style="font-size:12px; color:#888; margin:0;">سيتم إضافة الروابط الرسمية للمنصات فوراً من لوحة التحكم...</p>
+            <?php endif; ?>
+        </div>
+    </div>
+    
     <div class="block-header-gov" style="margin-bottom: 25px; border-bottom: 2px solid #115c38; padding-bottom: 10px;">
         <h2 style="color: #115c38; font-weight: 900; font-size: 19px; margin: 0;">
             <i class="fas fa-folder-open" style="margin-left: 8px;"></i> 

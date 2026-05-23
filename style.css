@@ -1558,3 +1558,22 @@ img { max-width: 100%; height: auto; display: block; }
 .submit:hover {
     background: #0b3d25 !important;
 }
+
+/* ==========================================================================
+   التعديل الحادي عشر: حركات قسم المساعدات الرسمية والمحدثة
+   ========================================================================== */
+.v2-aid-card:hover {
+    background: #115c38 !important;
+    color: #fff !important;
+    border-color: #115c38 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(17,92,56,0.15);
+}
+.v2-aid-card:hover i {
+    color: #d4af37 !important;
+}
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.06); box-shadow: 0 0 8px rgba(231,76,60,0.4); }
+    100% { transform: scale(1); }
+}

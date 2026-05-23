@@ -210,3 +210,61 @@ function v2_global_smart_views($post_id) {
     
     return (int)$actual_views + (int)$seed_views;
 }
+
+/* ==========================================================================
+   التعديل الحادي عشر: نظام إدارة روابط المساعدات الرسمية من لوحة التحكم
+   ========================================================================== */
+function v2_register_aid_links_cpt() {
+    $labels = array(
+        'name'               => 'روابط المساعدات',
+        'singular_name'      => 'رابط مساعدات',
+        'menu_name'          => 'روابط المساعدات 🤝',
+        'add_new_item'       => 'إضافة رابط رسمي جديد',
+        'edit_item'          => 'تعديل الرابط',
+    );
+    $args = array(
+        'labels'             => $labels,
+        'public'             => true,
+        'has_archive'        => false,
+        'menu_icon'          => 'dashicons-heart', // أيقونة ملوكية للقسم
+        'supports'           => array('title'), // نكتفي بالاسم فقط
+    );
+    register_post_type('aid_links', $args);
+}
+add_action('init', 'v2_register_aid_links_cpt');
+
+// إضافة صناديق إدخال الرابط وشارة محدث (Metaboxes)
+function v2_aid_links_add_meta_boxes() {
+    add_meta_box('v2_aid_meta', 'بيانات الرابط الرسمي', 'v2_aid_meta_callback', 'aid_links', 'normal', 'high');
+}
+add_action('add_meta_boxes', 'v2_aid_links_add_meta_boxes');
+
+function v2_aid_meta_callback($post) {
+    $url = get_post_meta($post->ID, '_v2_aid_url', true);
+    $is_updated = get_post_meta($post->ID, '_v2_aid_is_updated', true);
+    wp_nonce_field('v2_aid_save_meta', 'v2_aid_meta_nonce');
+    ?>
+    <p>
+        <label style="display:block; font-weight:bold; margin-bottom:5px;">الرابط الإلكتروني الرسمي للموقع:</label>
+        <input type="url" name="v2_aid_url" value="<?php echo esc_url($url); ?>" style="width:100%; padding:8px; border-radius:4px;" placeholder="https://example.com" required />
+    </p>
+    <p>
+        <label style="font-weight:bold;">
+            <input type="checkbox" name="v2_aid_is_updated" value="1" <?php checked($is_updated, '1'); ?> /> 
+            إظهار شارة (مُحدّث 🔥) بجانب هذا الرابط بشكل مميز
+        </label>
+    </p>
+    <?php
+}
+
+function v2_aid_links_save_meta($post_id) {
+    if (!isset($_POST['v2_aid_meta_nonce']) || !wp_verify_nonce($_POST['v2_aid_meta_nonce'], 'v2_aid_save_meta')) return;
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+    
+    if (isset($_POST['v2_aid_url'])) {
+        update_post_meta($post_id, '_v2_aid_url', esc_url_raw($_POST['v2_aid_url']));
+    }
+    $is_updated = isset($_POST['v2_aid_is_updated']) ? '1' : '0';
+    update_post_meta($post_id, '_v2_aid_is_updated', $is_updated);
+}
+add_action('save_post', 'v2_aid_links_save_meta');
