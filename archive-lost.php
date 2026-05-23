@@ -9,10 +9,10 @@
         </h2>
         
         <div class="v2-lost-actions-wrapper" style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <button class="btn-lost-report text-urgent" onclick="openGovModal('lost_report')" style="background: #e74c3c; color: #fff; border: none; padding: 7px 14px; cursor: pointer; font-weight: bold; font-size: 12.5px; border-radius: 4px; box-shadow: 0 2px 5px rgba(231,76,60,0.2); transition: transform 0.2s;">
+            <button class="btn-lost-report" onclick="triggerSmartLostModal('lost')" style="background: #e74c3c; color: #fff; border: none; padding: 7px 14px; cursor: pointer; font-weight: bold; font-size: 12.5px; border-radius: 4px; box-shadow: 0 2px 5px rgba(231,76,60,0.2); transition: transform 0.2s;">
                 <i class="fas fa-exclamation-circle" style="margin-left: 5px;"></i> تبليغ عن مفقودات
             </button>
-            <button class="btn-lost-found text-success" onclick="openGovModal('lost_found')" style="background: #2ecc71; color: #fff; border: none; padding: 7px 14px; cursor: pointer; font-weight: bold; font-size: 12.5px; border-radius: 4px; box-shadow: 0 2px 5px rgba(46,204,113,0.2); transition: transform 0.2s;">
+            <button class="btn-lost-found" onclick="triggerSmartLostModal('found')" style="background: #2ecc71; color: #fff; border: none; padding: 7px 14px; cursor: pointer; font-weight: bold; font-size: 12.5px; border-radius: 4px; box-shadow: 0 2px 5px rgba(46,204,113,0.2); transition: transform 0.2s;">
                 <i class="fas fa-check-circle" style="margin-left: 5px;"></i> وجود مفقودات
             </button>
         </div>
@@ -31,7 +31,7 @@
                         <a href="<?php the_permalink(); ?>" style="color: #222; text-decoration: none; transition: color 0.2s;"><?php the_title(); ?></a>
                     </h3>
                     <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 15px; font-size: 12px; color: #666;">
-                        <?php if(!empty($sender)) : ?><span><i class="far fa-user"></i> <strong>المعلن:</strong> <?php echo esc_html($sender); ?></span><?php endif; ?>
+                        <?php if(!empty($sender)) : <span><i class="far fa-user"></i> <strong>المعلن:</strong> <?php echo esc_html($sender); ?></span><?php endif; ?>
                         <?php if(!empty($phone)) : ?><span style="color: #115c38; font-weight: bold; font-family: sans-serif;"><i class="fas fa-phone-alt"></i> <?php echo esc_html($phone); ?></span><?php endif; ?>
                     </div>
                 </div>
